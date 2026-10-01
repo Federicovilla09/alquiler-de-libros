@@ -7,32 +7,32 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px;
+  gap: var(--gap-7);
+  padding: var(--gap-7);
 }
 
 .catalog {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px;
-  background-color: #f4ebe7;
-  border-radius: 16px;
+  gap: var(--gap-7);
+  padding: var(--gap-7);
+  background-color: var(--blush-2);
+  border-radius: var(--radius-x-large);
   margin-top: 8px;
 }
 
 .catalog__title {
   font-size: 14px;
   font-weight: 600;
-  color: #000000;
+  color: var(--gray-13);
 }
 
 .catalog__list {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: #ffffff;
-  border-radius: 16px;
+  background-color: var(--white);
+  border-radius: var(--radius-x-large);
   overflow: hidden;
 }
 
@@ -40,15 +40,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--gap-7);
   width: 100%;
-  padding: 10px 16px;
+  padding: var(--gap-6) var(--gap-8);
   border: none;
   background: none;
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
-  color: #165958;
+  color: var(--bg-app-9);
   cursor: pointer;
 }
 

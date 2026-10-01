@@ -1,0 +1,126 @@
+/*
+  Design tokens · Libreria - Alquiler de libros
+  Generado desde las variables de Figma: Color (77), Gap (16), Radius (7).
+  Los nombres son los mismos que muestra Dev Mode.
+  Si cambiás un valor en Figma, actualizalo también acá.
+*/
+
+:root {
+  /* ─── Color · Base ─── */
+  --white: #ffffff;
+  --black: #000000;
+  --gray-1: #fcfcfc;
+  --gray-2: #f9f9f9;
+  --gray-3: #f0f0f0;
+  --gray-4: #e8e8e8;
+  --gray-5: #e0e0e0;
+  --gray-6: #d9d9d9;
+  --gray-7: #cecece66; /* tiene 40% de opacidad */
+  --gray-8: #bbbbbb;
+  --gray-9: #8d8d8d;
+  --gray-10: #838383;
+  --gray-11: #646464;
+  --gray-12: #202020;
+  --gray-13: #111111;
+
+  /* ─── Color · Bg App (teal) ─── */
+  --bg-app-1: #f1fcfa;
+  --bg-app-2: #cff8f2;
+  --bg-app-3: #9ff0e5;
+  --bg-app-4: #67e1d5;
+  --bg-app-5: #38c9bf;
+  --bg-app-6: #20b2aa;
+  --bg-app-7: #168b87;
+  --bg-app-8: #166f6d;
+  --bg-app-9: #165958;
+  --bg-app-10: #174a49;
+  --bg-app-11: #072b2c;
+
+  /* ─── Color · Blush ─── */
+  --blush-1: #fbf7f5;
+  --blush-2: #f4ebe7;
+  --blush-3: #f0e6e2;
+
+  /* ─── Color · Success ─── */
+  --success-1: #fbfefc;
+  --success-2: #f4fbf6;
+  --success-3: #e6f6eb;
+  --success-4: #d6f1df;
+  --success-5: #c4e8d1;
+  --success-6: #adddc0;
+  --success-7: #8eceaa;
+  --success-8: #5bb98b;
+  --success-9: #30a46c;
+  --success-10: #2b9a66;
+  --success-11: #218358;
+  --success-12: #193b2d;
+
+  /* ─── Color · Warning ─── */
+  --warning-1: #fdfdf9;
+  --warning-2: #fefce9;
+  --warning-3: #fffab8;
+  --warning-4: #fff394;
+  --warning-5: #ffe770;
+  --warning-6: #f3d768;
+  --warning-7: #e4c767;
+  --warning-8: #d5ae39;
+  --warning-9: #ffe629;
+  --warning-10: #ffdc00;
+  --warning-11: #9e6c00;
+  --warning-12: #473b1f;
+
+  /* ─── Color · Error ─── */
+  --error-1: #fffcfc;
+  --error-2: #fff7f7;
+  --error-3: #feebec;
+  --error-4: #ffdbdc;
+  --error-5: #ffcdce;
+  --error-6: #fdbdbe;
+  --error-7: #f4a9aa;
+  --error-8: #eb8e90;
+  --error-9: #e5484d;
+  --error-10: #dc3e42;
+  --error-11: #ce2c31;
+  --error-12: #641723;
+
+  /* ─── Color · Info ─── */
+  --info-1: #fdfdff;
+  --info-2: #f8f8ff;
+  --info-3: #f0f1fe;
+  --info-4: #e6e7ff;
+  --info-5: #dadcff;
+  --info-6: #cbcdff;
+  --info-7: #b8baf8;
+  --info-8: #9b9ef0;
+  --info-9: #5b5bd6;
+  --info-10: #5151cd;
+  --info-11: #5753c6;
+  --info-12: #272962;
+
+  /* ─── Gap ─── */
+  --gap-1: 0px;
+  --gap-2: 2px;
+  --gap-3: 4px;
+  --gap-4: 6px;
+  --gap-5: 8px;
+  --gap-6: 10px;
+  --gap-7: 12px;
+  --gap-8: 16px;
+  --gap-9: 24px;
+  --gap-10: 32px;
+  --gap-11: 40px;
+  --gap-12: 48px;
+  --gap-13: 56px;
+  --gap-14: 64px;
+  --gap-15: 72px;
+  --gap-16: 80px;
+
+  /* ─── Radius ─── */
+  --radius-none: 0px;
+  --radius-x-small: 2px;
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 12px;
+  --radius-x-large: 16px;
+  --radius-full: 999px;
+}

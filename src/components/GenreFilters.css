@@ -1,6 +1,6 @@
 .genre-filters {
   display: flex;
-  gap: 10px;
+  gap: var(--gap-6);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -11,19 +11,19 @@
 
 .genre-chip {
   flex-shrink: 0;
-  padding: 6px 12px;
-  background-color: #ffffff;
-  border: 1px solid #38c9bf;
-  border-radius: 999px;
+  padding: var(--gap-4) var(--gap-7);
+  background-color: var(--white);
+  border: 1px solid var(--bg-app-5);
+  border-radius: var(--radius-full);
   font-family: inherit;
   font-size: 14px;
-  color: #38c9bf;
+  color: var(--bg-app-5);
   white-space: nowrap;
   cursor: pointer;
 }
 
 .genre-chip--selected {
-  background-color: #165958;
-  border-color: #165958;
-  color: #ffffff;
+  background-color: var(--bg-app-9);
+  border-color: var(--bg-app-9);
+  color: var(--white);
 }

@@ -1,9 +1,9 @@
 import './BookRow.css'
 
 const STATUS_COLORS = {
-  Disponible: '#2b9a66',
-  Reservado: '#5b5bd6',
-  Alquilado: '#e4c767',
+  Disponible: 'var(--success-10)',
+  Reservado: 'var(--info-9)',
+  Alquilado: 'var(--warning-7)',
 }
 
 function BookRow({ title, author, status, copies, coverColor }) {

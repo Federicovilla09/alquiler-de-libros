@@ -1,10 +1,10 @@
 .home-header {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 16px 16px 24px;
-    background-color: #f4ebe7;
-    border-radius: 0 0 16px 16px;
+    gap: var(--gap-8);
+    padding: var(--gap-4) var(--gap-4) var(--gap-6);
+    background-color: var(--blush-1);
+    border-radius: 0 0 var(--radius-x-large) var(--radius-x-large);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -19,26 +19,26 @@
 .home-header__greeting {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: var(--gap-2);
 }
 
 .home-header__hello {
     font-size: 18px;
     font-weight: 700;
-    color: #072b2c;
+    color: var(--bg-app-11);
 }
 
 .home-header__date {
     font-size: 12px;
-    color: #646464;
+    color: var(--gray-11);
 }
 
 .home-header__avatar {
     width: 40px;
     height: 40px;
     padding: 0;
-    border: 1px solid #165958;
-    border-radius: 999px;
+    border: 1px solid var(--bg-app-9);
+    border-radius: var(--radius-full);
     overflow: hidden;
     background: none;
     cursor: pointer;
@@ -54,24 +54,24 @@
 .home-header__today {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--gap-5);
 }
 
 .home-header__label {
     font-size: 12px;
     font-weight: 600;
-    color: #646464;
+    color: var(--gray-11);
 }
 
 .today-summary {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--gap-6);
     width: 100%;
-    padding: 10px 12px;
+    padding: var(--gap-4) var(--gap-7);
     border: none;
-    border-radius: 12px;
-    background-color: #ffffff;
+    border-radius: var(--radius-x-small);
+    background-color: var(--white);
     font-family: inherit;
     font-size: 13px;
     text-align: left;
@@ -80,20 +80,20 @@
 
 .today-summary__dots {
     display: flex;
-    gap: 3px;
+    gap: var(--gap-3);
 }
 
 .today-summary__dot {
     width: 8px;
     height: 8px;
-    border-radius: 999px;
+    border-radius: var(--radius-full);
 }
 
 .today-summary__text {
     display: flex;
     flex: 1;
-    gap: 4px;
-    color: #202020;
+    gap: var(--gap-3);
+    color: var(--gray-12);
 }
 
 .today-summary__text strong {
@@ -101,7 +101,7 @@
 }
 
 .today-summary__late {
-    color: #ce2c31;
+    color: var(--error-11);
 }
 
 .today-summary__chevron {
