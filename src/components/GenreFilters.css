@@ -1,0 +1,29 @@
+.genre-filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.genre-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.genre-chip {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  background-color: #ffffff;
+  border: 1px solid #38c9bf;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #38c9bf;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.genre-chip--selected {
+  background-color: #165958;
+  border-color: #165958;
+  color: #ffffff;
+}

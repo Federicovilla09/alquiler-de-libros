@@ -4,6 +4,9 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding: 16px;
 }
 
@@ -14,6 +17,7 @@
   padding: 12px;
   background-color: #f4ebe7;
   border-radius: 16px;
+  margin-top: 8px;
 }
 
 .catalog__title {

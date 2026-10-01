@@ -2,12 +2,16 @@ import './App.css'
 import BookRow from './components/BookRow'
 import { books } from './data/books'
 import HomeHeader from './components/HomeHeader'
+import SearchBar from './components/SearchBar'
+import GenreFilters from './components/GenreFilters'
 
 function App() {
-    return (
+  return (
     <main className="app">
       <HomeHeader />
       <div className="content">
+        <SearchBar />
+        <GenreFilters />
         <section className="catalog">
           <h2 className="catalog__title">12 títulos en tu biblioteca</h2>
           <div className="catalog__list">
