@@ -4,6 +4,7 @@ import { books } from './data/books'
 import HomeHeader from './components/HomeHeader'
 import SearchBar from './components/SearchBar'
 import GenreFilters from './components/GenreFilters'
+import BottomNav from './components/BottomNav'
 
 function App() {
   return (
@@ -26,8 +27,13 @@ function App() {
               />
             ))}
           </div>
+          <button className="catalog__more">
+            <img className="catalog__more-icon" src="/icons/arrows-button-down-teal.svg" alt="" />
+            Ver más (2)
+          </button>
         </section>
       </div>
+      <BottomNav />
     </main>
   )
 }
