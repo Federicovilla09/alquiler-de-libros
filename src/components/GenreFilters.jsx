@@ -1,4 +1,5 @@
 import './GenreFilters.css'
+import TagFilter from './TagFilter'
 import { genres } from '../data/genres'
 
 function GenreFilters() {
@@ -7,13 +8,9 @@ function GenreFilters() {
   return (
     <div className="genre-filters">
       {genres.map((genre) => (
-        <button
-          key={genre}
-          className={genre === selected ? 'genre-chip genre-chip--selected' : 'genre-chip'}
-          aria-pressed={genre === selected}
-        >
+        <TagFilter key={genre} selected={genre === selected}>
           {genre}
-        </button>
+        </TagFilter>
       ))}
     </div>
   )

@@ -1,0 +1,36 @@
+.tag-choice {
+  padding: calc(var(--gap-2) - 1px) calc(var(--gap-5) - 1px);
+  border: 1px solid;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tag-choice:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}
+
+/* Tag Troppes · Type=Default */
+.tag-choice--trope {
+  background-color: var(--bg-app-2);
+  border-color: var(--bg-app-10);
+  color: var(--bg-app-10);
+}
+
+/* Tag State · Type=Default */
+.tag-choice--condition {
+  background-color: var(--white);
+  border-color: var(--gray-7);
+  color: var(--gray-11);
+}
+
+/* Type=Select, igual en los dos */
+.tag-choice--selected {
+  background-color: var(--bg-app-10);
+  border-color: var(--bg-app-10);
+  color: var(--bg-app-2);
+}

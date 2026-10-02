@@ -1,0 +1,22 @@
+.tag-status {
+  display: inline-block;
+  padding: var(--gap-3) var(--gap-7);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.tag-status--available {
+  background-color: var(--success-6);
+  color: var(--success-12);
+}
+
+.tag-status--rented {
+  background-color: var(--warning-4);
+  color: var(--warning-12);
+}
+
+.tag-status--reserved {
+  background-color: var(--info-5);
+  color: var(--info-12);
+}

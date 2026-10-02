@@ -7,6 +7,8 @@ import GenreFilters from './components/GenreFilters'
 import BottomNav from './components/BottomNav'
 import Icon from './components/Icon'
 import Button from './components/Button'
+import TagStatus from './components/TagStatus'
+import TagChoice from './components/TagChoice'
 
 function App() {
   return (
