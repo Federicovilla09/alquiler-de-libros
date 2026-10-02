@@ -49,22 +49,6 @@
   gap: var(--gap-3);
 }
 
-.book-row__status {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-5);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gray-12);
-  white-space: nowrap;
-}
-
-.book-row__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: var(--radius-full);
-}
-
 .book-row__copies {
   font-size: 10px;
   color: var(--gray-9);

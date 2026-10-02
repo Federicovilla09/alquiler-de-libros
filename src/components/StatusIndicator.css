@@ -1,0 +1,29 @@
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-5);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-12);
+  white-space: nowrap;
+}
+
+.status-indicator__dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-11);
+}
+
+.status-indicator--rent .status-indicator__dot {
+  background-color: var(--warning-7);
+}
+
+.status-indicator--available .status-indicator__dot {
+  background-color: var(--success-10);
+}
+
+.status-indicator--reserved .status-indicator__dot {
+  background-color: var(--info-9);
+}
