@@ -16,12 +16,6 @@ function App() {
     <main className="app">
       <HomeHeader />
       <div className="content">
-                {/* PRUEBA TEMPORAL: borrar después */}
-        <TextField label="Título" placeholder="Ej: Alas de sangre" icon="user-single" helpText="Como figura en la tapa" />
-        <TextField label="Contraseña" type="password" placeholder="Tu contraseña" icon="view-off" />
-        <TextField label="Autor" placeholder="Nombre y apellido" error="Este campo es obligatorio" />
-        <TextField label="Sinopsis" placeholder="Breve sinopsis del libro" multiline />
-        <SearchBar />
         <GenreFilters />
         <section className="catalog">
           <h2 className="catalog__title">12 títulos en tu biblioteca</h2>
