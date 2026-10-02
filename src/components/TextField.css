@@ -1,0 +1,78 @@
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+}
+
+.text-field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+/* State=Default */
+.text-field__box {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-3);
+  padding: calc(var(--gap-6) - 1px) calc(var(--gap-8) - 1px);
+  background-color: var(--white);
+  border: 1px solid var(--gray-8);
+  border-radius: var(--radius-medium);
+  color: var(--gray-8);
+}
+
+.text-field__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px; /* 14px en Figma; con 16px el iPhone no hace zoom */
+  color: var(--gray-13);
+}
+
+.text-field__input::placeholder {
+  color: var(--gray-8);
+}
+
+.text-field__icon {
+  flex-shrink: 0;
+}
+
+/* Type=Textarea */
+.text-field--multiline .text-field__box {
+  align-items: flex-start;
+  padding: calc(var(--gap-7) - 1px);
+}
+
+.text-field--multiline .text-field__input {
+  resize: vertical;
+}
+
+/* State=Full: el campo tiene texto */
+.text-field__box:has(.text-field__input:not(:placeholder-shown)) {
+  border-color: var(--gray-13);
+  color: var(--gray-13);
+}
+
+/* State=Focus (nuevo) */
+.text-field__box:focus-within {
+  border-color: var(--bg-app-9);
+}
+
+/* Texto de ayuda */
+.text-field__message {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+/* State=Error */
+.text-field--error .text-field__box {
+  border-color: var(--error-9);
+}
+
+.text-field--error .text-field__message {
+  color: var(--error-11);
+}

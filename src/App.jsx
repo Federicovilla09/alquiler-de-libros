@@ -9,12 +9,18 @@ import Icon from './components/Icon'
 import Button from './components/Button'
 import TagStatus from './components/TagStatus'
 import TagChoice from './components/TagChoice'
+import TextField from './components/TextField'
 
 function App() {
   return (
     <main className="app">
       <HomeHeader />
       <div className="content">
+                {/* PRUEBA TEMPORAL: borrar después */}
+        <TextField label="Título" placeholder="Ej: Alas de sangre" icon="user-single" helpText="Como figura en la tapa" />
+        <TextField label="Contraseña" type="password" placeholder="Tu contraseña" icon="view-off" />
+        <TextField label="Autor" placeholder="Nombre y apellido" error="Este campo es obligatorio" />
+        <TextField label="Sinopsis" placeholder="Breve sinopsis del libro" multiline />
         <SearchBar />
         <GenreFilters />
         <section className="catalog">
