@@ -1,0 +1,91 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-5);
+  width: 100%;
+  padding: calc(var(--gap-6) - 1px) calc(var(--gap-8) - 1px);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+/* Type=Primary */
+.button--primary {
+  background-color: var(--bg-app-9);
+  color: var(--white);
+}
+
+.button--primary:disabled {
+  background-color: var(--gray-4);
+  border-color: var(--bg-app-5);
+  color: var(--bg-app-5);
+}
+
+/* Type=Secondary */
+.button--secondary {
+  background-color: var(--bg-app-1);
+  border-color: var(--bg-app-4);
+  color: var(--bg-app-9);
+}
+
+.button--secondary:disabled {
+  background-color: var(--gray-5);
+  border-color: var(--bg-app-5);
+  color: var(--bg-app-5);
+}
+
+/* Type=Ghost */
+.button--ghost {
+  color: var(--bg-app-9);
+}
+
+.button--ghost:disabled {
+  color: var(--bg-app-5);
+}
+
+/* Type=Primary Icon */
+.button--icon {
+  width: auto;
+  padding: calc(var(--gap-8) - 1px);
+  background-color: var(--bg-app-9);
+  color: var(--white);
+}
+
+.button--icon:disabled {
+  background-color: var(--gray-5);
+  border-color: var(--bg-app-5);
+  color: var(--bg-app-5);
+}
+
+/* State=Pressed */
+.button--primary:active:not(:disabled) {
+  background-color: var(--bg-app-10);
+}
+
+.button--secondary:active:not(:disabled) {
+  background-color: var(--bg-app-3);
+  border-color: transparent;
+}
+
+.button--ghost:active:not(:disabled) {
+  background-color: var(--bg-app-1);
+}
+
+.button--icon:active:not(:disabled) {
+  background-color: var(--bg-app-10);
+}

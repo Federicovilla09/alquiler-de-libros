@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar'
 import GenreFilters from './components/GenreFilters'
 import BottomNav from './components/BottomNav'
 import Icon from './components/Icon'
+import Button from './components/Button'
 
 function App() {
   return (
@@ -28,10 +29,7 @@ function App() {
               />
             ))}
           </div>
-          <button className="catalog__more">
-            <Icon name="arrows-button-down" />
-            Ver más (2)
-          </button>
+          <Button variant="ghost" icon="arrows-button-down">Ver más (2)</Button>
         </section>
       </div>
       <BottomNav />

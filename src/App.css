@@ -36,18 +36,3 @@
   overflow: hidden;
 }
 
-.catalog__more {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--gap-7);
-  width: 100%;
-  padding: var(--gap-6) var(--gap-8);
-  border: none;
-  background: none;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--bg-app-9);
-  cursor: pointer;
-}
