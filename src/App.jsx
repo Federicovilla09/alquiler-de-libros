@@ -20,6 +20,7 @@ import InlineNotice from "./components/InlineNotice";
 import Tabs from "./components/Tabs";
 import LoanCard from "./components/LoanCard";
 import HistoryItem from "./components/HistoryItem";
+import BookCopyCard from "./components/BookCopyCard";
 
 function App() {
   return (

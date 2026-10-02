@@ -34,3 +34,8 @@
   border-color: var(--bg-app-10);
   color: var(--bg-app-2);
 }
+
+.tag-choice--readonly {
+  display: inline-block;
+  cursor: default;
+}

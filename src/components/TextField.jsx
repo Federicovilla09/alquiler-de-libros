@@ -11,6 +11,7 @@ function TextField({
   error,
   multiline = false,
   name,
+  defaultValue,
 }) {
   const id = useId()
   const messageId = `${id}-message`
@@ -32,6 +33,7 @@ function TextField({
         <Field
           id={id}
           name={name}
+          defaultValue={defaultValue}
           className="text-field__input"
           type={multiline ? undefined : type}
           rows={multiline ? 5 : undefined}
