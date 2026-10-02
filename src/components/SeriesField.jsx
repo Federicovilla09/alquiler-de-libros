@@ -21,7 +21,7 @@ function SeriesField({ series = [], defaultChecked = false }) {
         label="¿De qué serie?"
         placeholder="Elegí una serie"
         options={[...series, NEW_SERIES]}
-        onChange={(event) => setSelected(event.target.value)}
+        onChange={setSelected}
       />
 
       {isNew && (

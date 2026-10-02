@@ -1,0 +1,35 @@
+.star-rating {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.star-rating__label {
+  margin-bottom: var(--gap-5);
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.star-rating__stars {
+  display: flex;
+  margin: calc(var(--gap-3) * -1);
+}
+
+.star-rating__star {
+  display: flex;
+  padding: var(--gap-3);
+  border: none;
+  border-radius: var(--radius-small);
+  background: none;
+  color: var(--warning-8);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-rating__star:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}

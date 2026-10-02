@@ -10,40 +10,104 @@
   color: var(--gray-13);
 }
 
-.select-field__box {
+.select-field__control {
   position: relative;
 }
 
-.select-field__select {
+/* El campo cerrado: Type=Select, State=Default */
+.select-field__button {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-3);
   width: 100%;
-  padding: calc(var(--gap-6) - 1px) calc(var(--gap-8) + 14px + var(--gap-3)) calc(var(--gap-6) - 1px) calc(var(--gap-8) - 1px);
+  padding: calc(var(--gap-6) - 1px) calc(var(--gap-8) - 1px);
   border: 1px solid var(--gray-8);
   border-radius: var(--radius-medium);
   background-color: var(--white);
   font-family: inherit;
   font-size: 16px;
   color: var(--gray-13);
-  appearance: none;
+  text-align: left;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.select-field__select:focus {
+.select-field__button:focus-visible,
+.select-field--open .select-field__button {
   outline: none;
   border-color: var(--bg-app-9);
 }
 
-.select-field__select:invalid,
-.select-field__select:has(option[value='']:checked) {
+.select-field__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-field__value--placeholder {
   color: var(--gray-9);
 }
 
 .select-field__icon {
-  position: absolute;
-  top: 50%;
-  right: var(--gap-8);
-  transform: translateY(-50%);
+  flex-shrink: 0;
   color: var(--gray-9);
-  pointer-events: none;
+}
+
+/* La lista: Type=Select, State=Open */
+.select-field__list {
+  position: absolute;
+  top: calc(100% + var(--gap-3));
+  right: 0;
+  left: 0;
+  z-index: 20;
+  max-height: 230px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  background-color: var(--white);
+  border: 1px solid var(--gray-8);
+  border-radius: var(--radius-medium);
+}
+
+.select-field__option {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-5);
+  padding: var(--gap-7) var(--gap-8);
+  font-size: 16px;
+  color: var(--gray-13);
+  cursor: pointer;
+}
+
+.select-field__option + .select-field__option {
+  border-top: 1px solid var(--gray-8);
+}
+
+.select-field__option-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Opción resaltada (nueva) */
+.select-field__option--active {
+  background-color: var(--bg-app-1);
+}
+
+/* Opción elegida (nueva) */
+.select-field__option[aria-selected='true'] {
+  font-weight: 600;
+  color: var(--bg-app-9);
+}
+
+.select-field__dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
 }
 
 .select-field__message {
@@ -51,7 +115,7 @@
   color: var(--gray-11);
 }
 
-.select-field--error .select-field__select {
+.select-field--error .select-field__button {
   border-color: var(--error-9);
 }
 
