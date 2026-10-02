@@ -5,6 +5,7 @@ import HomeHeader from './components/HomeHeader'
 import SearchBar from './components/SearchBar'
 import GenreFilters from './components/GenreFilters'
 import BottomNav from './components/BottomNav'
+import Icon from './components/Icon'
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
             ))}
           </div>
           <button className="catalog__more">
-            <img className="catalog__more-icon" src="/icons/arrows-button-down-teal.svg" alt="" />
+            <Icon name="arrows-button-down" />
             Ver más (2)
           </button>
         </section>

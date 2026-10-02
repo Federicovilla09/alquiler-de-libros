@@ -1,9 +1,10 @@
 import './BottomNav.css'
+import Icon from './Icon'
 
 const items = [
-  { id: 'biblioteca', label: 'Biblioteca', icon: '/icons/book-library.svg' },
-  { id: 'cargar', label: 'Cargar libro', icon: '/icons/add-circle.svg' },
-  { id: 'seguimiento', label: 'Seguimiento', icon: '/icons/calendar.svg' },
+  { id: 'biblioteca', label: 'Biblioteca', icon: 'book-library' },
+  { id: 'cargar', label: 'Cargar libro', icon: 'add-circle' },
+  { id: 'seguimiento', label: 'Seguimiento', icon: 'calendar' },
 ]
 
 function BottomNav() {
@@ -21,7 +22,7 @@ function BottomNav() {
             aria-label={item.label}
             aria-current={isActive ? 'page' : undefined}
           >
-            <img className="bottom-nav__icon" src={item.icon} alt="" />
+            <Icon name={item.icon} size={20} strokeWidth={2} />
             {isActive && <span className="bottom-nav__label">{item.label}</span>}
           </button>
         )

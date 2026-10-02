@@ -1,4 +1,5 @@
 import './HomeHeader.css'
+import Icon from './Icon'
 
 function formatToday() {
   const text = new Date().toLocaleDateString('es-AR', {
@@ -35,7 +36,7 @@ function HomeHeader() {
             <strong>4 pendientes</strong>
             <span className="today-summary__late">· 1 atrasada</span>
           </span>
-          <img className="today-summary__chevron" src="/icons/arrows-button-down.svg" alt="" />
+          <Icon name="arrows-button-down" className="today-summary__chevron" />
         </button>
       </div>
     </header>

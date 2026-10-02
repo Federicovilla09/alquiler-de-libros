@@ -105,6 +105,6 @@
 }
 
 .today-summary__chevron {
-    width: 14px;
-    height: 14px;
+  flex-shrink: 0;
+  color: var(--gray-10);
 }

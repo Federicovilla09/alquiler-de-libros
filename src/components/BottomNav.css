@@ -22,17 +22,16 @@
   padding: var(--gap-5);
   border: none;
   background: none;
+  color: var(--gray-8);
   font-family: inherit;
   cursor: pointer;
 }
 
-.bottom-nav__icon {
-  width: 20px;
-  height: 20px;
+.bottom-nav__item--active {
+  color: var(--bg-app-11);
 }
 
 .bottom-nav__label {
   font-size: 12px;
   font-weight: 700;
-  color: var(--bg-app-11);
 }

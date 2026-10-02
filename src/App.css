@@ -51,8 +51,3 @@
   color: var(--bg-app-9);
   cursor: pointer;
 }
-
-.catalog__more-icon {
-  width: 14px;
-  height: 14px;
-}
