@@ -8,9 +8,9 @@
   justify-content: space-between;
   width: 100%;
   max-width: 393px;
-  padding: var(--gap-5) var(--gap-8);
-  background-color: var(--blush-1);
-  border-top: 1px solid var(--gray-2);
+  padding: var(--gap-5) var(--gap-11);
+  background-color: var(--bg-app-1);
+  border-top: 1px solid var(--blush-3);
 }
 
 .bottom-nav__item {
