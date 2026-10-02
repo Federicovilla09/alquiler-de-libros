@@ -1,0 +1,103 @@
+.history-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-item {
+  display: flex;
+  gap: var(--gap-7);
+}
+
+/* El riel: punto y línea */
+.history-item__rail {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-3);
+  width: 14px;
+  padding-top: 14px;
+}
+
+.history-item__dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-6);
+}
+
+.history-item__line {
+  flex: 1;
+  width: 2px;
+  background-color: var(--bg-app-3);
+}
+
+/* La tarjeta */
+.history-item__card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-3);
+  min-width: 0;
+  margin-bottom: var(--gap-7);
+  padding: calc(var(--gap-7) - 1px);
+  background-color: var(--white);
+  border: 1px solid var(--blush-3);
+  border-radius: var(--radius-large);
+}
+
+.history-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-5);
+}
+
+.history-item__who {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.history-item__price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bg-app-10);
+}
+
+.history-item__copy,
+.history-item__status {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.history-item__dates {
+  font-size: 12px;
+  color: var(--gray-12);
+}
+
+/* Position=Last: automático */
+.history-item:last-child .history-item__line {
+  display: none;
+}
+
+.history-item:last-child .history-item__card {
+  margin-bottom: 0;
+}
+
+/* Position=Current */
+.history-item--current .history-item__dot {
+  background-color: var(--bg-app-10);
+  box-shadow: 0 0 0 3px var(--bg-app-4);
+}
+
+.history-item--current .history-item__card {
+  border-color: var(--bg-app-4);
+}
+
+.history-item--current .history-item__status {
+  font-weight: 600;
+  color: var(--bg-app-10);
+}

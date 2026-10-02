@@ -1,0 +1,102 @@
+.loan-card {
+  display: flex;
+  gap: var(--gap-7);
+  padding: calc(var(--gap-7) - 1px);
+  background-color: var(--white);
+  border: 1px solid var(--blush-3);
+  border-radius: var(--radius-large);
+}
+
+.loan-card__cover {
+  flex-shrink: 0;
+  width: 44px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: var(--radius-small);
+  background-color: var(--gray-5);
+}
+
+.loan-card__cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loan-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.loan-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.loan-card__who {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.loan-card__progress {
+  height: 6px;
+  margin: var(--gap-5) 0;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-2);
+}
+
+.loan-card__bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-6);
+}
+
+.loan-card__status {
+  font-size: 12px;
+  color: var(--gray-12);
+}
+
+/* State=Overdue */
+.loan-card--overdue {
+  border-color: var(--error-7);
+}
+
+.loan-card--overdue .loan-card__progress {
+  background-color: var(--error-4);
+}
+
+.loan-card--overdue .loan-card__bar {
+  background-color: var(--error-9);
+}
+
+.loan-card--overdue .loan-card__status {
+  font-weight: 600;
+  color: var(--error-11);
+}
+
+/* State=Due Today */
+.loan-card--due-today .loan-card__progress {
+  background-color: var(--warning-4);
+}
+
+.loan-card--due-today .loan-card__bar {
+  background-color: var(--warning-7);
+}
+
+.loan-card--due-today .loan-card__status {
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+/* State=Reserved */
+.loan-card--reserved .loan-card__progress {
+  background-color: var(--info-4);
+}
+
+.loan-card--reserved .loan-card__bar {
+  background-color: var(--info-9);
+}

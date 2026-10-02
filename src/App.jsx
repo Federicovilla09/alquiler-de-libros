@@ -18,6 +18,8 @@ import Loader from "./components/Loader";
 import Notification from "./components/Notification";
 import InlineNotice from "./components/InlineNotice";
 import Tabs from "./components/Tabs";
+import LoanCard from "./components/LoanCard";
+import HistoryItem from "./components/HistoryItem";
 
 function App() {
   return (
