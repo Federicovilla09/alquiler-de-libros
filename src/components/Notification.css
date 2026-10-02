@@ -1,0 +1,30 @@
+.notification {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-7);
+  width: fit-content;
+  max-width: 100%;
+  padding: calc(var(--gap-7) - 1px) calc(var(--gap-8) - 1px);
+  border: 1px solid;
+  border-radius: var(--radius-x-large);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notification__icon {
+  flex-shrink: 0;
+}
+
+/* State=Success */
+.notification--success {
+  background-color: var(--bg-app-2);
+  border-color: var(--bg-app-4);
+  color: var(--bg-app-10);
+}
+
+/* State=Error */
+.notification--error {
+  background-color: var(--error-2);
+  border-color: var(--error-7);
+  color: var(--error-11);
+}

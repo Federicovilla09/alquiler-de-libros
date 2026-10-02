@@ -1,0 +1,28 @@
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--blush-3);
+}
+
+.tabs__tab {
+  margin-bottom: -1px;
+  padding: var(--gap-5) var(--gap-8);
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-11);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tabs__tab--active {
+  border-bottom-color: var(--gray-13);
+  color: var(--gray-13);
+}
+
+.tabs__tab:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}

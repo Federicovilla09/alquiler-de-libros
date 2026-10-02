@@ -1,0 +1,26 @@
+.inline-notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  padding: calc(var(--gap-8) - 1px);
+  background-color: var(--bg-app-1);
+  border: 1px solid var(--bg-app-4);
+  border-radius: var(--radius-large);
+}
+
+.inline-notice__texts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-3);
+}
+
+.inline-notice__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bg-app-11);
+}
+
+.inline-notice__body {
+  font-size: 12px;
+  color: var(--gray-11);
+}
