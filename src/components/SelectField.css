@@ -1,0 +1,60 @@
+.select-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+}
+
+.select-field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.select-field__box {
+  position: relative;
+}
+
+.select-field__select {
+  width: 100%;
+  padding: calc(var(--gap-6) - 1px) calc(var(--gap-8) + 14px + var(--gap-3)) calc(var(--gap-6) - 1px) calc(var(--gap-8) - 1px);
+  border: 1px solid var(--gray-8);
+  border-radius: var(--radius-medium);
+  background-color: var(--white);
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--gray-13);
+  appearance: none;
+  cursor: pointer;
+}
+
+.select-field__select:focus {
+  outline: none;
+  border-color: var(--bg-app-9);
+}
+
+.select-field__select:invalid,
+.select-field__select:has(option[value='']:checked) {
+  color: var(--gray-9);
+}
+
+.select-field__icon {
+  position: absolute;
+  top: 50%;
+  right: var(--gap-8);
+  transform: translateY(-50%);
+  color: var(--gray-9);
+  pointer-events: none;
+}
+
+.select-field__message {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.select-field--error .select-field__select {
+  border-color: var(--error-9);
+}
+
+.select-field--error .select-field__message {
+  color: var(--error-11);
+}

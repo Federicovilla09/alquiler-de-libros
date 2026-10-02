@@ -1,0 +1,41 @@
+.number-stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+}
+
+.number-stepper__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-10);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.number-stepper__button:disabled {
+  background-color: var(--gray-5);
+  color: var(--gray-9);
+  cursor: not-allowed;
+}
+
+.number-stepper__button:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+.number-stepper__value {
+  min-width: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--gray-13);
+}

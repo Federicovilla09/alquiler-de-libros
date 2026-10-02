@@ -1,0 +1,89 @@
+.switch-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  padding: calc(var(--gap-7) - 1px) calc(var(--gap-8) - 1px);
+  background-color: var(--white);
+  border: 1px solid var(--gray-8);
+  border-radius: var(--radius-large);
+}
+
+.switch-field__top {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-7);
+  cursor: pointer;
+}
+
+.switch-field__texts {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-2);
+}
+
+.switch-field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.switch-field__helper {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.switch-field__divider {
+  height: 1px;
+  background-color: var(--blush-3);
+}
+
+.switch-field__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+}
+
+/* El interruptor */
+.switch {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 24px;
+  padding: 0 var(--gap-2);
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: var(--gray-6);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.switch__knob {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background-color: var(--white);
+  transition: transform 150ms ease;
+}
+
+.switch[aria-checked='true'] {
+  background-color: var(--bg-app-10);
+}
+
+.switch[aria-checked='true'] .switch__knob {
+  transform: translateX(20px);
+}
+
+.switch:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch,
+  .switch__knob {
+    transition: none;
+  }
+}
