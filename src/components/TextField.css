@@ -19,7 +19,7 @@
   background-color: var(--white);
   border: 1px solid var(--gray-8);
   border-radius: var(--radius-medium);
-  color: var(--gray-8);
+  color: var(--gray-9);
 }
 
 .text-field__input {
@@ -34,7 +34,7 @@
 }
 
 .text-field__input::placeholder {
-  color: var(--gray-8);
+  color: var(--gray-9);
 }
 
 .text-field__icon {

@@ -16,6 +16,7 @@ function App() {
     <main className="app">
       <HomeHeader />
       <div className="content">
+        <SearchBar />
         <GenreFilters />
         <section className="catalog">
           <h2 className="catalog__title">12 títulos en tu biblioteca</h2>
