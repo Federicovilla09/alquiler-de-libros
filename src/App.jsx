@@ -21,11 +21,12 @@ import Tabs from "./components/Tabs";
 import LoanCard from "./components/LoanCard";
 import HistoryItem from "./components/HistoryItem";
 import BookCopyCard from "./components/BookCopyCard";
+import { alerts } from "./data/alerts";
 
 function App() {
   return (
     <main className="app">
-      <HomeHeader />
+      <HomeHeader alerts={alerts} />
       <div className="content">
         <SearchBar />
         <GenreFilters />

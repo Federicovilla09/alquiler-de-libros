@@ -8,5 +8,5 @@ export const books = [
   { id: 7, title: 'Todo lo que nunca fuimos', author: 'Alice Kellen', status: 'Alquilado', copies: 1, coverColor: '#9fb8c8' },
   { id: 8, title: 'El príncipe cruel', author: 'Holly Black', status: 'Disponible', copies: 1, coverColor: '#1f1b2e' },
   { id: 9, title: 'Boulevard', author: 'Flor M. Salvador', status: 'Disponible', copies: 1, coverColor: '#b9a7d6' },
-  { id: 10, title: 'Cincuenta Sombras de Gray', author: 'E. L. James', status: 'Disponible', copies: 2, coverColor: '#3a3a3a' },
+  { id: 10, title: 'Cincuenta Sombras de Grey', author: 'E. L. James', status: 'Disponible', copies: 2, coverColor: '#3a3a3a' },
 ]

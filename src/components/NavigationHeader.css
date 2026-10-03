@@ -1,0 +1,34 @@
+.nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  padding: var(--gap-8);
+  background-color: var(--blush-1);
+  border-bottom: 1px solid var(--blush-3);
+}
+
+.nav-header__back {
+  display: flex;
+  margin: -14px;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--gray-13);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-header__back:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}
+
+.nav-header__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-13);
+}

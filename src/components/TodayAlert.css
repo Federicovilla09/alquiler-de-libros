@@ -1,0 +1,78 @@
+.today-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-6);
+  width: 100%;
+  padding: calc(var(--gap-6) - 1px) calc(var(--gap-7) - 1px);
+  border: 1px solid transparent;
+  border-radius: var(--radius-large);
+  background-color: var(--white);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--gray-12);
+  text-align: left;
+}
+
+button.today-alert {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button.today-alert:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}
+
+.today-alert__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+
+.today-alert__message {
+  flex: 1;
+  min-width: 0;
+}
+
+.today-alert__chevron {
+  flex-shrink: 0;
+  color: var(--gray-9);
+}
+
+/* Type=Reservation */
+.today-alert--reservation .today-alert__dot {
+  background-color: var(--info-9);
+}
+
+/* Type=Return */
+.today-alert--return .today-alert__dot {
+  background-color: var(--warning-7);
+}
+
+/* Type=Overdue */
+.today-alert--overdue {
+  background-color: var(--error-2);
+  border-color: var(--error-7);
+  color: var(--error-11);
+}
+
+.today-alert--overdue .today-alert__dot {
+  background-color: var(--error-11);
+}
+
+.today-alert--overdue .today-alert__chevron {
+  color: currentColor;
+}
+
+/* Type=Clear */
+.today-alert--clear {
+  background-color: var(--bg-app-2);
+  border-color: var(--bg-app-4);
+  color: var(--bg-app-10);
+}
+
+.today-alert__icon {
+  flex-shrink: 0;
+  color: var(--bg-app-8);
+}
