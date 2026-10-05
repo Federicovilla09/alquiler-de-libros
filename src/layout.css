@@ -36,3 +36,7 @@
   overflow: hidden;
 }
 
+.placeholder {
+  font-size: 14px;
+  color: var(--gray-11);
+}

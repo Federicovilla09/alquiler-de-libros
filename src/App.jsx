@@ -1,58 +1,21 @@
-import "./App.css";
-import BookRow from "./components/BookRow";
-import { books } from "./data/books";
-import HomeHeader from "./components/HomeHeader";
-import SearchBar from "./components/SearchBar";
-import GenreFilters from "./components/GenreFilters";
-import BottomNav from "./components/BottomNav";
-import Icon from "./components/Icon";
-import Button from "./components/Button";
-import TagStatus from "./components/TagStatus";
-import TagChoice from "./components/TagChoice";
-import TextField from "./components/TextField";
-import SelectField from "./components/SelectField";
-import SwitchField from "./components/SwitchField";
-import SeriesField from "./components/SeriesField";
-import StarRating from "./components/StarRating";
-import Loader from "./components/Loader";
-import Notification from "./components/Notification";
-import InlineNotice from "./components/InlineNotice";
-import Tabs from "./components/Tabs";
-import LoanCard from "./components/LoanCard";
-import HistoryItem from "./components/HistoryItem";
-import BookCopyCard from "./components/BookCopyCard";
-import { alerts } from "./data/alerts";
-import CoverUpload from './components/CoverUpload'
+import { Route, Routes } from 'react-router'
+import HomePage from './pages/HomePage'
+import BookPage from './pages/BookPage'
+import PlaceholderPage from './pages/PlaceholderPage'
 
 function App() {
   return (
-    <main className="app">
-      <HomeHeader alerts={alerts} />
-      <div className="content">
-        <SearchBar />
-        <GenreFilters />
-        <section className="catalog">
-          <h2 className="catalog__title">12 títulos en tu biblioteca</h2>
-          <div className="catalog__list">
-            {books.map((book) => (
-              <BookRow
-                key={book.id}
-                title={book.title}
-                author={book.author}
-                status={book.status}
-                copies={book.copies}
-                coverColor={book.coverColor}
-              />
-            ))}
-          </div>
-          <Button variant="ghost" icon="arrows-button-down">
-            Ver más (2)
-          </Button>
-        </section>
-      </div>
-      <BottomNav />
-    </main>
-  );
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<PlaceholderPage title="Iniciar sesión" />} />
+      <Route path="/libros/nuevo" element={<PlaceholderPage title="Cargar nuevo libro" />} />
+      <Route path="/libros/:id" element={<BookPage />} />
+      <Route path="/libros/:id/editar" element={<PlaceholderPage title="Editar libro" />} />
+      <Route path="/libros/:id/historial" element={<PlaceholderPage title="Historial" />} />
+      <Route path="/seguimiento" element={<PlaceholderPage title="Seguimiento" withNav />} />
+      <Route path="*" element={<PlaceholderPage title="Página no encontrada" />} />
+    </Routes>
+  )
 }
 
-export default App;
+export default App

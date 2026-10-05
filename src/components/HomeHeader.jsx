@@ -3,6 +3,7 @@ import './HomeHeader.css'
 import Icon from './Icon'
 import Avatar from './Avatar'
 import TodayAlert from './TodayAlert'
+import { useNavigate } from 'react-router'
 
 function formatToday() {
   const text = new Date().toLocaleDateString('es-AR', {
@@ -16,6 +17,7 @@ function formatToday() {
 
 function HomeHeader({ alerts = [], welcome = false }) {
   const [expanded, setExpanded] = useState(false)
+  const navigate = useNavigate()
 
   const total = alerts.reduce((sum, alert) => sum + alert.count, 0)
   const overdue = alerts
@@ -74,7 +76,7 @@ function HomeHeader({ alerts = [], welcome = false }) {
           {alerts.length > 0 && expanded && (
             <div className="home-header__alerts">
               {alerts.map((alert) => (
-                <TodayAlert key={alert.id} type={alert.type}>
+                  <TodayAlert key={alert.id} type={alert.type} onClick={() => navigate('/seguimiento')}>
                   {alert.message}
                 </TodayAlert>
               ))}

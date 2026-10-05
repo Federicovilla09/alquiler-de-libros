@@ -5,6 +5,9 @@
   padding: var(--gap-5) var(--gap-7);
   background-color: var(--white);
   border-bottom: 1px solid var(--gray-2);
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .book-row__details {
@@ -52,4 +55,9 @@
 .book-row__copies {
   font-size: 10px;
   color: var(--gray-9);
+}
+
+.book-row:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: -2px;
 }

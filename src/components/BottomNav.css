@@ -25,6 +25,13 @@
   color: var(--gray-8);
   font-family: inherit;
   cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav__item:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
 }
 
 .bottom-nav__item--active {

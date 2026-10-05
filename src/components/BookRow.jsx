@@ -1,5 +1,6 @@
 import "./BookRow.css";
 import StatusIndicator from "./StatusIndicator";
+import { Link } from 'react-router'
 
 const STATUS_TYPES = {
   Disponible: "available",
@@ -7,9 +8,9 @@ const STATUS_TYPES = {
   Reservado: "reserved",
 };
 
-function BookRow({ title, author, status, copies, coverColor }) {
+function BookRow({ id, title, author, status, copies, coverColor }) {
   return (
-    <article className="book-row">
+    <Link to={`/libros/${id}`} className="book-row">   {/* ← cambió */}
       <div className="book-row__details">
         <div
           className="book-row__cover"
@@ -26,7 +27,7 @@ function BookRow({ title, author, status, copies, coverColor }) {
           {copies === 1 ? "1 ejemplar" : `${copies} ejemplares`}
         </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
