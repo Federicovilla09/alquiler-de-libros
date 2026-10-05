@@ -29,9 +29,6 @@ function App() {
     <main className="app">
       <HomeHeader alerts={alerts} />
       <div className="content">
-                {/* PRUEBA TEMPORAL: borrar después */}
-        <CoverUpload />
-        <CoverUpload error="La portada es obligatoria. Subí una foto para continuar." />
         <SearchBar />
         <GenreFilters />
         <section className="catalog">
