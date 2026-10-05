@@ -22,12 +22,16 @@ import LoanCard from "./components/LoanCard";
 import HistoryItem from "./components/HistoryItem";
 import BookCopyCard from "./components/BookCopyCard";
 import { alerts } from "./data/alerts";
+import CoverUpload from './components/CoverUpload'
 
 function App() {
   return (
     <main className="app">
       <HomeHeader alerts={alerts} />
       <div className="content">
+                {/* PRUEBA TEMPORAL: borrar después */}
+        <CoverUpload />
+        <CoverUpload error="La portada es obligatoria. Subí una foto para continuar." />
         <SearchBar />
         <GenreFilters />
         <section className="catalog">
