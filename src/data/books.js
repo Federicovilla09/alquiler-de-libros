@@ -81,7 +81,7 @@ export const books = [
     synopsis: 'Una historia sobre el amor, las decisiones difíciles y el valor de empezar de nuevo.',
     quote: null,
     copies: [
-      { number: 1, condition: 'Casi nuevo', state: 'reserved', borrower: 'Sofía Ruiz' },
+      { number: 1, condition: 'Casi nuevo', state: 'reserved', borrower: 'Carla Méndez' },
     ],
   },
   {

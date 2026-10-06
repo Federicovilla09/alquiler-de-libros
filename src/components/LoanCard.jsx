@@ -1,11 +1,11 @@
 import './LoanCard.css'
 
-function LoanCard({ state = 'on-track', title, who, progress = 0, status, coverSrc }) {
+function LoanCard({ state = 'on-track', title, who, progress = 0, status, coverSrc, coverColor }) {
   const percent = Math.min(Math.max(progress, 0), 1) * 100
 
   return (
     <article className={`loan-card loan-card--${state}`}>
-      <div className="loan-card__cover">
+      <div className="loan-card__cover" style={{ backgroundColor: coverColor }}>
         {coverSrc && <img src={coverSrc} alt="" />}
       </div>
       <div className="loan-card__body">
