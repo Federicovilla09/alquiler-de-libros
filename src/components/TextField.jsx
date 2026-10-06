@@ -15,6 +15,7 @@ function TextField({
   inputMode,
   autoComplete,
   onChange,
+  autoFocus,
 }) {
   const id = useId()
   const messageId = `${id}-message`
@@ -40,6 +41,7 @@ function TextField({
           inputMode={inputMode}
           autoComplete={autoComplete}
           onChange={onChange}
+          autoFocus={autoFocus}
           className="text-field__input"
           type={multiline ? undefined : type}
           rows={multiline ? 5 : undefined}

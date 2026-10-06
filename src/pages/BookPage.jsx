@@ -84,7 +84,7 @@ function BookPage() {
                   Agregar nuevo ejemplar
                 </Button>
               </div>
-              {book.copies.map((copy) => (
+                {book.copies.map((copy) => (
                 <BookCopyCard
                   key={copy.number}
                   state={copy.state}
@@ -93,6 +93,12 @@ function BookPage() {
                   borrower={copy.borrower}
                   returnDate={copy.returnDate}
                   returnOptions={returnOptions}
+                  onReserve={(name) =>
+                    updateCopy(book.id, copy.number, { state: 'reserved', borrower: name })
+                  }
+                  onCancelReservation={() =>
+                    updateCopy(book.id, copy.number, { state: 'available', borrower: undefined })
+                  }
                 />
               ))}
             </div>
