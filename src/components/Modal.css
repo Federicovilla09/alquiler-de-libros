@@ -1,0 +1,74 @@
+.modal {
+  width: 100%;
+  max-width: 393px;
+  max-height: 90dvh;
+  margin: auto auto 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-large) var(--radius-large) 0 0;
+  background-color: var(--white);
+  color: var(--gray-13);
+}
+
+.modal[open] {
+  animation: modal-in 200ms ease-out;
+}
+
+.modal::backdrop {
+  background-color: color-mix(in srgb, var(--bg-app-11) 40%, transparent);
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-9);
+  padding: var(--gap-9) var(--gap-8) calc(var(--gap-10) + env(safe-area-inset-bottom, 0px));
+}
+
+.modal__close {
+  display: flex;
+  align-self: flex-end;
+  margin: -15px -15px -15px 0;
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--gray-13);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal__close:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 0;
+}
+
+/* Secciones y textos que se usan adentro de los modales */
+.modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+}
+
+.modal-section__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-13);
+}
+
+.modal__note {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+@keyframes modal-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal[open] {
+    animation: none;
+  }
+}

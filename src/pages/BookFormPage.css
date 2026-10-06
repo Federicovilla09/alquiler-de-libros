@@ -1,0 +1,76 @@
+.book-form {
+  gap: var(--gap-10);
+  padding-top: var(--gap-9);
+}
+
+.book-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+}
+
+/* Grupos de tags con título */
+.book-form__choices {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.book-form__label {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.book-form__choices > .book-form__label {
+  margin-bottom: var(--gap-5);
+}
+
+.book-form__scroll {
+  display: flex;
+  gap: var(--gap-6);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.book-form__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.book-form__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-5) var(--gap-6);
+}
+
+/* Precios */
+.book-form__prices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+}
+
+.book-form__row {
+  display: flex;
+  gap: var(--gap-7);
+}
+
+.book-form__row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-form__note {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+/* Cantidad de ejemplares */
+.book-form__copies {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-7);
+}

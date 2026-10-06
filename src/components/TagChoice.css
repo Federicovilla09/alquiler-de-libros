@@ -5,6 +5,7 @@
   font-family: inherit;
   font-size: 10px;
   white-space: nowrap;
+  position: relative;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -38,4 +39,11 @@
 .tag-choice--readonly {
   display: inline-block;
   cursor: default;
+}
+
+/* Área táctil de 26 px sin cambiar el tamaño visible */
+button.tag-choice::after {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
 }
