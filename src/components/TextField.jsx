@@ -13,6 +13,8 @@ function TextField({
   name,
   defaultValue,
   inputMode,
+  autoComplete,
+  onChange,
 }) {
   const id = useId()
   const messageId = `${id}-message`
@@ -36,6 +38,8 @@ function TextField({
           name={name}
           defaultValue={defaultValue}
           inputMode={inputMode}
+          autoComplete={autoComplete}
+          onChange={onChange}
           className="text-field__input"
           type={multiline ? undefined : type}
           rows={multiline ? 5 : undefined}

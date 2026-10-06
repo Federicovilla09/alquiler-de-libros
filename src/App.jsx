@@ -5,12 +5,13 @@ import NewBookPage from './pages/NewBookPage'
 import EditBookPage from './pages/EditBookPage'
 import TrackingPage from './pages/TrackingPage'
 import PlaceholderPage from './pages/PlaceholderPage'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<PlaceholderPage title="Iniciar sesión" />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/libros/nuevo" element={<NewBookPage />} />
       <Route path="/libros/:id" element={<BookPage />} />
       <Route path="/libros/:id/editar" element={<EditBookPage />} />
