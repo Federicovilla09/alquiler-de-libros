@@ -4,7 +4,7 @@ import GenreFilters from '../components/GenreFilters'
 import BookRow from '../components/BookRow'
 import Button from '../components/Button'
 import BottomNav from '../components/BottomNav'
-import { books } from '../data/books'
+import { books, getBookStatus } from '../data/books'
 import { alerts } from '../data/alerts'
 
 function HomePage() {
@@ -23,8 +23,8 @@ function HomePage() {
                 id={book.id}
                 title={book.title}
                 author={book.author}
-                status={book.status}
-                copies={book.copies}
+                status={getBookStatus(book)}
+                copies={book.copies.length}
                 coverColor={book.coverColor}
               />
             ))}

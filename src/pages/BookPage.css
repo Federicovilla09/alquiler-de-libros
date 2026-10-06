@@ -1,0 +1,114 @@
+.book-page {
+  gap: var(--gap-10);
+  padding-top: var(--gap-9);
+}
+
+/* Portada y datos */
+.book-summary {
+  display: flex;
+  gap: var(--gap-8);
+}
+
+.book-summary__cover {
+  flex-shrink: 0;
+  width: 96px;
+  height: 134px;
+  border-radius: var(--radius-x-small);
+  box-shadow: 0 1px 4px rgba(12, 12, 13, 0.1), 0 1px 4px rgba(12, 12, 13, 0.05);
+}
+
+.book-summary__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  min-width: 0;
+}
+
+.book-summary__price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-13);
+}
+
+.book-summary__price-note {
+  margin-top: var(--gap-2);
+  font-size: 11px;
+  color: var(--gray-11);
+}
+
+.book-summary__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.book-summary__author {
+  margin-top: var(--gap-2);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-9);
+}
+
+.book-summary__rating {
+  display: flex;
+  gap: var(--gap-5);
+  color: var(--warning-8);
+}
+
+.book-summary__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-6);
+}
+
+/* Cita */
+.book-quote {
+  margin: 0;
+  padding-left: calc(var(--gap-8) - 2px);
+  border-left: 2px solid var(--gray-9);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 20px;
+  color: var(--gray-11);
+}
+
+/* Sinopsis */
+.book-synopsis {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+}
+
+.book-synopsis__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.book-synopsis__text {
+  font-size: 14px;
+  color: var(--gray-13);
+}
+
+/* Ejemplares */
+.book-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-10);
+}
+
+.book-copies {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+}
+
+.book-copies__add {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.book-copies__add .button {
+  width: auto;
+}
