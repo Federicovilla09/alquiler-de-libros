@@ -2,10 +2,16 @@ import './BookHistory.css'
 import HistoryItem from './HistoryItem'
 import { formatPrice } from '../data/books'
 
-const STATUS_LABELS = {
-  current: 'En curso',
-  'on-time': 'Devuelto a tiempo',
-  late: 'Devuelto con atraso',
+// ← CAMBIO 1: la tabla STATUS_LABELS se reemplazó por esta función
+function getStatusText(rental) {
+  if (rental.status === 'current') return 'En curso'
+
+  if (rental.status === 'late') {
+    const days = rental.lateDays
+    return `Devuelto con ${days} ${days === 1 ? 'día' : 'días'} de atraso`
+  }
+
+  return 'Devuelto a tiempo'
 }
 
 function BookHistory({ history }) {
@@ -31,12 +37,12 @@ function BookHistory({ history }) {
         {history.map((rental) => (
           <HistoryItem
             key={rental.id}
-            current={rental.status === 'current'}
             who={rental.who}
             price={formatPrice(rental.price)}
             copy={`Ejemplar ${rental.copy} · ${rental.days} días`}
             dates={`${rental.from} → ${rental.to}`}
-            status={STATUS_LABELS[rental.status]}
+            status={rental.status}
+            statusText={getStatusText(rental)}
           />
         ))}
       </ol>

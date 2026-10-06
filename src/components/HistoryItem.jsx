@@ -1,8 +1,8 @@
 import './HistoryItem.css'
 
-function HistoryItem({ who, price, copy, dates, status, current = false }) {
+function HistoryItem({ who, price, copy, dates, status = 'on-time', statusText }) {
   return (
-    <li className={current ? 'history-item history-item--current' : 'history-item'}>
+    <li className={`history-item history-item--${status}`}>
       <div className="history-item__rail" aria-hidden="true">
         <span className="history-item__dot" />
         <span className="history-item__line" />
@@ -14,7 +14,7 @@ function HistoryItem({ who, price, copy, dates, status, current = false }) {
         </div>
         <p className="history-item__copy">{copy}</p>
         <p className="history-item__dates">{dates}</p>
-        <p className="history-item__status">{status}</p>
+        <p className="history-item__status">{statusText}</p>
       </div>
     </li>
   )

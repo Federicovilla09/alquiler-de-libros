@@ -147,3 +147,13 @@
   outline: 2px solid var(--bg-app-11);
   outline-offset: 0;
 }
+
+/* Status=Late */
+.history-item--late .history-item__dot {
+  background-color: var(--error-9);
+}
+
+.history-item--late .history-item__status {
+  font-weight: 600;
+  color: var(--error-11);
+}
