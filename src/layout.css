@@ -42,10 +42,19 @@
 }
 
 .catalog__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-7);
   padding: var(--gap-9) var(--gap-8);
   background-color: var(--white);
   border-radius: var(--radius-x-large);
   font-size: 14px;
   text-align: center;
   color: var(--gray-11);
+}
+
+.catalog__empty-illustration {
+  width: auto;
+  height: 160px;
 }

@@ -8,6 +8,7 @@ import BottomNav from '../components/BottomNav'
 import { getBookStatus } from '../data/books'
 import { alerts } from '../data/alerts'
 import { useLibrary } from '../store/LibraryContext'
+import Icon from '../components/Icon'
 
 const PAGE_SIZE = 10
 
@@ -50,9 +51,10 @@ function HomePage() {
           </h2>
 
           {filteredBooks.length === 0 ? (
-            <p className="catalog__empty">
-              No encontramos libros con esa búsqueda. Probá con otro título, autor o género.
-            </p>
+            <div className="catalog__empty">
+              <img className="catalog__empty-illustration" src="/illustrations/no-results.svg" alt="" />
+              <p>No encontramos libros con esa búsqueda. Probá con otro título, autor o género.</p>
+            </div>
           ) : (
             <div className="catalog__list">
               {visibleBooks.map((book) => (
