@@ -74,3 +74,10 @@
   align-items: flex-start;
   gap: var(--gap-7);
 }
+
+/* Condición de los ejemplares (edición) */
+.book-form__conditions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+}

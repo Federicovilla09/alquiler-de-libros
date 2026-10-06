@@ -4,11 +4,17 @@ import TagChoice from './TagChoice'
 
 const CONDITIONS = ['Nuevo', 'Casi nuevo', 'Subrayado', 'Notas', 'Etiquetas']
 
-function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false }) {
+function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = false }) {
   const [selected, setSelected] = useState(defaultValue)
 
+  const classes = [
+    'condition-picker',
+    boxed && 'condition-picker--boxed',
+    sub && 'condition-picker--sub',
+  ].filter(Boolean).join(' ')
+
   return (
-    <fieldset className={boxed ? 'condition-picker condition-picker--boxed' : 'condition-picker'}>
+    <fieldset className={classes}>
       <legend className="condition-picker__label">{label}</legend>
       <div className="condition-picker__options">
         {CONDITIONS.map((condition) => (

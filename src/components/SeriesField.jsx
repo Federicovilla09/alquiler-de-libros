@@ -7,8 +7,8 @@ import NumberStepper from './NumberStepper'
 
 const NEW_SERIES = '+ Crear nueva serie'
 
-function SeriesField({ series = [], defaultChecked = false }) {
-  const [selected, setSelected] = useState('')
+function SeriesField({ series = [], defaultChecked = false, defaultSeries = '', defaultVolume = 1 }) {
+  const [selected, setSelected] = useState(defaultSeries)
   const isNew = selected === NEW_SERIES
 
   return (
@@ -21,6 +21,7 @@ function SeriesField({ series = [], defaultChecked = false }) {
         label="¿De qué serie?"
         placeholder="Elegí una serie"
         options={[...series, NEW_SERIES]}
+        defaultValue={defaultSeries}
         onChange={setSelected}
       />
 
@@ -36,7 +37,7 @@ function SeriesField({ series = [], defaultChecked = false }) {
 
       <div className="series-field__tomo">
         <span className="series-field__tomo-label">Tomo</span>
-        <NumberStepper label="Tomo" />
+        <NumberStepper label="Tomo" defaultValue={defaultVolume} />
       </div>
     </SwitchField>
   )

@@ -155,6 +155,9 @@ export const books = [
     synopsis:
       'Narra la intensa y compleja relación entre Anastasia Steele, una inocente estudiante de literatura, y Christian Grey, un exitoso y enigmático multimillonario.',
     quote: 'Tengo reglas. Si las sigues te compensaré, sino te castigaré',
+    recommended: true,
+    series: 'Cincuenta sombras',
+    volume: 1,
     copies: [
       { number: 1, condition: 'Nuevo', state: 'available' },
       { number: 2, condition: 'Casi nuevo', state: 'available' },

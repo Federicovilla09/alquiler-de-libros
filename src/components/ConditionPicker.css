@@ -40,3 +40,9 @@
 .condition-picker--boxed .condition-picker__options {
   gap: var(--gap-5);
 }
+
+/* Como subtítulo, para cada ejemplar en la edición */
+.condition-picker--sub .condition-picker__label {
+  font-size: 12px;
+  color: var(--gray-11);
+}
