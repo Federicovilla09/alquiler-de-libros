@@ -159,6 +159,11 @@ export const books = [
       { number: 1, condition: 'Nuevo', state: 'available' },
       { number: 2, condition: 'Casi nuevo', state: 'available' },
     ],
+    history: [
+      { id: 1, who: 'Federico Villanueva', price: 2000, copy: 1, days: 15, from: '30/09/2026', to: '15/10/2026', status: 'current' },
+      { id: 2, who: 'Sofía Ruiz', price: 4000, copy: 1, days: 30, from: '12/08/2026', to: '11/09/2026', status: 'on-time' },
+      { id: 3, who: 'Lucía Gómez', price: 2000, copy: 1, days: 15, from: '20/07/2026', to: '04/08/2026', status: 'on-time' },
+    ],
   },
 ]
 

@@ -9,6 +9,7 @@ import Button from '../components/Button'
 import BookCopyCard from '../components/BookCopyCard'
 import PlaceholderPage from './PlaceholderPage'
 import { findBook, formatPrice } from '../data/books'
+import BookHistory from '../components/BookHistory'
 
 const STARS = [1, 2, 3, 4, 5]
 
@@ -95,7 +96,7 @@ function BookPage() {
             </div>
           )}
 
-          {tab === 1 && <p className="placeholder">El historial se arma en el próximo paso.</p>}
+          {tab === 1 && <BookHistory history={book.history ?? []} />}
         </div>
 
         <Button variant="ghost" icon="edit-pencil" onClick={() => navigate(`/libros/${book.id}/editar`)}>
