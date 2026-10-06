@@ -4,10 +4,13 @@ import GenreFilters from '../components/GenreFilters'
 import BookRow from '../components/BookRow'
 import Button from '../components/Button'
 import BottomNav from '../components/BottomNav'
-import { books, getBookStatus } from '../data/books'
+import { getBookStatus } from '../data/books'
 import { alerts } from '../data/alerts'
+import { useLibrary } from '../store/LibraryContext'
 
 function HomePage() {
+  const { books } = useLibrary()
+
   return (
     <main className="app">
       <HomeHeader alerts={alerts} />

@@ -6,7 +6,7 @@ import TagFilter from '../components/TagFilter'
 import LoanCard from '../components/LoanCard'
 import BottomNav from '../components/BottomNav'
 import { loans } from '../data/loans'
-import { findBook } from '../data/books'
+import { useLibrary } from '../store/LibraryContext'
 
 const FILTERS = [
   { id: 'all', label: 'Todos', states: ['overdue', 'due-today', 'reserved', 'on-track'] },
@@ -22,7 +22,8 @@ const SECTIONS = [
 ]
 
 function TrackingPage() {
-  const [filterId, setFilterId] = useState('all')
+  const [filterId, setFilterId] = useState('all')   
+  const { getBook } = useLibrary()
 
   const activeFilter = FILTERS.find((f) => f.id === filterId)
   const visibleLoans = loans.filter((loan) => activeFilter.states.includes(loan.state))
@@ -58,7 +59,7 @@ function TrackingPage() {
                 {section.label}
               </h2>
               {sectionLoans.map((loan) => {
-                const book = findBook(loan.bookId)
+                const book = getBook(loan.bookId)
                 return (
                   <Link key={loan.id} to={`/libros/${loan.bookId}`} className="tracking__link">
                     <LoanCard

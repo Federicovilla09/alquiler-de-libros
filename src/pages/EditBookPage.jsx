@@ -2,11 +2,12 @@ import { useParams } from 'react-router'
 import NavigationHeader from '../components/NavigationHeader'
 import BookForm from '../components/BookForm'
 import PlaceholderPage from './PlaceholderPage'
-import { findBook } from '../data/books'
+import { useLibrary } from '../store/LibraryContext'
 
 function EditBookPage() {
   const { id } = useParams()
-  const book = findBook(id)
+  const { getBook } = useLibrary()
+  const book = getBook(id)
 
   if (!book) {
     return <PlaceholderPage title="Libro no encontrado" />

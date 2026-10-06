@@ -7,9 +7,10 @@ import TagChoice from '../components/TagChoice'
 import Tabs from '../components/Tabs'
 import Button from '../components/Button'
 import BookCopyCard from '../components/BookCopyCard'
-import PlaceholderPage from './PlaceholderPage'
-import { findBook, formatPrice } from '../data/books'
 import BookHistory from '../components/BookHistory'
+import PlaceholderPage from './PlaceholderPage'
+import { formatPrice } from '../data/books'
+import { useLibrary } from '../store/LibraryContext'
 
 const STARS = [1, 2, 3, 4, 5]
 
@@ -17,7 +18,8 @@ function BookPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [tab, setTab] = useState(0)
-  const book = findBook(id)
+  const { getBook, updateCopy } = useLibrary()
+  const book = getBook(id)
 
   if (!book) {
     return <PlaceholderPage title="Libro no encontrado" />
