@@ -40,3 +40,12 @@
   font-size: 14px;
   color: var(--gray-11);
 }
+
+.catalog__empty {
+  padding: var(--gap-9) var(--gap-8);
+  background-color: var(--white);
+  border-radius: var(--radius-x-large);
+  font-size: 14px;
+  text-align: center;
+  color: var(--gray-11);
+}
