@@ -4,6 +4,8 @@
 }
 
 .tabs__tab {
+  flex: 1;
+  text-align: center;
   margin-bottom: -1px;
   padding: var(--gap-5) var(--gap-8);
   border: none;
