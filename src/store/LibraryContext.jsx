@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import { books as initialBooks } from '../data/books'
+import { addDays, formatDate, today } from '../utils/dates'
 
 const LibraryContext = createContext(null)
 
@@ -10,22 +11,53 @@ export function LibraryProvider({ children }) {
     return books.find((book) => book.id === Number(id))
   }
 
-  function updateCopy(bookId, copyNumber, changes) {
+  // Aplica un cambio a un libro, sin tocar los demás
+  function updateBook(bookId, update) {
     setBooks((current) =>
-      current.map((book) => {
-        if (book.id !== Number(bookId)) return book
-
-        return {
-          ...book,
-          copies: book.copies.map((copy) =>
-            copy.number === copyNumber ? { ...copy, ...changes } : copy
-          ),
-        }
-      })
+      current.map((book) => (book.id === Number(bookId) ? update(book) : book))
     )
   }
 
-  const value = { books, getBook, updateCopy }
+  function updateCopy(bookId, copyNumber, changes) {
+    updateBook(bookId, (book) => ({
+      ...book,
+      copies: book.copies.map((copy) =>
+        copy.number === copyNumber ? { ...copy, ...changes } : copy
+      ),
+    }))
+  }
+
+  function rentCopy(bookId, copyNumber, plan) {
+    const start = today()
+    const end = addDays(start, plan.days)
+
+    updateBook(bookId, (book) => {
+      const copy = book.copies.find((c) => c.number === copyNumber)
+
+      const rental = {
+        id: Date.now(),
+        who: copy.borrower,
+        price: plan.price,
+        copy: copyNumber,
+        days: plan.days,
+        from: formatDate(start),
+        to: formatDate(end),
+        status: 'current',
+      }
+
+      return {
+        ...book,
+        copies: book.copies.map((c) =>
+          c.number === copyNumber
+            ? { ...c, state: 'rented', days: plan.days, returnDate: formatDate(end) }
+            : c
+        ),
+        history: [rental, ...(book.history ?? [])],
+      }
+    })
+  }
+
+  const value = { books, getBook, updateCopy, rentCopy }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>
 }
