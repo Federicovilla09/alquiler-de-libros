@@ -13,6 +13,7 @@ const STEP_BY_STATE = {
   reserved: 'reserved',
   delivery: 'reserved',
   rented: 'rented',
+  renewal: 'rented',
 }
 
 function BookCopyCard({
@@ -22,23 +23,24 @@ function BookCopyCard({
   borrower,
   returnDate,
   returnOptions = [],
+  renewOptions = [],
   onReserve,
   onCancelReservation,
   onConfirmDelivery,
-  onRenew,
+  onConfirmRenewal,
   onReturn,
 }) {
-  // El paso intermedio en el que está Micaela: ninguno, el formulario o el plazo
+  // El paso intermedio: ninguno, el formulario, el plazo de entrega o el de renovación
   const [mode, setMode] = useState('idle')
   const [name, setName] = useState('')
   const [nameError, setNameError] = useState(null)
   const [plan, setPlan] = useState('')
   const [planError, setPlanError] = useState(null)
 
-  // Qué variante mostrar: el dato del ejemplar más el paso intermedio
   let view = state
   if (state === 'available' && mode === 'form') view = 'reservation-form'
   if (state === 'reserved' && mode === 'delivery') view = 'delivery'
+  if (state === 'rented' && mode === 'renew') view = 'renewal'
 
   function startReservation() {
     setName('')
@@ -60,11 +62,15 @@ function BookCopyCard({
     if (onCancelReservation) onCancelReservation()
   }
 
+  function startPlan(nextMode) {
+    setPlan('')
+    setPlanError(null)
+    setMode(nextMode)
+  }
+
   function confirmDelivery() {
     if (mode !== 'delivery') {
-      setPlan('')
-      setPlanError(null)
-      setMode('delivery')
+      startPlan('delivery')
       return
     }
     if (plan === '') {
@@ -72,6 +78,20 @@ function BookCopyCard({
       return
     }
     if (onConfirmDelivery) onConfirmDelivery(plan)
+  }
+
+  function confirmRenewal() {
+    if (plan === '') {
+      setPlanError('Elegí un plazo para renovar')
+      return
+    }
+    setMode('idle')
+    if (onConfirmRenewal) onConfirmRenewal(plan)
+  }
+
+  function handlePlanChange(option) {
+    setPlan(option)
+    setPlanError(null)
   }
 
   return (
@@ -121,10 +141,7 @@ function BookCopyCard({
                 placeholder="Elegí un plazo"
                 options={returnOptions}
                 error={planError}
-                onChange={(option) => {
-                  setPlan(option)
-                  setPlanError(null)
-                }}
+                onChange={handlePlanChange}
               />
             )}
           </div>
@@ -137,7 +154,7 @@ function BookCopyCard({
         </div>
       )}
 
-      {view === 'rented' && (
+      {(view === 'rented' || view === 'renewal') && (
         <div className="copy-card__content">
           <div className="copy-card__info">
             <div className="copy-card__info-item">
@@ -149,12 +166,32 @@ function BookCopyCard({
               <span className="copy-card__info-value">{returnDate}</span>
             </div>
           </div>
-          <div className="copy-card__actions">
-            <Button onClick={onRenew}>Renovar alquiler</Button>
-            <Button variant="secondary" onClick={onReturn}>
-              Devolver a la biblioteca
-            </Button>
-          </div>
+
+          {view === 'renewal' && (
+            <SelectField
+              label="Nuevo plazo"
+              placeholder="Elegí un plazo"
+              options={renewOptions}
+              error={planError}
+              onChange={handlePlanChange}
+            />
+          )}
+
+          {view === 'rented' ? (
+            <div className="copy-card__actions">
+              <Button onClick={() => startPlan('renew')}>Renovar alquiler</Button>
+              <Button variant="secondary" onClick={onReturn}>
+                Devolver a la biblioteca
+              </Button>
+            </div>
+          ) : (
+            <div className="copy-card__actions">
+              <Button onClick={confirmRenewal}>Confirmar renovación</Button>
+              <Button variant="secondary" onClick={() => setMode('idle')}>
+                Cancelar
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </article>

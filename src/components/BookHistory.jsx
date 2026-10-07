@@ -43,6 +43,7 @@ function BookHistory({ history }) {
             dates={`${rental.from} → ${rental.to}`}
             status={rental.status}
             statusText={getStatusText(rental)}
+            renewed={rental.renewed}
           />
         ))}
       </ol>

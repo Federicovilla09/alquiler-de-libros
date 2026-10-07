@@ -1,6 +1,6 @@
 import './HistoryItem.css'
 
-function HistoryItem({ who, price, copy, dates, status = 'on-time', statusText }) {
+function HistoryItem({ who, price, copy, dates, status = 'on-time', statusText, renewed = false }) {
   return (
     <li className={`history-item history-item--${status}`}>
       <div className="history-item__rail" aria-hidden="true">
@@ -8,6 +8,7 @@ function HistoryItem({ who, price, copy, dates, status = 'on-time', statusText }
         <span className="history-item__line" />
       </div>
       <div className="history-item__card">
+        {renewed && <span className="history-item__tag">Renovación</span>}
         <div className="history-item__header">
           <span className="history-item__who">{who}</span>
           <span className="history-item__price">{price}</span>

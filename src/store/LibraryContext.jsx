@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import { books as initialBooks } from '../data/books'
-import { addDays, formatDate, today } from '../utils/dates'
+import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
 
 const LibraryContext = createContext(null)
 
@@ -25,6 +25,15 @@ export function LibraryProvider({ children }) {
         copy.number === copyNumber ? { ...copy, ...changes } : copy
       ),
     }))
+  }
+
+  // Cierra el alquiler en curso de un ejemplar en el historial
+  function closeCurrentRental(history, copyNumber, lateDays) {
+    return history.map((rental) =>
+      rental.copy === copyNumber && rental.status === 'current'
+        ? { ...rental, status: lateDays > 0 ? 'late' : 'on-time', lateDays }
+        : rental
+    )
   }
 
   function rentCopy(bookId, copyNumber, plan) {
@@ -57,7 +66,53 @@ export function LibraryProvider({ children }) {
     })
   }
 
-  const value = { books, getBook, updateCopy, rentCopy }
+  function renewCopy(bookId, copyNumber, plan) {
+    updateBook(bookId, (book) => {
+      const copy = book.copies.find((c) => c.number === copyNumber)
+      const due = parseDate(copy.returnDate)
+      const lateDays = Math.max(0, daysBetween(due, today()))
+      // Desde la fecha de devolución, o desde hoy si ya venció
+      const start = lateDays > 0 ? today() : due
+      const end = addDays(start, plan.days)
+
+      const renewal = {
+        id: Date.now(),
+        who: copy.borrower,
+        price: plan.price,
+        copy: copyNumber,
+        days: plan.days,
+        from: formatDate(start),
+        to: formatDate(end),
+        status: 'current',
+        renewed: true,
+      }
+
+      return {
+        ...book,
+        copies: book.copies.map((c) =>
+          c.number === copyNumber ? { ...c, days: plan.days, returnDate: formatDate(end) } : c
+        ),
+        history: [renewal, ...closeCurrentRental(book.history ?? [], copyNumber, lateDays)],
+      }
+    })
+  }
+
+  function returnCopy(bookId, copyNumber) {
+    updateBook(bookId, (book) => {
+      const copy = book.copies.find((c) => c.number === copyNumber)
+      const lateDays = Math.max(0, daysBetween(parseDate(copy.returnDate), today()))
+
+      return {
+        ...book,
+        copies: book.copies.map((c) =>
+          c.number === copyNumber ? { number: c.number, condition: c.condition, state: 'available' } : c
+        ),
+        history: closeCurrentRental(book.history ?? [], copyNumber, lateDays),
+      }
+    })
+  }
+
+  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>
 }

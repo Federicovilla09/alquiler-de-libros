@@ -5,7 +5,7 @@ import NavigationHeader from '../components/NavigationHeader'
 import TagFilter from '../components/TagFilter'
 import LoanCard from '../components/LoanCard'
 import BottomNav from '../components/BottomNav'
-import { loans } from '../data/loans'
+import { getLoans } from '../utils/loans'
 import { useLibrary } from '../store/LibraryContext'
 
 const FILTERS = [
@@ -23,7 +23,8 @@ const SECTIONS = [
 
 function TrackingPage() {
   const [filterId, setFilterId] = useState('all')   
-  const { getBook } = useLibrary()
+  const { books, getBook } = useLibrary()
+  const loans = getLoans(books)
 
   const activeFilter = FILTERS.find((f) => f.id === filterId)
   const visibleLoans = loans.filter((loan) => activeFilter.states.includes(loan.state))

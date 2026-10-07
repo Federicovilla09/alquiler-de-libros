@@ -14,7 +14,7 @@ import Notification from '../components/Notification'
 import PlaceholderPage from './PlaceholderPage'
 import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
-import { addDays, formatDate, today } from '../utils/dates'
+import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
 
 const STARS = [1, 2, 3, 4, 5]
 
@@ -23,8 +23,9 @@ function BookPage() {
   const navigate = useNavigate()
   const [tab, setTab] = useState(0)
   const [pendingRental, setPendingRental] = useState(null)
+  const [pendingReturn, setPendingReturn] = useState(null)
   const [notice, setNotice] = useState(null)
-  const { getBook, updateCopy, rentCopy } = useLibrary()
+  const { getBook, updateCopy, rentCopy, renewCopy, returnCopy } = useLibrary()
   const book = getBook(id)
 
   // La notificación desaparece sola a los 3 segundos
@@ -38,21 +39,43 @@ function BookPage() {
     return <PlaceholderPage title="Libro no encontrado" />
   }
 
-  // Los dos plazos, con su fecha de devolución calculada desde hoy
   const start = today()
-  const plans = [
-    { days: 15, price: book.price15 },
-    { days: 30, price: book.price30 },
-  ].map((plan) => ({ ...plan, end: addDays(start, plan.days) }))
 
-  const returnOptions = plans.map(
-    (plan) => `${plan.days} días · ${formatPrice(plan.price)} · vuelve el ${formatDate(plan.end)}`
-  )
+  // Los dos plazos del libro, contados desde una fecha
+  function makePlans(from) {
+    return [
+      { days: 15, price: book.price15 },
+      { days: 30, price: book.price30 },
+    ].map((plan) => ({ ...plan, end: addDays(from, plan.days) }))
+  }
+
+  function planLabel(plan) {
+    return `${plan.days} días · ${formatPrice(plan.price)} · vuelve el ${formatDate(plan.end)}`
+  }
+
+  // Desde cuándo cuenta una renovación: la fecha de devolución, o hoy si ya venció
+  function renewalStart(copy) {
+    const due = parseDate(copy.returnDate)
+    return due > start ? due : start
+  }
+
+  const plans = makePlans(start)
+  const returnOptions = plans.map(planLabel)
+
+  const returnLateDays = pendingReturn
+    ? Math.max(0, daysBetween(parseDate(pendingReturn.returnDate), start))
+    : 0
 
   function confirmRental() {
     rentCopy(book.id, pendingRental.copy.number, pendingRental.plan)
     setPendingRental(null)
     setNotice('¡Libro alquilado con éxito!')
+  }
+
+  function confirmReturn() {
+    returnCopy(book.id, pendingReturn.number)
+    setPendingReturn(null)
+    setNotice('¡Libro devuelto a la biblioteca!')
   }
 
   return (
@@ -109,26 +132,45 @@ function BookPage() {
                   Agregar nuevo ejemplar
                 </Button>
               </div>
-              {book.copies.map((copy) => (
-                <BookCopyCard
-                  key={`${copy.number}-${copy.state}`}
-                  state={copy.state}
-                  copyNumber={copy.number}
-                  condition={copy.condition}
-                  borrower={copy.borrower}
-                  returnDate={copy.returnDate}
-                  returnOptions={returnOptions}
-                  onReserve={(name) =>
-                    updateCopy(book.id, copy.number, { state: 'reserved', borrower: name })
-                  }
-                  onCancelReservation={() =>
-                    updateCopy(book.id, copy.number, { state: 'available', borrower: undefined })
-                  }
-                  onConfirmDelivery={(option) =>
-                    setPendingRental({ copy, plan: plans[returnOptions.indexOf(option)] })
-                  }
-                />
-              ))}
+              {book.copies.map((copy) => {
+                const renewPlans = copy.state === 'rented' ? makePlans(renewalStart(copy)) : []
+                const renewOptions = renewPlans.map(planLabel)
+
+                return (
+                  <BookCopyCard
+                    key={`${copy.number}-${copy.state}`}
+                    state={copy.state}
+                    copyNumber={copy.number}
+                    condition={copy.condition}
+                    borrower={copy.borrower}
+                    returnDate={copy.returnDate}
+                    returnOptions={returnOptions}
+                    renewOptions={renewOptions}
+                    onReserve={(name) =>
+                      updateCopy(book.id, copy.number, {
+                        state: 'reserved',
+                        borrower: name,
+                        reservedAt: formatDate(start),
+                      })
+                    }
+                    onCancelReservation={() =>
+                      updateCopy(book.id, copy.number, {
+                        state: 'available',
+                        borrower: undefined,
+                        reservedAt: undefined,
+                      })
+                    }
+                    onConfirmDelivery={(option) =>
+                      setPendingRental({ copy, plan: plans[returnOptions.indexOf(option)] })
+                    }
+                    onConfirmRenewal={(option) => {
+                      renewCopy(book.id, copy.number, renewPlans[renewOptions.indexOf(option)])
+                      setNotice('¡Alquiler renovado con éxito!')
+                    }}
+                    onReturn={() => setPendingReturn(copy)}
+                  />
+                )
+              })}
             </div>
           )}
 
@@ -156,6 +198,32 @@ function BookPage() {
             </section>
             <p className="modal__note">Lo vas a ver en «Para hoy» cuando se acerque la fecha.</p>
             <Button onClick={confirmRental}>Confirmar alquiler</Button>
+          </>
+        )}
+      </Modal>
+
+      <Modal open={pendingReturn !== null} onClose={() => setPendingReturn(null)} label="Devolución del libro">
+        {pendingReturn && (
+          <>
+            <section className="modal-section">
+              <h2 className="modal-section__title">Devolución del libro</h2>
+              <SummaryCard>
+                <SummaryItem label="Libro" value={book.title} />
+                <SummaryItem label="Devuelve" value={pendingReturn.borrower} />
+                <div className="summary-card__row">
+                  <SummaryItem label="Fecha pactada" value={pendingReturn.returnDate} />
+                  <SummaryItem
+                    label="Atraso"
+                    value={
+                      returnLateDays > 0
+                        ? `${returnLateDays} ${returnLateDays === 1 ? 'día' : 'días'}`
+                        : 'Sin atraso'
+                    }
+                  />
+                </div>
+              </SummaryCard>
+            </section>
+            <Button onClick={confirmReturn}>Devolver a la biblioteca</Button>
           </>
         )}
       </Modal>

@@ -101,3 +101,14 @@
   font-weight: 600;
   color: var(--bg-app-10);
 }
+
+/* Renewed=True */
+.history-item__tag {
+  align-self: flex-start;
+  padding: var(--gap-2) var(--gap-5);
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-2);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--bg-app-10);
+}
