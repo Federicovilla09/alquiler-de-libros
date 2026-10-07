@@ -13,6 +13,7 @@ import NumberStepper from './NumberStepper'
 import Button from './Button'
 import { genres } from '../data/genres'
 import { tropes } from '../data/tropes'
+import InlineNotice from './InlineNotice'
 
 const BOOK_GENRES = genres.filter((g) => g !== 'Todos')
 const AUDIENCES = ['Todo público', '+15', '+18', '+21']
@@ -23,19 +24,19 @@ function parsePrice(text) {
   return Number(String(text ?? '').replace(/\D/g, ''))
 }
 
-function BookForm({ book, submitLabel, onSubmit }) {
+function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, onIdentityChange }) {
   const [genre, setGenre] = useState(book?.genre ?? 'Romance')
   const [selectedTropes, setSelectedTropes] = useState(book?.tropes ?? [])
   const [coverFile, setCoverFile] = useState(null)
   const [errors, setErrors] = useState({})
 
-  // Al aparecer errores, llevar la vista al primero
+  // Al aparecer errores o el aviso de duplicado, llevar la vista hasta ahí
   useEffect(() => {
-    const first = document.querySelector('[aria-invalid="true"], .cover-upload--error')
+    const first = document.querySelector('[aria-invalid="true"], .cover-upload--error, .inline-notice')
     if (!first) return
     first.scrollIntoView({ behavior: 'smooth', block: 'center' })
     if (first.matches('input, textarea')) first.focus({ preventScroll: true })
-  }, [errors])
+  }, [errors, duplicate])
 
   function clearError(field) {
     if (errors[field]) setErrors({ ...errors, [field]: undefined })
@@ -111,14 +112,17 @@ function BookForm({ book, submitLabel, onSubmit }) {
         }}
       />
 
-      <div className="book-form__group">
+            <div className="book-form__group">
         <TextField
           label="Título"
           name="title"
           placeholder="Título del libro"
           defaultValue={book?.title}
           error={errors.title}
-          onChange={() => clearError('title')}
+          onChange={() => {
+            clearError('title')
+            if (onIdentityChange) onIdentityChange()
+          }}
         />
         <TextField
           label="Autor/a"
@@ -126,9 +130,24 @@ function BookForm({ book, submitLabel, onSubmit }) {
           placeholder="Nombre del autor/a"
           defaultValue={book?.author}
           error={errors.author}
-          onChange={() => clearError('author')}
+          onChange={() => {
+            clearError('author')
+            if (onIdentityChange) onIdentityChange()
+          }}
         />
       </div>
+
+      {duplicate && (
+        <InlineNotice
+          title="Ya tenés este libro en tu biblioteca"
+          actionLabel="Agregar un ejemplar"
+          onAction={onDuplicateAction}
+        >
+          {duplicate.title} · {duplicate.author} · {duplicate.copies.length}{' '}
+          {duplicate.copies.length === 1 ? 'ejemplar' : 'ejemplares'}. Podés sumar otra copia en lugar
+          de crear un libro nuevo.
+        </InlineNotice>
+      )}
 
       <fieldset className="book-form__choices">
         <legend className="book-form__label">Género</legend>

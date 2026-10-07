@@ -10,13 +10,9 @@ import { getLoans } from '../utils/loans'
 import { getAlerts } from '../utils/alerts'
 import { useLibrary } from '../store/LibraryContext'
 import Icon from '../components/Icon'
+import { normalize } from '../utils/text'
 
 const PAGE_SIZE = 10
-
-// "Fantasía" → "fantasia", para buscar sin importar tildes ni mayúsculas
-function normalize(text) {
-  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-}
 
 function HomePage() {
   const { books } = useLibrary()

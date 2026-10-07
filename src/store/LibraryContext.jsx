@@ -142,7 +142,20 @@ export function LibraryProvider({ children }) {
     return id
   }
 
-  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy, addBook }
+  function editBook(bookId, values) {
+    const { conditions = {}, condition, copies, coverFile, ...data } = values
+
+    updateBook(bookId, (book) => ({
+      ...book,
+      ...data,
+      copies: book.copies.map((copy) => ({
+        ...copy,
+        condition: conditions[copy.number] ?? copy.condition,
+      })),
+    }))
+  }
+
+  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy, addBook, editBook }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>
 }

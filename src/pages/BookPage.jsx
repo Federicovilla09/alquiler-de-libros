@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router'
 import './BookPage.css'
 import NavigationHeader from '../components/NavigationHeader'
@@ -10,34 +10,27 @@ import BookCopyCard from '../components/BookCopyCard'
 import BookHistory from '../components/BookHistory'
 import Modal from '../components/Modal'
 import SummaryCard, { SummaryItem } from '../components/SummaryCard'
-import Notification from '../components/Notification'
+import ConditionPicker from '../components/ConditionPicker'
 import PlaceholderPage from './PlaceholderPage'
 import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
+import { useNotice } from '../store/NoticeContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
-import ConditionPicker from '../components/ConditionPicker'
 
 const STARS = [1, 2, 3, 4, 5]
 
 function BookPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
   const [tab, setTab] = useState(0)
   const [pendingRental, setPendingRental] = useState(null)
   const [pendingReturn, setPendingReturn] = useState(null)
-  const location = useLocation()
-  const [notice, setNotice] = useState(location.state?.notice ?? null)
-  const [addingCopy, setAddingCopy] = useState(false)
+  const [addingCopy, setAddingCopy] = useState(location.state?.addCopy === true)
   const [newCondition, setNewCondition] = useState('Nuevo')
   const { getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
-  const book = getBook(id)  
-
-  // La notificación desaparece sola a los 3 segundos
-  useEffect(() => {
-    if (!notice) return
-    const timer = setTimeout(() => setNotice(null), 3000)
-    return () => clearTimeout(timer)
-  }, [notice])
+  const { notify } = useNotice()
+  const book = getBook(id)
 
   if (!book) {
     return <PlaceholderPage title="Libro no encontrado" />
@@ -73,19 +66,19 @@ function BookPage() {
   function confirmRental() {
     rentCopy(book.id, pendingRental.copy.number, pendingRental.plan)
     setPendingRental(null)
-    setNotice('¡Libro alquilado con éxito!')
+    notify('¡Libro alquilado con éxito!')
   }
 
   function confirmReturn() {
     returnCopy(book.id, pendingReturn.number)
     setPendingReturn(null)
-    setNotice('¡Libro devuelto a la biblioteca!')
+    notify('¡Libro devuelto a la biblioteca!')
   }
 
   function confirmAddCopy() {
     addCopy(book.id, newCondition)
     setAddingCopy(false)
-    setNotice('¡Ejemplar agregado con éxito!')
+    notify('¡Ejemplar agregado con éxito!')
   }
 
   return (
@@ -182,7 +175,7 @@ function BookPage() {
                     }
                     onConfirmRenewal={(option) => {
                       renewCopy(book.id, copy.number, renewPlans[renewOptions.indexOf(option)])
-                      setNotice('¡Alquiler renovado con éxito!')
+                      notify('¡Alquiler renovado con éxito!')
                     }}
                     onReturn={() => setPendingReturn(copy)}
                   />
@@ -257,12 +250,6 @@ function BookPage() {
           </>
         )}
       </Modal>
-
-      {notice && (
-        <div className="toast">
-          <Notification>{notice}</Notification>
-        </div>
-      )}
     </main>
   )
 }

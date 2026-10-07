@@ -5,12 +5,15 @@ import "./index.css";
 import "./layout.css";
 import App from "./App.jsx";
 import { LibraryProvider } from "./store/LibraryContext";
+import { NoticeProvider } from './store/NoticeContext'
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <LibraryProvider>
-        <App />
+        <NoticeProvider>
+          <App />
+        </NoticeProvider>
       </LibraryProvider>
     </BrowserRouter>
   </StrictMode>,
