@@ -34,6 +34,7 @@ export function getLoans(books) {
               ? 'Se libera hoy si no se confirma'
               : `Se libera en ${plural(left, 'día', 'días')} si no se confirma`,
           date: expires,
+          expiresToday: left <= 0,
         })
       }
 

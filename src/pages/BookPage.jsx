@@ -15,6 +15,7 @@ import PlaceholderPage from './PlaceholderPage'
 import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
+import ConditionPicker from '../components/ConditionPicker'
 
 const STARS = [1, 2, 3, 4, 5]
 
@@ -25,7 +26,9 @@ function BookPage() {
   const [pendingRental, setPendingRental] = useState(null)
   const [pendingReturn, setPendingReturn] = useState(null)
   const [notice, setNotice] = useState(null)
-  const { getBook, updateCopy, rentCopy, renewCopy, returnCopy } = useLibrary()
+  const [addingCopy, setAddingCopy] = useState(false)
+  const [newCondition, setNewCondition] = useState('Nuevo')
+  const { getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
   const book = getBook(id)
 
   // La notificación desaparece sola a los 3 segundos
@@ -78,6 +81,12 @@ function BookPage() {
     setNotice('¡Libro devuelto a la biblioteca!')
   }
 
+  function confirmAddCopy() {
+    addCopy(book.id, newCondition)
+    setAddingCopy(false)
+    setNotice('¡Ejemplar agregado con éxito!')
+  }
+
   return (
     <main className="app">
       <NavigationHeader title="Estado del libro" />
@@ -128,7 +137,14 @@ function BookPage() {
           {tab === 0 && (
             <div className="book-copies">
               <div className="book-copies__add">
-                <Button variant="ghost" icon="plus-add">
+                <Button
+                  variant="ghost"
+                  icon="plus-add"
+                  onClick={() => {
+                    setNewCondition('Nuevo')
+                    setAddingCopy(true)
+                  }}
+                >
                   Agregar nuevo ejemplar
                 </Button>
               </div>
@@ -224,6 +240,19 @@ function BookPage() {
               </SummaryCard>
             </section>
             <Button onClick={confirmReturn}>Devolver a la biblioteca</Button>
+          </>
+        )}
+      </Modal>
+
+      <Modal open={addingCopy} onClose={() => setAddingCopy(false)} label="Agregar ejemplar">
+        {addingCopy && (
+          <>
+            <ConditionPicker
+              label="Condición del nuevo ejemplar"
+              boxed
+              onChange={setNewCondition}
+            />
+            <Button onClick={confirmAddCopy}>Agregar ejemplar</Button>
           </>
         )}
       </Modal>

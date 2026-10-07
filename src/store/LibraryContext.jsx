@@ -112,7 +112,17 @@ export function LibraryProvider({ children }) {
     })
   }
 
-  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy }
+  function addCopy(bookId, condition) {
+    updateBook(bookId, (book) => {
+      const nextNumber = Math.max(0, ...book.copies.map((c) => c.number)) + 1
+      return {
+        ...book,
+        copies: [...book.copies, { number: nextNumber, condition, state: 'available' }],
+      }
+    })
+  }
+
+  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>
 }

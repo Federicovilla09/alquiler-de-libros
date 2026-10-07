@@ -4,7 +4,7 @@ import TagChoice from './TagChoice'
 
 const CONDITIONS = ['Nuevo', 'Casi nuevo', 'Subrayado', 'Notas', 'Etiquetas']
 
-function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = false }) {
+function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = false, onChange }) {
   const [selected, setSelected] = useState(defaultValue)
 
   const classes = [
@@ -22,7 +22,10 @@ function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = f
             key={condition}
             variant="condition"
             selected={condition === selected}
-            onClick={() => setSelected(condition)}
+            onClick={() => {
+              setSelected(condition)
+              if (onChange) onChange(condition)
+            }}
           >
             {condition}
           </TagChoice>

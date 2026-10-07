@@ -6,7 +6,8 @@ import BookRow from '../components/BookRow'
 import Button from '../components/Button'
 import BottomNav from '../components/BottomNav'
 import { getBookStatus } from '../data/books'
-import { alerts } from '../data/alerts'
+import { getLoans } from '../utils/loans'
+import { getAlerts } from '../utils/alerts'
 import { useLibrary } from '../store/LibraryContext'
 import Icon from '../components/Icon'
 
@@ -19,6 +20,7 @@ function normalize(text) {
 
 function HomePage() {
   const { books } = useLibrary()
+  const alerts = getAlerts(getLoans(books))
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState('Todos')
   const [showAll, setShowAll] = useState(false)
