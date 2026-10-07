@@ -6,15 +6,18 @@ import "./layout.css";
 import App from "./App.jsx";
 import { LibraryProvider } from "./store/LibraryContext";
 import { NoticeProvider } from './store/NoticeContext'
+import { AuthProvider } from './store/AuthContext'
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <LibraryProvider>
-        <NoticeProvider>
-          <App />
-        </NoticeProvider>
-      </LibraryProvider>
+      <AuthProvider>
+        <LibraryProvider>
+          <NoticeProvider>
+            <App />
+          </NoticeProvider>
+        </LibraryProvider>
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode>,
 );

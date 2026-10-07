@@ -1,26 +1,48 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 import './LoginPage.css'
 import TextField from '../components/TextField'
 import Button from '../components/Button'
+import Loader from '../components/Loader'
+import { useAuth } from '../store/AuthContext'
 
 function LoginPage() {
   const navigate = useNavigate()
-  const [user, setUser] = useState('')
+  const location = useLocation()
+  const { session, signIn } = useAuth()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loginError, setLoginError] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
 
-  const canSubmit = user.trim() !== '' && password !== ''
+  // Si ya hay una sesión iniciada, no tiene sentido mostrar el login
+  if (session && !submitting) {
+    return <Navigate to="/" replace />
+  }
 
-  function handleSubmit(event) {
+  const canSubmit = email.trim() !== '' && password !== ''
+
+  async function handleSubmit(event) {
     event.preventDefault()
     if (!canSubmit) return
-    // En la Etapa 7, acá se va a verificar el ingreso con Supabase
-    navigate('/')
+
+    setSubmitting(true)
+    const error = await signIn(email.trim(), password)
+
+    if (error) {
+      setSubmitting(false)
+      setLoginError('Email o contraseña incorrectos')
+      return
+    }
+
+    navigate(location.state?.from ?? '/', { replace: true })
   }
 
   return (
     <main className="login">
-      <div className="login__screen">
+      {submitting && <Loader label="Ingresando" />}
+
+      <div className="login__screen" hidden={submitting}>
         <img className="login__illustration" src="/illustrations/login.svg" alt="" />
 
         <div className="login__welcome">
@@ -31,12 +53,18 @@ function LoginPage() {
         <form className="login__form" onSubmit={handleSubmit}>
           <div className="login__fields">
             <TextField
-              label="Usuario"
-              placeholder="Micaela Unrein"
+              label="Email"
+              type="email"
+              placeholder="tu@email.com"
               icon="user-single"
-              name="username"
+              name="email"
               autoComplete="username"
-              onChange={(event) => setUser(event.target.value)}
+              inputMode="email"
+              error={loginError ? true : undefined}
+              onChange={(event) => {
+                setEmail(event.target.value)
+                setLoginError(null)
+              }}
             />
             <TextField
               label="Contraseña"
@@ -44,7 +72,11 @@ function LoginPage() {
               placeholder="••••••••"
               name="password"
               autoComplete="current-password"
-              onChange={(event) => setPassword(event.target.value)}
+              error={loginError ?? undefined}
+              onChange={(event) => {
+                setPassword(event.target.value)
+                setLoginError(null)
+              }}
             />
           </div>
           <Button type="submit" disabled={!canSubmit}>

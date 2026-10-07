@@ -23,7 +23,7 @@ function TextField({
   const inputType = isPassword && visible ? 'text' : type
 
   const messageId = `${id}-message`
-  const message = error || helpText
+    const message = (typeof error === 'string' ? error : null) || helpText
   const Field = multiline ? 'textarea' : 'input'
 
   const classes = [
