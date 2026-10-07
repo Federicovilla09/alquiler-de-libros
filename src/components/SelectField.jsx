@@ -9,6 +9,7 @@ function SelectField({
   helpText,
   error,
   defaultValue = '',
+  name,
   onChange,
 }) {
   const id = useId()
@@ -148,6 +149,7 @@ function SelectField({
             ))}
           </ul>
         )}
+        {name && <input type="hidden" name={name} value={value} />}
       </div>
 
       {message && (

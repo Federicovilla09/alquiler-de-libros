@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import './BookPage.css'
 import NavigationHeader from '../components/NavigationHeader'
 import Icon from '../components/Icon'
@@ -25,11 +25,12 @@ function BookPage() {
   const [tab, setTab] = useState(0)
   const [pendingRental, setPendingRental] = useState(null)
   const [pendingReturn, setPendingReturn] = useState(null)
-  const [notice, setNotice] = useState(null)
+  const location = useLocation()
+  const [notice, setNotice] = useState(location.state?.notice ?? null)
   const [addingCopy, setAddingCopy] = useState(false)
   const [newCondition, setNewCondition] = useState('Nuevo')
   const { getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
-  const book = getBook(id)
+  const book = getBook(id)  
 
   // La notificación desaparece sola a los 3 segundos
   useEffect(() => {

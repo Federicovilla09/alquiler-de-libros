@@ -5,7 +5,7 @@ import SelectField from './SelectField'
 import TextField from './TextField'
 import NumberStepper from './NumberStepper'
 
-const NEW_SERIES = '+ Crear nueva serie'
+export const NEW_SERIES = '+ Crear nueva serie'
 
 function SeriesField({ series = [], defaultChecked = false, defaultSeries = '', defaultVolume = 1 }) {
   const [selected, setSelected] = useState(defaultSeries)
@@ -16,6 +16,7 @@ function SeriesField({ series = [], defaultChecked = false, defaultSeries = '', 
       label="Es parte de una serie"
       helper="Se agrupa con sus otros tomos en el catálogo"
       defaultChecked={defaultChecked}
+      name="inSeries"
     >
       <SelectField
         label="¿De qué serie?"
@@ -23,10 +24,11 @@ function SeriesField({ series = [], defaultChecked = false, defaultSeries = '', 
         options={[...series, NEW_SERIES]}
         defaultValue={defaultSeries}
         onChange={setSelected}
+        name="series"
       />
 
       {isNew && (
-        <TextField label="Nombre de la serie" placeholder="Ej: Una corte de rosas y espinas" />
+        <TextField name="newSeries" label="Nombre de la serie" placeholder="Ej: Una corte de rosas y espinas" />
       )}
 
       <p className="series-field__hint">
@@ -37,7 +39,7 @@ function SeriesField({ series = [], defaultChecked = false, defaultSeries = '', 
 
       <div className="series-field__tomo">
         <span className="series-field__tomo-label">Tomo</span>
-        <NumberStepper label="Tomo" defaultValue={defaultVolume} />
+        <NumberStepper name="volume" label="Tomo" defaultValue={defaultVolume} />
       </div>
     </SwitchField>
   )

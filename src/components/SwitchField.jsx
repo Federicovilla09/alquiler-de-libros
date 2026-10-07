@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './SwitchField.css'
 
-function SwitchField({ label, helper, defaultChecked = false, children }) {
+function SwitchField({ label, helper, defaultChecked = false, name, children }) {
   const [checked, setChecked] = useState(defaultChecked)
 
   return (
     <div className="switch-field">
+      {name && <input type="hidden" name={name} value={checked ? 'on' : ''} />}
       <label className="switch-field__top">
         <span className="switch-field__texts">
           <span className="switch-field__label">{label}</span>

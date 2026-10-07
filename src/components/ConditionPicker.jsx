@@ -4,7 +4,7 @@ import TagChoice from './TagChoice'
 
 const CONDITIONS = ['Nuevo', 'Casi nuevo', 'Subrayado', 'Notas', 'Etiquetas']
 
-function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = false, onChange }) {
+function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = false, name, onChange }) {
   const [selected, setSelected] = useState(defaultValue)
 
   const classes = [
@@ -31,6 +31,7 @@ function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = f
           </TagChoice>
         ))}
       </div>
+      {name && <input type="hidden" name={name} value={selected} />}
     </fieldset>
   )
 }

@@ -122,7 +122,27 @@ export function LibraryProvider({ children }) {
     })
   }
 
-  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy }
+  function addBook(values) {
+    const id = Math.max(0, ...books.map((b) => b.id)) + 1
+    const { condition, copies, coverFile, ...data } = values
+
+    const book = {
+      ...data,
+      id,
+      coverColor: 'var(--blush-3)',
+      copies: Array.from({ length: copies }, (_, i) => ({
+        number: i + 1,
+        condition,
+        state: 'available',
+      })),
+      history: [],
+    }
+
+    setBooks((current) => [book, ...current])
+    return id
+  }
+
+  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy, addBook }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>
 }

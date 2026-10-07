@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './NumberStepper.css'
 
-function NumberStepper({ label, defaultValue = 1, min = 1, max = 99 }) {
+function NumberStepper({ label, defaultValue = 1, min = 1, max = 99, name }) {
   const [value, setValue] = useState(defaultValue)
 
   return (
@@ -27,8 +27,9 @@ function NumberStepper({ label, defaultValue = 1, min = 1, max = 99 }) {
       >
         +
       </button>
+      {name && <input type="hidden" name={name} value={value} />}
     </div>
   )
 }
 
-export default NumberStepper
+export default NumberStepper  

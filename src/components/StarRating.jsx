@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './StarRating.css'
 import Icon from './Icon'
 
-function StarRating({ label, defaultValue = 0, max = 5 }) {
+function StarRating({ label, defaultValue = 0, max = 5, name }) {
   const [value, setValue] = useState(defaultValue)
 
   const stars = []
@@ -27,6 +27,7 @@ function StarRating({ label, defaultValue = 0, max = 5 }) {
           </button>
         ))}
       </div>
+      {name && <input type="hidden" name={name} value={value} />}
     </fieldset>
   )
 }
