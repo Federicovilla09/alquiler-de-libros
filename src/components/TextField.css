@@ -76,3 +76,22 @@
 .text-field--error .text-field__message {
   color: var(--error-11);
 }
+
+/* Mostrar u ocultar la contraseña */
+.text-field__toggle {
+  display: flex;
+  flex-shrink: 0;
+  margin: -15px;
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.text-field__toggle:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: -12px;
+}

@@ -42,7 +42,6 @@ function LoginPage() {
               label="Contraseña"
               type="password"
               placeholder="••••••••"
-              icon="view-off"
               name="password"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
