@@ -27,3 +27,15 @@ export function parseDate(text) {
 export function daysBetween(from, to) {
   return Math.round((to - from) / 86400000)
 }
+
+// "2026-10-05" (base de datos) → "05/10/2026" (app)
+export function fromISO(text) {
+  const [year, month, day] = text.split('-')
+  return `${day}/${month}/${year}`
+}
+
+// "05/10/2026" (app) → "2026-10-05" (base de datos)
+export function toISO(text) {
+  const [day, month, year] = text.split('/')
+  return `${year}-${month}-${day}`
+}

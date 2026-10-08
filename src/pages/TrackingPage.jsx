@@ -7,6 +7,7 @@ import LoanCard from '../components/LoanCard'
 import BottomNav from '../components/BottomNav'
 import { getLoans } from '../utils/loans'
 import { useLibrary } from '../store/LibraryContext'
+import ScreenLoader from '../components/ScreenLoader'
 
 const FILTERS = [
   { id: 'all', label: 'Todos', states: ['overdue', 'due-today', 'reserved', 'on-track'] },
@@ -23,7 +24,10 @@ const SECTIONS = [
 
 function TrackingPage() {
   const [filterId, setFilterId] = useState('all')   
-  const { books, getBook } = useLibrary()
+  const { books, loading, getBook } = useLibrary()
+
+  if (loading) return <ScreenLoader />
+
   const loans = getLoans(books)
 
   const activeFilter = FILTERS.find((f) => f.id === filterId)

@@ -1,11 +1,36 @@
-import { createContext, useContext, useState } from 'react'
-import { books as initialBooks } from '../data/books'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { fetchBooks } from '../lib/library'
+import { useAuth } from './AuthContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
 
 const LibraryContext = createContext(null)
 
 export function LibraryProvider({ children }) {
-  const [books, setBooks] = useState(initialBooks)
+  const { session } = useAuth()
+  const [books, setBooks] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(null)
+
+  async function refresh() {
+    const { data, error } = await fetchBooks()
+    if (error) {
+      setLoadError('No pudimos cargar la biblioteca. Revisá tu conexión.')
+    } else {
+      setBooks(data)
+      setLoadError(null)
+    }
+    setLoading(false)
+  }
+
+  // Cargar la biblioteca al iniciar sesión, y vaciarla al cerrarla
+  useEffect(() => {
+    if (!session) {
+      setBooks([])
+      setLoading(true)
+      return
+    }
+    refresh()
+  }, [session])
 
   function getBook(id) {
     return books.find((book) => book.id === Number(id))
@@ -155,7 +180,20 @@ export function LibraryProvider({ children }) {
     }))
   }
 
-  const value = { books, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy, addBook, editBook }
+    const value = {
+    books,
+    loading,
+    loadError,
+    refresh,
+    getBook,
+    updateCopy,
+    rentCopy,
+    renewCopy,
+    returnCopy,
+    addCopy,
+    addBook,
+    editBook,
+  }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>
 }

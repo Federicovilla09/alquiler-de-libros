@@ -94,3 +94,8 @@
   justify-content: center;
   min-height: 100dvh;
 }
+
+.screen-error {
+  padding: var(--gap-10) var(--gap-8);
+  text-align: center;
+}

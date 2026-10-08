@@ -4,11 +4,12 @@ import BookForm from '../components/BookForm'
 import PlaceholderPage from './PlaceholderPage'
 import { useLibrary } from '../store/LibraryContext'
 import { useNotice } from '../store/NoticeContext'
+import ScreenLoader from '../components/ScreenLoader'
 
 function EditBookPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { getBook, editBook } = useLibrary()
+  const { loading, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
   const { notify } = useNotice()
   const book = getBook(id)
 

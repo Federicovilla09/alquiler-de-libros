@@ -16,6 +16,7 @@ import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
 import { useNotice } from '../store/NoticeContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
+import ScreenLoader from '../components/ScreenLoader'
 
 const STARS = [1, 2, 3, 4, 5]
 
@@ -28,7 +29,7 @@ function BookPage() {
   const [pendingReturn, setPendingReturn] = useState(null)
   const [addingCopy, setAddingCopy] = useState(location.state?.addCopy === true)
   const [newCondition, setNewCondition] = useState('Nuevo')
-  const { getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
+  const { loading, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
   const { notify } = useNotice()
   const book = getBook(id)
 
