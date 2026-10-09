@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router'
+import { Outlet, useMatch } from 'react-router'
 import ScreenLoader from '../../components/ScreenLoader'
+import PreviewBar from '../../components/PreviewBar'
 import { fetchCatalog } from '../../lib/catalog'
+import { useAuth } from '../../store/AuthContext'
 
 function CatalogLayout() {
+  const { session } = useAuth()
+  const bookMatch = useMatch('/catalogo/libro/:id')
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -22,7 +26,13 @@ function CatalogLayout() {
   if (loading) return <ScreenLoader />
   if (error) return <p className="placeholder screen-error">{error}</p>
 
-  return <Outlet context={{ books }} />
+  return (
+    <>
+      {/* Micaela, con su sesión iniciada, ve el catálogo con la barra arriba */}
+      {session && <PreviewBar bookId={bookMatch?.params.id} />}
+      <Outlet context={{ books }} />
+    </>
+  )
 }
 
 export default CatalogLayout
