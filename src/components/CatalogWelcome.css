@@ -1,0 +1,111 @@
+.welcome {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 393px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: var(--gap-12) var(--gap-10);
+  overflow: hidden;
+  background-color: var(--blush-1);
+}
+
+/* Los círculos decorativos: cada uno es un halo con un círculo adentro */
+.welcome__deco,
+.welcome__deco::after {
+  position: absolute;
+  border-radius: var(--radius-full);
+}
+
+.welcome__deco::after {
+  content: '';
+}
+
+.welcome__deco--top {
+  top: -130px;
+  left: 223px;
+  width: 300px;
+  height: 300px;
+  background-color: var(--bg-app-2);
+}
+
+.welcome__deco--top::after {
+  top: 30px;
+  left: 30px;
+  width: 240px;
+  height: 240px;
+  background-color: var(--bg-app-10);
+}
+
+.welcome__deco--bottom {
+  bottom: -98px;
+  left: -110px;
+  width: 260px;
+  height: 260px;
+  background-color: var(--bg-app-2);
+}
+
+.welcome__deco--bottom::after {
+  top: 30px;
+  left: 30px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--bg-app-6);
+}
+
+.welcome__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-9);
+  width: 100%;
+}
+
+.welcome__logo {
+  width: 220px;
+  height: auto;
+}
+
+.welcome__subtitle {
+  font-size: 15px;
+  text-align: center;
+  color: var(--gray-11);
+}
+
+.welcome__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  width: 100%;
+  margin: 0;
+  padding: calc(var(--gap-8) - 1px);
+  list-style: none;
+  background-color: var(--white);
+  border: 1px solid var(--blush-3);
+  border-radius: var(--radius-x-large);
+}
+
+.welcome__step {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-7);
+  font-size: 14px;
+  color: var(--gray-12);
+}
+
+.welcome__number {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-app-2);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bg-app-10);
+}

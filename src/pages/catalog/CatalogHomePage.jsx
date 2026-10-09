@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useOutletContext } from 'react-router'
 import './CatalogHomePage.css'
 import CatalogHeader from '../../components/CatalogHeader'
+import CatalogWelcome from '../../components/CatalogWelcome'
 import FeaturedCarousel from '../../components/FeaturedCarousel'
 import GenreFilters from '../../components/GenreFilters'
 import TagChoice from '../../components/TagChoice'
@@ -17,12 +18,26 @@ const FEATURED_SIZE = 3
 const ROW_SIZE = 8
 const PAGE_SIZE = 6
 
+// ← 1. La clave y la función van acá, junto a las constantes
+const WELCOME_KEY = 'letrita:welcome-seen'
+
+// ¿Ya vio la bienvenida en este navegador?
+function hasSeenWelcome() {
+  try {
+    return localStorage.getItem(WELCOME_KEY) === 'yes'
+  } catch {
+    return true
+  }
+}
+
 function CatalogHomePage() {
   const { books } = useOutletContext()
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState('Todos')
   const [trope, setTrope] = useState(null)
   const [showAll, setShowAll] = useState(false)
+  // ← 2. El estado de la bienvenida, junto a los otros useState
+  const [showWelcome, setShowWelcome] = useState(() => !hasSeenWelcome())
 
   // Al cambiar de género, el tropo elegido deja de tener sentido
   function changeGenre(nextGenre) {
@@ -67,6 +82,37 @@ function CatalogHomePage() {
   ]
     .filter(Boolean)
     .join(' · ')
+
+  // ← 3. La primera visita muestra la bienvenida en lugar del catálogo
+  if (showWelcome) {
+    return (
+      <CatalogWelcome
+        onStart={() => {
+          try {
+            localStorage.setItem(WELCOME_KEY, 'yes')
+          } catch {
+            // Si el navegador no deja guardar, la bienvenida se cierra igual
+          }
+          setShowWelcome(false)
+        }}
+      />
+    )
+  }
+
+  if (showWelcome) {
+    return (
+      <CatalogWelcome
+        onStart={() => {
+          try {
+            localStorage.setItem(WELCOME_KEY, 'yes')
+          } catch {
+            // Si el navegador no deja guardar, la bienvenida se cierra igual
+          }
+          setShowWelcome(false)
+        }}
+      />
+    )
+  }
 
   // Una búsqueda sin resultados reemplaza todo el contenido
   if (search !== '' && filtered.length === 0) {

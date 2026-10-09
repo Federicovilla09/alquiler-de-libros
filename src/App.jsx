@@ -11,29 +11,32 @@ import CatalogLayout from './pages/catalog/CatalogLayout'
 import CatalogHomePage from './pages/catalog/CatalogHomePage'
 import ScrollToTop from './components/ScrollToTop'
 import CatalogBookPage from './pages/catalog/CatalogBookPage'
+import CatalogListPage from './pages/catalog/CatalogListPage'
 
 function App() {
-    return (
+  return (
     <>
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 
-      {/* El catálogo es público: no exige sesión */}
-      <Route path="/catalogo" element={<CatalogLayout />}>
-        <Route index element={<CatalogHomePage />} />
-        <Route path="libro/:id" element={<CatalogBookPage />} />
-      </Route>
+        {/* El catálogo es público: no exige sesión */}
+        <Route path="/catalogo" element={<CatalogLayout />}>
+          <Route index element={<CatalogHomePage />} />
+          <Route path="libro/:id" element={<CatalogBookPage />} />
+          <Route path="recien-llegados" element={<CatalogListPage section="newest" />} />
+          <Route path="mejor-valorados" element={<CatalogListPage section="topRated" />} />
+        </Route>
 
-      {/* Todo lo de adentro exige haber iniciado sesión */}
-      <Route element={<RequireAuth />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/libros/nuevo" element={<NewBookPage />} />
-        <Route path="/libros/:id" element={<BookPage />} />
-        <Route path="/libros/:id/editar" element={<EditBookPage />} />
-        <Route path="/seguimiento" element={<TrackingPage />} />
-        <Route path="*" element={<PlaceholderPage title="Página no encontrada" />} />
-      </Route>
+        {/* Todo lo de adentro exige haber iniciado sesión */}
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/libros/nuevo" element={<NewBookPage />} />
+          <Route path="/libros/:id" element={<BookPage />} />
+          <Route path="/libros/:id/editar" element={<EditBookPage />} />
+          <Route path="/seguimiento" element={<TrackingPage />} />
+          <Route path="*" element={<PlaceholderPage title="Página no encontrada" />} />
+        </Route>
       </Routes>
     </>
   )
