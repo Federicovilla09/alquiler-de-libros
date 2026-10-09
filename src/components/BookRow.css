@@ -5,9 +5,14 @@
   padding: var(--gap-5) var(--gap-7);
   background-color: var(--white);
   border-bottom: 1px solid var(--gray-2);
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.book-row:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: -2px;
 }
 
 .book-row__details {
@@ -17,11 +22,22 @@
   min-width: 0;
 }
 
+/* La portada: tamaño fijo, recorta la foto */
 .book-row__cover {
+  flex-shrink: 0;
+  width: 40px;
+  height: 67px;
+  overflow: hidden;
+  border-radius: var(--radius-x-small);
+  box-shadow: var(--shadow-small);
+}
+
+/* La foto adentro: llena la portada sin deformarse */
+.book-row__cover img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover
+  object-fit: cover;
 }
 
 .book-row__info {
@@ -54,9 +70,4 @@
 .book-row__copies {
   font-size: 10px;
   color: var(--gray-9);
-}
-
-.book-row:focus-visible {
-  outline: 2px solid var(--bg-app-11);
-  outline-offset: -2px;
 }
