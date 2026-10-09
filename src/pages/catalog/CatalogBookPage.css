@@ -1,0 +1,311 @@
+.catalog-book {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-9);
+  padding: 20px var(--gap-8) var(--gap-11);
+}
+
+/* Portada y datos */
+.catalog-book__hero {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8);
+}
+
+.catalog-book__cover {
+  flex-shrink: 0;
+  width: 124px;
+  height: 182px;
+  overflow: hidden;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-medium);
+}
+
+.catalog-book__cover img,
+.saga-item__cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.catalog-book__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  min-width: 0;
+}
+
+.catalog-book__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-4);
+}
+
+.catalog-book__genre,
+.content-badge {
+  padding: calc(var(--gap-3) - 1px) calc(var(--gap-6) - 1px);
+  border: 1px solid;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.catalog-book__genre {
+  background-color: var(--bg-app-1);
+  border-color: var(--bg-app-4);
+  color: var(--bg-app-10);
+}
+
+/* Content Badge · Rating=+15 */
+.content-badge {
+  background-color: var(--blush-2);
+  border-color: var(--blush-3);
+  color: var(--gray-12);
+}
+
+/* Content Badge · Rating=+18 y +21 */
+.content-badge--adult {
+  background-color: var(--error-2);
+  border-color: var(--error-6);
+  color: var(--error-11);
+}
+
+.catalog-book__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bg-app-11);
+}
+
+.catalog-book__author {
+  font-size: 13px;
+  color: var(--gray-11);
+}
+
+.catalog-book__rating {
+  display: flex;
+  gap: var(--gap-5);
+  color: var(--warning-8);
+}
+
+.catalog-book__availability {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding-top: var(--gap-3);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-10);
+}
+
+.catalog-book__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--gray-8);
+}
+
+.catalog-book__availability--available {
+  color: var(--success-11);
+}
+
+.catalog-book__availability--available .catalog-book__dot {
+  background-color: var(--success-9);
+}
+
+.catalog-book__condition {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+/* Precios */
+.catalog-book__prices {
+  display: flex;
+  gap: var(--gap-7);
+}
+
+.catalog-book__price {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-2);
+  padding: calc(var(--gap-7) - 1px) calc(var(--gap-8) - 1px);
+  background-color: var(--white);
+  border: 1px solid var(--blush-3);
+  border-radius: var(--radius-large);
+}
+
+.catalog-book__price-label {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.catalog-book__price-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-12);
+}
+
+/* El precio de 15 días, destacado */
+.catalog-book__price--main {
+  background-color: var(--bg-app-1);
+  border-color: var(--bg-app-4);
+}
+
+.catalog-book__price--main .catalog-book__price-value {
+  font-size: 22px;
+  color: var(--bg-app-11);
+}
+
+/* Botón de WhatsApp */
+.catalog-book__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+}
+
+.catalog-book__cta .button {
+  text-decoration: none;
+}
+
+.catalog-book__helper {
+  font-size: 12px;
+  text-align: center;
+  color: var(--gray-11);
+}
+
+/* Cita */
+.catalog-book__quote {
+  margin: 0;
+  padding-left: calc(var(--gap-7) - 3px);
+  border-left: 3px solid var(--bg-app-6);
+  font-size: 14px;
+  color: var(--gray-12);
+}
+
+/* Tropos y sinopsis */
+.catalog-book__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-6);
+}
+
+.catalog-book__block h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.catalog-book__tropes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-4);
+}
+
+.catalog-book__synopsis {
+  font-size: 14px;
+  color: var(--gray-12);
+}
+
+/* La saga */
+.catalog-saga {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  padding: var(--gap-8);
+  background-color: var(--blush-2);
+  border-radius: var(--radius-x-large);
+}
+
+.catalog-saga__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bg-app-11);
+}
+
+.catalog-saga__subtitle {
+  margin-top: var(--gap-2);
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.catalog-saga__list {
+  display: flex;
+  gap: var(--gap-7);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.catalog-saga__list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Saga Item */
+.saga-item {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: var(--gap-4);
+  width: 80px;
+  border-radius: var(--radius-small);
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.saga-item:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+.saga-item__cover {
+  width: 80px;
+  height: 116px;
+  overflow: hidden;
+  border-radius: var(--radius-small);
+}
+
+/* State=Current: el tomo actual, con borde */
+.saga-item--current .saga-item__cover {
+  outline: 2px solid var(--bg-app-10);
+  outline-offset: -2px;
+}
+
+.saga-item__volume {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+/* State=Unavailable */
+.saga-item__status {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-3);
+  font-size: 11px;
+  color: var(--gray-10);
+}
+
+.saga-item__dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--gray-8);
+}
+
+/* State=Available */
+.saga-item__status--available {
+  color: var(--success-11);
+}
+
+.saga-item__status--available .saga-item__dot {
+  background-color: var(--success-9);
+}
+
+/* State=Current */
+.saga-item__status--current {
+  font-weight: 600;
+  color: var(--bg-app-10);
+}
