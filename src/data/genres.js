@@ -5,6 +5,7 @@ export const genres = [
   'Fantasía',
   'Distopía',
   'Policial',
+  'Thriller',
   'Históricas',
   'Autoayuda',
   'Autobiografía',

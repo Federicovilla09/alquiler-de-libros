@@ -7,11 +7,18 @@ import EditBookPage from './pages/EditBookPage'
 import TrackingPage from './pages/TrackingPage'
 import LoginPage from './pages/LoginPage'
 import PlaceholderPage from './pages/PlaceholderPage'
+import CatalogLayout from './pages/catalog/CatalogLayout'
+import CatalogHomePage from './pages/catalog/CatalogHomePage'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+
+      {/* El catálogo es público: no exige sesión */}
+      <Route path="/catalogo" element={<CatalogLayout />}>
+        <Route index element={<CatalogHomePage />} />
+      </Route>
 
       {/* Todo lo de adentro exige haber iniciado sesión */}
       <Route element={<RequireAuth />}>

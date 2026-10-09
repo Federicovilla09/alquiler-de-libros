@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import './ConditionPicker.css'
 import TagChoice from './TagChoice'
-
-const CONDITIONS = ['Nuevo', 'Casi nuevo', 'Subrayado', 'Notas', 'Etiquetas']
+import { CONDITIONS } from '../data/conditions'
 
 function ConditionPicker({ label, defaultValue = 'Nuevo', boxed = false, sub = false, name, onChange }) {
   const [selected, setSelected] = useState(defaultValue)
