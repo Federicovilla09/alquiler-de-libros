@@ -1,5 +1,6 @@
 import { supabase } from './supabase'
 import { dateToISO, fromISO, today } from '../utils/dates'
+import { resizeImage } from '../utils/images'
 
 // ─── Lectura ───
 
@@ -161,6 +162,26 @@ export async function returnCopy(bookId, number, lateDays) {
   })
 }
 
+// ─── Portadas ───
+
+async function uploadCover(bookId, file) {
+  const image = await resizeImage(file)
+  const path = `${bookId}/${Date.now()}.jpg`
+
+  const { error } = await supabase.storage
+    .from('covers')
+    .upload(path, image, { contentType: 'image/jpeg' })
+  if (error) return error
+
+  const { data } = supabase.storage.from('covers').getPublicUrl(path)
+
+  const { error: updateError } = await supabase
+    .from('books')
+    .update({ cover_url: data.publicUrl })
+    .eq('id', bookId)
+  return updateError
+}
+
 // ─── Libros ───
 
 // Los datos del formulario → las columnas de la tabla books
@@ -197,12 +218,24 @@ export async function addBook(values) {
   }))
   const { error: copiesError } = await supabase.from('copies').insert(copies)
 
-  return { id: data.id, error: copiesError }
+  if (copiesError) return { id: data.id, error: copiesError }
+
+  if (values.coverFile) {
+    const coverError = await uploadCover(data.id, values.coverFile)
+    if (coverError) return { id: data.id, error: coverError }
+  }
+
+  return { id: data.id, error: null }
 }
 
 export async function editBook(bookId, values) {
   const { error } = await supabase.from('books').update(toBookColumns(values)).eq('id', bookId)
   if (error) return error
+
+  if (values.coverFile) {
+    const coverError = await uploadCover(bookId, values.coverFile)
+    if (coverError) return coverError
+  }
 
   // La condición de cada ejemplar
   for (const [number, condition] of Object.entries(values.conditions ?? {})) {

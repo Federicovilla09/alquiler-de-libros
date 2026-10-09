@@ -9,12 +9,11 @@
   gap: var(--gap-8);
 }
 
-.book-summary__cover {
-  flex-shrink: 0;
-  width: 96px;
-  height: 134px;
-  border-radius: var(--radius-x-small);
-  box-shadow: var(--shadow-small);
+.book-summary__cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .book-summary__meta {

@@ -105,6 +105,7 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
   return (
     <form className="content book-form" onSubmit={handleSubmit} noValidate>
       <CoverUpload
+        defaultSrc={book?.coverUrl}
         error={errors.cover}
         onChange={(file) => {
           setCoverFile(file)
@@ -112,7 +113,7 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
         }}
       />
 
-            <div className="book-form__group">
+      <div className="book-form__group">
         <TextField
           label="Título"
           name="title"

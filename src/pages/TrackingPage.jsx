@@ -74,6 +74,7 @@ function TrackingPage() {
                       who={loan.who}
                       progress={loan.progress}
                       status={loan.status}
+                      coverSrc={book.coverUrl}
                     />
                   </Link>
                 )

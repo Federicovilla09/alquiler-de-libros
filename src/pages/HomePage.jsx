@@ -70,6 +70,7 @@ function HomePage() {
                   status={getBookStatus(book)}
                   copies={book.copies.length}
                   coverColor={book.coverColor}
+                  coverSrc={book.coverUrl}
                 />
               ))}
             </div>

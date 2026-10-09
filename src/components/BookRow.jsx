@@ -8,14 +8,11 @@ const STATUS_TYPES = {
   Reservado: "reserved",
 };
 
-function BookRow({ id, title, author, status, copies, coverColor }) {
+function BookRow({ id, title, author, status, copies, coverColor, coverSrc }) {
   return (
     <Link to={`/libros/${id}`} className="book-row">   {/* ← cambió */}
       <div className="book-row__details">
-        <div
-          className="book-row__cover"
-          style={{ backgroundColor: coverColor }}
-        />
+        <div className="book-row__cover" style={{ backgroundColor: coverColor }} />
         <div className="book-row__info">
           <h3 className="book-row__title">{title}</h3>
           <p className="book-row__author">{author}</p>

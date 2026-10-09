@@ -2,18 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import './CoverUpload.css'
 import Button from './Button'
 
-const MAX_SIZE_MB = 5
+// La foto se achica antes de subirla, así que acá se aceptan fotos grandes
+const MAX_SIZE_MB = 15
 
-function CoverUpload({ error: requiredError, onChange }) {
-  const [preview, setPreview] = useState(null)
+function CoverUpload({ error: requiredError, defaultSrc, onChange }) {
+  const [preview, setPreview] = useState(defaultSrc ?? null)
   const [fileError, setFileError] = useState(null)
   const galleryRef = useRef(null)
   const cameraRef = useRef(null)
 
-  // Liberar la dirección temporal de la foto anterior
+  // Liberar la memoria de la foto temporal anterior (no la portada guardada)
   useEffect(() => {
     return () => {
-      if (preview) URL.revokeObjectURL(preview)
+      if (preview && preview.startsWith('blob:')) URL.revokeObjectURL(preview)
     }
   }, [preview])
 

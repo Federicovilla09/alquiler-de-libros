@@ -109,7 +109,9 @@ function BookPage() {
 
       <div className="content book-page">
         <section className="book-summary">
-          <div className="book-summary__cover" style={{ backgroundColor: book.coverColor }} />
+          <div className="book-summary__cover" style={{ backgroundColor: book.coverColor }}>
+            {book.coverUrl && <img src={book.coverUrl} alt="" />}
+          </div>
           <div className="book-summary__meta">
             <div>
               <p className="book-summary__price">{formatPrice(book.price15)}</p>
