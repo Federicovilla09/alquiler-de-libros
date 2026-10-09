@@ -1,0 +1,183 @@
+.featured-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+}
+
+.featured-carousel__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--radius-x-large);
+}
+
+.featured-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* La tarjeta */
+.featured-card {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--gap-8);
+  width: 100%;
+  height: 196px;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: var(--radius-x-large);
+  background-color: var(--bg-app-2);
+  color: inherit;
+  text-decoration: none;
+  scroll-snap-align: start;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.featured-card:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: -2px;
+}
+
+/* Los dos círculos decorativos, detrás de la portada */
+.featured-card::before,
+.featured-card::after {
+  content: '';
+  position: absolute;
+  border-radius: var(--radius-full);
+}
+
+.featured-card::before {
+  top: -70px;
+  left: 230px;
+  width: 220px;
+  height: 220px;
+  background-color: var(--bg-app-1);
+}
+
+.featured-card::after {
+  top: -50px;
+  left: 250px;
+  width: 180px;
+  height: 180px;
+  background-color: var(--bg-app-3);
+}
+
+.featured-card__texts,
+.featured-card__cover {
+  position: relative;
+  z-index: 1;
+}
+
+.featured-card__texts {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-4);
+  min-width: 0;
+}
+
+.featured-card__chip {
+  align-self: flex-start;
+  padding: var(--gap-3) var(--gap-6);
+  border-radius: var(--radius-full);
+  background-color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bg-app-10);
+}
+
+.featured-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bg-app-11);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.featured-card__author {
+  font-size: 12px;
+  color: var(--gray-11);
+}
+
+.featured-card__quote {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--gray-12);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.featured-card__cta {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2);
+  padding-top: var(--gap-3);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bg-app-10);
+}
+
+.featured-card__cover {
+  flex-shrink: 0;
+  width: 104px;
+  height: 152px;
+  overflow: hidden;
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-large);
+}
+
+.featured-card__cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* El Pager */
+.pager {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-4);
+}
+
+.pager__dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--bg-app-4);
+  cursor: pointer;
+  transition: width 200ms ease, background-color 200ms ease;
+}
+
+/* Área táctil más grande que el punto */
+.pager__dot::after {
+  content: '';
+  position: absolute;
+  inset: -10px -4px;
+}
+
+.pager__dot--active {
+  width: 20px;
+  background-color: var(--bg-app-10);
+}
+
+.pager__dot:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pager__dot {
+    transition: none;
+  }
+}

@@ -69,3 +69,37 @@
   grid-template-columns: repeat(2, 1fr);
   gap: var(--gap-9) var(--gap-8);
 }
+
+/* Recomendados por Mica */
+.catalog-featured {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  padding: var(--gap-8) var(--gap-8) 0;
+}
+
+.catalog-featured__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bg-app-11);
+}
+
+/* Los tropos del género elegido */
+.catalog-filters__tropes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+  margin-top: var(--gap-7);
+}
+
+.catalog-filters__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-11);
+}
+
+.catalog-filters__trope-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-5);
+}
