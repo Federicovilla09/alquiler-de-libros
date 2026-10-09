@@ -1,24 +1,34 @@
 import { useNavigate, useParams } from 'react-router'
 import NavigationHeader from '../components/NavigationHeader'
 import BookForm from '../components/BookForm'
+import ScreenLoader from '../components/ScreenLoader'
 import PlaceholderPage from './PlaceholderPage'
 import { useLibrary } from '../store/LibraryContext'
 import { useNotice } from '../store/NoticeContext'
-import ScreenLoader from '../components/ScreenLoader'
 
 function EditBookPage() {
+  // 1. Primero, todos los "use..."
   const { id } = useParams()
   const navigate = useNavigate()
-  const { loading, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
+  const { loading, getBook, editBook } = useLibrary()
   const { notify } = useNotice()
-  const book = getBook(id)
 
+  // 2. Después, los casos especiales
+  if (loading) return <ScreenLoader />
+
+  const book = getBook(id)
   if (!book) {
     return <PlaceholderPage title="Libro no encontrado" />
   }
 
-  function handleSubmit(values) {
-    editBook(book.id, values)
+  // 3. Por último, las acciones y la pantalla
+  async function handleSubmit(values) {
+    const error = await editBook(book.id, values)
+    if (error) {
+      notify('No pudimos guardar los cambios. Revisá tu conexión y probá de nuevo.', 'error')
+      return
+    }
+
     notify('¡Datos editados con éxito!')
 
     // Volver a la ficha de la que se vino, o abrirla si se llegó directo

@@ -13,7 +13,7 @@ function NewBookPage() {
   const { notify } = useNotice()
   const [duplicate, setDuplicate] = useState(null)
 
-  function handleSubmit(values) {
+    async function handleSubmit(values) {
     const existing = books.find(
       (book) =>
         compactKey(book.title) === compactKey(values.title) &&
@@ -25,7 +25,12 @@ function NewBookPage() {
       return
     }
 
-    const id = addBook(values)
+    const { id, error } = await addBook(values)
+    if (error) {
+      notify('No pudimos guardar el libro. Revisá tu conexión y probá de nuevo.', 'error')
+      return
+    }
+
     notify('¡Libro agregado con éxito!')
     navigate(`/libros/${id}`, { replace: true })
   }

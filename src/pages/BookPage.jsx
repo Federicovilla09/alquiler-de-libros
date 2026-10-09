@@ -11,14 +11,15 @@ import BookHistory from '../components/BookHistory'
 import Modal from '../components/Modal'
 import SummaryCard, { SummaryItem } from '../components/SummaryCard'
 import ConditionPicker from '../components/ConditionPicker'
+import ScreenLoader from '../components/ScreenLoader'
 import PlaceholderPage from './PlaceholderPage'
 import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
 import { useNotice } from '../store/NoticeContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
-import ScreenLoader from '../components/ScreenLoader'
 
 const STARS = [1, 2, 3, 4, 5]
+const SAVE_ERROR = 'No pudimos guardar el cambio. Revisá tu conexión y probá de nuevo.'
 
 function BookPage() {
   const { id } = useParams()
@@ -29,15 +30,36 @@ function BookPage() {
   const [pendingReturn, setPendingReturn] = useState(null)
   const [addingCopy, setAddingCopy] = useState(location.state?.addCopy === true)
   const [newCondition, setNewCondition] = useState('Nuevo')
-  const { loading, getBook, updateCopy, rentCopy, renewCopy, returnCopy, addCopy } = useLibrary()
+  const {
+    loading,
+    getBook,
+    reserveCopy,
+    cancelReservation,
+    rentCopy,
+    renewCopy,
+    returnCopy,
+    addCopy,
+  } = useLibrary()
   const { notify } = useNotice()
   const book = getBook(id)
+
+  if (loading) return <ScreenLoader />
 
   if (!book) {
     return <PlaceholderPage title="Libro no encontrado" />
   }
 
   const start = today()
+
+  // Ejecuta una acción y avisa cómo salió
+  async function run(action, successText) {
+    const error = await action
+    if (error) {
+      notify(SAVE_ERROR, 'error')
+    } else if (successText) {
+      notify(successText)
+    }
+  }
 
   // Los dos plazos del libro, contados desde una fecha
   function makePlans(from) {
@@ -65,21 +87,20 @@ function BookPage() {
     : 0
 
   function confirmRental() {
-    rentCopy(book.id, pendingRental.copy.number, pendingRental.plan)
+    const { copy, plan } = pendingRental
     setPendingRental(null)
-    notify('¡Libro alquilado con éxito!')
+    run(rentCopy(book.id, copy.number, plan), '¡Libro alquilado con éxito!')
   }
 
   function confirmReturn() {
-    returnCopy(book.id, pendingReturn.number)
+    const copy = pendingReturn
     setPendingReturn(null)
-    notify('¡Libro devuelto a la biblioteca!')
+    run(returnCopy(book.id, copy.number), '¡Libro devuelto a la biblioteca!')
   }
 
   function confirmAddCopy() {
-    addCopy(book.id, newCondition)
     setAddingCopy(false)
-    notify('¡Ejemplar agregado con éxito!')
+    run(addCopy(book.id, newCondition), '¡Ejemplar agregado con éxito!')
   }
 
   return (
@@ -157,27 +178,17 @@ function BookPage() {
                     returnDate={copy.returnDate}
                     returnOptions={returnOptions}
                     renewOptions={renewOptions}
-                    onReserve={(name) =>
-                      updateCopy(book.id, copy.number, {
-                        state: 'reserved',
-                        borrower: name,
-                        reservedAt: formatDate(start),
-                      })
-                    }
-                    onCancelReservation={() =>
-                      updateCopy(book.id, copy.number, {
-                        state: 'available',
-                        borrower: undefined,
-                        reservedAt: undefined,
-                      })
-                    }
+                    onReserve={(name) => run(reserveCopy(book.id, copy.number, name))}
+                    onCancelReservation={() => run(cancelReservation(book.id, copy.number))}
                     onConfirmDelivery={(option) =>
                       setPendingRental({ copy, plan: plans[returnOptions.indexOf(option)] })
                     }
-                    onConfirmRenewal={(option) => {
-                      renewCopy(book.id, copy.number, renewPlans[renewOptions.indexOf(option)])
-                      notify('¡Alquiler renovado con éxito!')
-                    }}
+                    onConfirmRenewal={(option) =>
+                      run(
+                        renewCopy(book.id, copy.number, renewPlans[renewOptions.indexOf(option)]),
+                        '¡Alquiler renovado con éxito!'
+                      )
+                    }
                     onReturn={() => setPendingReturn(copy)}
                   />
                 )

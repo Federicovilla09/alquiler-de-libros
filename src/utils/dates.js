@@ -39,3 +39,8 @@ export function toISO(text) {
   const [day, month, year] = text.split('/')
   return `${year}-${month}-${day}`
 }
+
+// Fecha → "2026-10-05", para guardarla en la base
+export function dateToISO(date) {
+  return toISO(formatDate(date))
+}
