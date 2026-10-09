@@ -9,6 +9,17 @@
   gap: var(--gap-8);
 }
 
+/* La portada: tamaño fijo, recorta la foto */
+.book-summary__cover {
+  flex-shrink: 0;
+  width: 96px;
+  height: 134px;
+  overflow: hidden;
+  border-radius: var(--radius-x-small);
+  box-shadow: var(--shadow-small);
+}
+
+/* La foto adentro: llena la portada sin deformarse */
 .book-summary__cover img {
   display: block;
   width: 100%;

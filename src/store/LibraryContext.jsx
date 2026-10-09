@@ -104,7 +104,8 @@ export function LibraryProvider({ children }) {
 
   async function addBook(values) {
     const result = await db.addBook(values)
-    if (!result.error) await refresh()
+    // Si el libro llegó a crearse, refrescar (aunque algo después haya fallado)
+    if (result.id) await refresh()
     return result
   }
 

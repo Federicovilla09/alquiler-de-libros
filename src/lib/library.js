@@ -165,21 +165,26 @@ export async function returnCopy(bookId, number, lateDays) {
 // ─── Portadas ───
 
 async function uploadCover(bookId, file) {
-  const image = await resizeImage(file)
-  const path = `${bookId}/${Date.now()}.jpg`
+  try {
+    const image = await resizeImage(file)
+    const path = `${bookId}/${Date.now()}.jpg`
 
-  const { error } = await supabase.storage
-    .from('covers')
-    .upload(path, image, { contentType: 'image/jpeg' })
-  if (error) return error
+    const { error } = await supabase.storage
+      .from('covers')
+      .upload(path, image, { contentType: 'image/jpeg' })
+    if (error) return error
 
-  const { data } = supabase.storage.from('covers').getPublicUrl(path)
+    const { data } = supabase.storage.from('covers').getPublicUrl(path)
 
-  const { error: updateError } = await supabase
-    .from('books')
-    .update({ cover_url: data.publicUrl })
-    .eq('id', bookId)
-  return updateError
+    const { error: updateError } = await supabase
+      .from('books')
+      .update({ cover_url: data.publicUrl })
+      .eq('id', bookId)
+    return updateError
+  } catch (problem) {
+    // Errores que no vienen de Supabase, como no poder leer la foto
+    return problem
+  }
 }
 
 // ─── Libros ───
@@ -217,15 +222,16 @@ export async function addBook(values) {
     condition: values.condition,
   }))
   const { error: copiesError } = await supabase.from('copies').insert(copies)
-
   if (copiesError) return { id: data.id, error: copiesError }
 
+  // Si la portada falla, el libro igual quedó guardado
+  let coverError = null
   if (values.coverFile) {
-    const coverError = await uploadCover(data.id, values.coverFile)
-    if (coverError) return { id: data.id, error: coverError }
+    coverError = await uploadCover(data.id, values.coverFile)
+    if (coverError) console.error('Error al subir la portada:', coverError)
   }
 
-  return { id: data.id, error: null }
+  return { id: data.id, error: null, coverError }
 }
 
 export async function editBook(bookId, values) {

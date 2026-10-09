@@ -25,13 +25,19 @@ function NewBookPage() {
       return
     }
 
-    const { id, error } = await addBook(values)
-    if (error) {
+        const { id, error, coverError } = await addBook(values)
+
+    if (error && !id) {
       notify('No pudimos guardar el libro. Revisá tu conexión y probá de nuevo.', 'error')
       return
     }
 
-    notify('¡Libro agregado con éxito!')
+    if (coverError) {
+      notify('Guardamos el libro, pero no pudimos subir la portada. Probá de nuevo desde Editar.', 'error')
+    } else {
+      notify('¡Libro agregado con éxito!')
+    }
+
     navigate(`/libros/${id}`, { replace: true })
   }
 
