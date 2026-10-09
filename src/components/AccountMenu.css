@@ -1,0 +1,108 @@
+.account-menu {
+  position: relative;
+}
+
+/* El avatar: el mismo estilo que tenía en el header */
+.account-menu__trigger {
+  display: flex;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.account-menu__trigger:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+/* El globo, debajo del avatar y alineado a la derecha */
+.account-menu__popover {
+  position: absolute;
+  top: calc(100% + var(--gap-5));
+  right: 0;
+  z-index: 30;
+  width: 241px;
+  overflow: hidden;
+  background-color: var(--white);
+  border: 1px solid var(--blush-3);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-medium);
+  animation: account-menu-in 150ms ease-out;
+}
+
+.account-menu__session {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-3);
+  padding: var(--gap-6) var(--gap-7);
+  border-bottom: 1px solid var(--blush-3);
+}
+
+.account-menu__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-11);
+}
+
+.account-menu__email {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--gray-13);
+}
+
+.account-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-7);
+  width: 100%;
+  padding: var(--gap-6) var(--gap-7);
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--gray-11);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.account-menu__item:active {
+  background-color: var(--blush-1);
+}
+
+.account-menu__item:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: -2px;
+}
+
+.account-menu__icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-medium);
+  background-color: var(--blush-2);
+  color: var(--gray-13);
+}
+
+@keyframes account-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .account-menu__popover {
+    animation: none;
+  }
+}

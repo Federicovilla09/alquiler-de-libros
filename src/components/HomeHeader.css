@@ -33,21 +33,6 @@
     color: var(--gray-11);
 }
 
-.home-header__avatar {
-  display: flex;
-  padding: 0;
-  border: none;
-  border-radius: var(--radius-full);
-  background: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.home-header__avatar:focus-visible {
-  outline: 2px solid var(--bg-app-11);
-  outline-offset: 2px;
-}
-
 .home-header__today {
     display: flex;
     flex-direction: column;

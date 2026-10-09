@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './HomeHeader.css'
 import Icon from './Icon'
-import Avatar from './Avatar'
 import TodayAlert from './TodayAlert'
 import { useNavigate } from 'react-router'
+import AccountMenu from './AccountMenu'
 
 function formatToday() {
   const text = new Date().toLocaleDateString('es-AR', {
@@ -31,9 +31,7 @@ function HomeHeader({ alerts = [], welcome = false }) {
           <h1 className="home-header__hello">Hola, Mica</h1>
           <p className="home-header__date">{formatToday()}</p>
         </div>
-        <button className="home-header__avatar" aria-label="Abrir menú de cuenta">
-          <Avatar src="/avatar-mica.png" />
-        </button>
+        <AccountMenu />
       </div>
 
       {!welcome && (
@@ -76,7 +74,7 @@ function HomeHeader({ alerts = [], welcome = false }) {
           {alerts.length > 0 && expanded && (
             <div className="home-header__alerts">
               {alerts.map((alert) => (
-                  <TodayAlert key={alert.id} type={alert.type} onClick={() => navigate('/seguimiento')}>
+                <TodayAlert key={alert.id} type={alert.type} onClick={() => navigate('/seguimiento')}>
                   {alert.message}
                 </TodayAlert>
               ))}
