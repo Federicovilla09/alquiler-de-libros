@@ -112,3 +112,13 @@
   font-weight: 600;
   color: var(--bg-app-10);
 }
+
+/* Status=Late */
+.history-item--late .history-item__dot {
+  background-color: var(--error-9);
+}
+
+.history-item--late .history-item__status {
+  font-weight: 600;
+  color: var(--error-11);
+}
