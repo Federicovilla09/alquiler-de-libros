@@ -73,10 +73,9 @@ function BookPage() {
     return `${plan.days} días · ${formatPrice(plan.price)} · vuelve el ${formatDate(plan.end)}`
   }
 
-  // Desde cuándo cuenta una renovación: la fecha de devolución, o hoy si ya venció
-  function renewalStart(copy) {
-    const due = parseDate(copy.returnDate)
-    return due > start ? due : start
+  // Una renovación siempre cuenta desde hoy
+  function renewalStart() {
+    return start
   }
 
   const plans = makePlans(start)

@@ -77,8 +77,8 @@ export function LibraryProvider({ children }) {
   function renewCopy(bookId, number, plan) {
     const copy = findCopy(bookId, number)
     const lateDays = lateDaysOf(copy)
-    // Desde la fecha de devolución, o desde hoy si ya venció
-    const start = lateDays > 0 ? today() : parseDate(copy.returnDate)
+    // El nuevo plazo siempre cuenta desde el día en que se renueva
+    const start = today()
     return save(
       db.renewCopy(bookId, number, {
         borrower: copy.borrower,
