@@ -50,7 +50,7 @@
 
 .featured-card::before {
   top: -70px;
-  left: 230px;
+  right: -89px;
   width: 220px;
   height: 220px;
   background-color: var(--bg-app-1);
@@ -58,7 +58,7 @@
 
 .featured-card::after {
   top: -50px;
-  left: 250px;
+  right: -69px;
   width: 180px;
   height: 180px;
   background-color: var(--bg-app-3);

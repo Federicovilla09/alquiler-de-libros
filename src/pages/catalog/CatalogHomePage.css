@@ -1,5 +1,5 @@
 .catalog-page {
-  max-width: 393px;
+  max-width: var(--app-max-width);
   min-height: 100dvh;
   margin: 0 auto;
   background-color: var(--blush-1);

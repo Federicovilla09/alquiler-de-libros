@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   min-height: 100dvh;
-  max-width: 393px;
+  max-width: var(--app-max-width);
   margin: 0 auto;
   padding: var(--gap-8);
   position: relative;

@@ -1,6 +1,6 @@
 .modal {
   width: 100%;
-  max-width: 393px;
+  max-width: var(--app-max-width);
   max-height: 90dvh;
   margin: auto auto 0;
   padding: 0;

@@ -11,6 +11,7 @@ import { useLibrary } from '../store/LibraryContext'
 import { getLoans } from '../utils/loans'
 import { getAlerts } from '../utils/alerts'
 import { normalize } from '../utils/text'
+import EmptyLibrary from '../components/EmptyLibrary'
 
 const PAGE_SIZE = 10
 
@@ -24,6 +25,18 @@ function HomePage() {
   // 2. Después, los casos especiales
   if (loading) return <ScreenLoader />
   if (loadError) return <p className="placeholder screen-error">{loadError}</p>
+  // Home 00: la biblioteca todavía no tiene libros
+  if (books.length === 0) {
+    return (
+      <main className="app">
+        <HomeHeader welcome />
+        <div className="content">
+          <EmptyLibrary />
+        </div>
+        <BottomNav />
+      </main>
+    )
+  }
 
   // 3. Por último, los cálculos con los datos
   const alerts = getAlerts(getLoans(books))

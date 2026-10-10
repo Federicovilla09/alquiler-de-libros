@@ -114,6 +114,25 @@ function CatalogHomePage() {
     )
   }
 
+  // El catálogo todavía no tiene libros
+  if (books.length === 0) {
+    return (
+      <main className="catalog-page">
+        <CatalogHeader query={query} onQueryChange={setQuery} />
+        <div className="catalog-no-results">
+          <span className="catalog-no-results__icon">
+            <Icon name="book-library" size={28} />
+          </span>
+          <h2 className="catalog-no-results__title">Mica está armando su biblioteca</h2>
+          <p className="catalog-no-results__text">
+            Muy pronto vas a encontrar acá sus libros para alquilar. ¡Volvé en unos días!
+          </p>
+        </div>
+        <CatalogFooter />
+      </main>
+    )
+  }
+
   // Una búsqueda sin resultados reemplaza todo el contenido
   if (search !== '' && filtered.length === 0) {
     return (

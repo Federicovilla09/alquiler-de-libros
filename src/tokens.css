@@ -15,7 +15,8 @@
   --gray-4: #e8e8e8;
   --gray-5: #e0e0e0;
   --gray-6: #d9d9d9;
-  --gray-7: #cecece66; /* tiene 40% de opacidad */
+  --gray-7: #cecece66;
+  /* tiene 40% de opacidad */
   --gray-8: #bbbbbb;
   --gray-9: #8d8d8d;
   --gray-10: #838383;
@@ -128,4 +129,7 @@
   --shadow-small: 0 1px 2px rgba(7, 43, 44, 0.06), 0 1px 4px rgba(7, 43, 44, 0.08);
   --shadow-medium: 0 2px 6px rgba(7, 43, 44, 0.06), 0 6px 16px rgba(7, 43, 44, 0.08);
   --shadow-large: 0 8px 24px rgba(7, 43, 44, 0.1), 0 16px 40px rgba(7, 43, 44, 0.1);
+
+  /* ─── Layout ─── */
+  --app-max-width: 480px;
 }
