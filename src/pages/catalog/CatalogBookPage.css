@@ -107,7 +107,7 @@
 }
 
 .catalog-book__availability--available {
-  color: var(--success-11);
+  color: var(--success-12);
 }
 
 .catalog-book__availability--available .catalog-book__dot {
@@ -297,7 +297,7 @@
 
 /* State=Available */
 .saga-item__status--available {
-  color: var(--success-11);
+  color: var(--success-12);
 }
 
 .saga-item__status--available .saga-item__dot {

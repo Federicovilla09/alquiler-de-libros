@@ -80,7 +80,7 @@
 
 /* Availability=Available */
 .catalog-card__availability--available {
-  color: var(--success-11);
+  color: var(--success-12);
 }
 
 .catalog-card__availability--available .catalog-card__dot {
