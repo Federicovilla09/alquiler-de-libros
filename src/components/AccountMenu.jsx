@@ -4,10 +4,12 @@ import './AccountMenu.css'
 import Avatar from './Avatar'
 import Icon from './Icon'
 import { useAuth } from '../store/AuthContext'
+import { useNotice } from '../store/NoticeContext'
 
 function AccountMenu() {
   const navigate = useNavigate()
   const { session, signOut } = useAuth()
+  const { notify } = useNotice()
   const [open, setOpen] = useState(false)
   const rootRef = useRef(null)
 
@@ -30,6 +32,18 @@ function AccountMenu() {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [open])
+
+  async function copyCatalogLink() {
+    const link = `${window.location.origin}/catalogo`
+    setOpen(false)
+
+    try {
+      await navigator.clipboard.writeText(link)
+      notify('¡Link copiado!')
+    } catch {
+      notify('No pudimos copiar el link. Abrí tu catálogo y copialo desde el navegador.', 'error')
+    }
+  }
 
   return (
     <div className="account-menu" ref={rootRef}>
@@ -55,6 +69,13 @@ function AccountMenu() {
               <Icon name="book-library" />
             </span>
             Ver catálogo público
+          </button>
+
+          <button type="button" className="account-menu__item" onClick={copyCatalogLink}>
+            <span className="account-menu__icon">
+              <Icon name="copy" />
+            </span>
+            Copiar link del catálogo
           </button>
 
           <button type="button" className="account-menu__item" onClick={signOut}>
