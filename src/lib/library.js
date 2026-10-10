@@ -171,7 +171,7 @@ async function uploadCover(bookId, file) {
 
     const { error } = await supabase.storage
       .from('covers')
-      .upload(path, image, { contentType: 'image/jpeg' })
+      .upload(path, image, { contentType: 'image/jpeg', cacheControl: '31536000' })
     if (error) return error
 
     const { data } = supabase.storage.from('covers').getPublicUrl(path)

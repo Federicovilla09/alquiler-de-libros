@@ -1,6 +1,6 @@
 // Achica una foto para que su lado más largo mida como máximo maxSize píxeles,
 // y la convierte a JPG. Devuelve el archivo nuevo, listo para subir.
-export async function resizeImage(file, maxSize = 800) {
+export async function resizeImage(file, maxSize = 600) {
   const bitmap = await createImageBitmap(file)
   const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height))
 

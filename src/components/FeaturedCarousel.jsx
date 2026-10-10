@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import './FeaturedCarousel.css'
 import Icon from './Icon'
 
-function FeaturedCard({ book }) {
+function FeaturedCard({ book, priority = false }) {
   return (
     <Link to={`/catalogo/libro/${book.id}`} className="featured-card">
       <div className="featured-card__texts">
@@ -17,7 +17,15 @@ function FeaturedCard({ book }) {
         </span>
       </div>
       <div className="featured-card__cover" style={{ backgroundColor: book.coverColor }}>
-        {book.coverUrl && <img src={book.coverUrl} alt="" width="104" height="152" />}
+        {book.coverUrl && (
+          <img
+            src={book.coverUrl}
+            alt=""
+            width="104"
+            height="152"
+            fetchPriority={priority ? 'high' : 'auto'}
+          />
+        )}
       </div>
     </Link>
   )
@@ -37,7 +45,7 @@ function FeaturedCarousel({ books }) {
     <div className="featured-carousel">
       <div className="featured-carousel__track" ref={trackRef} onScroll={handleScroll}>
         {books.map((book) => (
-          <FeaturedCard key={book.id} book={book} />
+          <FeaturedCard key={book.id} book={book} priority={index === 0} />
         ))}
       </div>
 
