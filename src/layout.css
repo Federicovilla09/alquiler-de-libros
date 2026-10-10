@@ -59,24 +59,33 @@
   height: 160px;
 }
 
-/* Notificación flotante */
+/* ─── Notificación flotante ─── */
 .toast {
   position: fixed;
+  right: var(--gap-8);
   bottom: calc(var(--gap-9) + env(safe-area-inset-bottom, 0px));
-  left: 50%;
+  left: var(--gap-8);
   z-index: 30;
-  width: max-content;
   max-width: calc(var(--app-max-width) - var(--gap-8) * 2);
-  transform: translateX(-50%);
+  margin: 0 auto;
   animation: toast-in 200ms ease-out;
 }
 
+.toast .notification {
+  width: 100%;
+  box-shadow: var(--shadow-large);
+}
+
+/* Al despedirse */
 .toast--leaving {
   animation: toast-out 300ms ease-in forwards;
 }
 
-.toast .notification {
-  box-shadow: var(--shadow-large);
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 
 @keyframes toast-out {
@@ -86,16 +95,9 @@
   }
 }
 
-
-@keyframes toast-in {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 12px);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .toast {
+  .toast,
+  .toast--leaving {
     animation: none;
   }
 }
