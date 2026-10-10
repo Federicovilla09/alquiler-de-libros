@@ -5,6 +5,7 @@
   max-width: 393px;
   margin: 0 auto;
   padding: var(--gap-8);
+  position: relative;
 }
 
 .login__screen {
@@ -58,4 +59,26 @@
 
 .login .loader {
   margin: 0 auto;
+}
+
+/* La mención de las ilustraciones, al pie */
+.login__credit {
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--gap-8) + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  font-size: 11px;
+  text-align: center;
+  color: var(--gray-11);
+}
+
+.login__credit a {
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  color: var(--bg-app-10);
+}
+
+.login__credit a:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
 }

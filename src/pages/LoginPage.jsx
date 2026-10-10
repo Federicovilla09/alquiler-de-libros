@@ -84,6 +84,12 @@ function LoginPage() {
           </Button>
         </form>
       </div>
+      <p className="login__credit">
+        Ilustraciones de{' '}
+        <a href="https://storyset.com" target="_blank" rel="noopener noreferrer">
+          Storyset
+        </a>
+      </p>
     </main>
   )
 }
