@@ -44,7 +44,7 @@ function FeaturedCarousel({ books }) {
   return (
     <div className="featured-carousel">
       <div className="featured-carousel__track" ref={trackRef} onScroll={handleScroll}>
-        {books.map((book) => (
+        {books.map((book, index) => (
           <FeaturedCard key={book.id} book={book} priority={index === 0} />
         ))}
       </div>
