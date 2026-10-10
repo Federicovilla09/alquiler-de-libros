@@ -56,7 +56,7 @@ function HomePage() {
 
           {filteredBooks.length === 0 ? (
             <div className="catalog__empty">
-              <img className="catalog__empty-illustration" src="/illustrations/no-results.svg" alt="" />
+              <img className="catalog__empty-illustration" width="184" height="160" src="/illustrations/no-results.svg" alt="" />
               <p>No encontramos libros con esa búsqueda. Probá con otro título, autor o género.</p>
             </div>
           ) : (

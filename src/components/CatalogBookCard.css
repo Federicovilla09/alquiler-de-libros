@@ -67,7 +67,7 @@
   gap: var(--gap-4);
   padding-top: var(--gap-2);
   font-size: 11px;
-  color: var(--gray-10);
+  color: var(--gray-11);
 }
 
 .catalog-card__dot {

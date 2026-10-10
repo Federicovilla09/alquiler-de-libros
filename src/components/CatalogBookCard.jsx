@@ -5,7 +5,7 @@ function CatalogBookCard({ book, size = 'row' }) {
   return (
     <Link to={`/catalogo/libro/${book.id}`} className={`catalog-card catalog-card--${size}`}>
       <div className="catalog-card__cover" style={{ backgroundColor: book.coverColor }}>
-        {book.coverUrl && <img src={book.coverUrl} alt="" loading="lazy" />}
+        {book.coverUrl && <img src={book.coverUrl} width="136" height="196" alt="" loading="lazy" />}
       </div>
       <div className="catalog-card__info">
         <p className="catalog-card__title">{book.title}</p>

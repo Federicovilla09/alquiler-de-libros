@@ -14,7 +14,7 @@ function CatalogWelcome({ onStart }) {
       <span className="welcome__deco welcome__deco--bottom" aria-hidden="true" />
 
       <div className="welcome__content">
-        <img className="welcome__logo" src="/brand/logo.svg" alt="Biblioteca de Letrita" />
+        <img className="welcome__logo" width="220" height="174" src="/brand/logo.svg" alt="Biblioteca de Letrita" />
         <p className="welcome__subtitle">Libros elegidos por Mica para alquilar por 15 o 30 días.</p>
 
         <ol className="welcome__steps">

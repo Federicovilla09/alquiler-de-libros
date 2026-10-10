@@ -43,7 +43,7 @@ function LoginPage() {
       {submitting && <Loader label="Ingresando" />}
 
       <div className="login__screen" hidden={submitting}>
-        <img className="login__illustration" src="/illustrations/login.svg" alt="" />
+        <img className="login__illustration" width="169" height="170" src="/illustrations/login.svg" alt="" />
 
         <div className="login__welcome">
           <h1 className="login__title">Hola Mica</h1>

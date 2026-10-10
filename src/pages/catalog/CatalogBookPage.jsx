@@ -36,7 +36,7 @@ function CatalogBookPage() {
       <div className="catalog-book">
         <section className="catalog-book__hero">
           <div className="catalog-book__cover" style={{ backgroundColor: book.coverColor }}>
-            {book.coverUrl && <img src={book.coverUrl} alt="" />}
+            {book.coverUrl && <img src={book.coverUrl} width="124" height="182" alt="" />}
           </div>
 
           <div className="catalog-book__info">
@@ -134,7 +134,7 @@ function CatalogBookPage() {
                 const content = (
                   <>
                     <div className="saga-item__cover" style={{ backgroundColor: tomo.coverColor }}>
-                      {tomo.coverUrl && <img src={tomo.coverUrl} alt="" />}
+                      {tomo.coverUrl && <img src={tomo.coverUrl} width="80" height="116" alt="" />}
                     </div>
                     <p className="saga-item__volume">Vol. {tomo.volume ?? '–'}</p>
                     {isCurrent ? (

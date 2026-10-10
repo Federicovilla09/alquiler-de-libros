@@ -57,7 +57,7 @@ function CoverUpload({ error: requiredError, defaultSrc, onChange }) {
     >
       {preview ? (
         <>
-          <img className="cover-upload__preview" src={preview} alt="Portada elegida" />
+          <img className="cover-upload__preview" width="80" height="78" src={preview} alt="Portada elegida" />
           <Button variant="secondary" icon="camera" onClick={() => galleryRef.current.click()}>
             Cambiar portada
           </Button>

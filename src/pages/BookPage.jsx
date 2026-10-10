@@ -109,7 +109,7 @@ function BookPage() {
       <div className="content book-page">
         <section className="book-summary">
           <div className="book-summary__cover" style={{ backgroundColor: book.coverColor }}>
-            {book.coverUrl && <img src={book.coverUrl} alt="" />}
+            {book.coverUrl && <img src={book.coverUrl} width="96" height="134" alt="" />}
           </div>
           <div className="book-summary__meta">
             <div>

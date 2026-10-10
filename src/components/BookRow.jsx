@@ -13,7 +13,7 @@ function BookRow({ id, title, author, status, copies, coverColor, coverSrc }) {
     <Link to={`/libros/${id}`} className="book-row">
       <div className="book-row__details">
         <div className="book-row__cover" style={{ backgroundColor: coverColor }}>
-          {coverSrc && <img src={coverSrc} alt="" />}
+          {coverSrc && <img src={coverSrc} width="40" height="67" alt="" />}
         </div>
         <div className="book-row__info">
           <h3 className="book-row__title">{title}</h3>

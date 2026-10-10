@@ -15,7 +15,7 @@ function CatalogFooter() {
       </figure>
       <span className="catalog-footer__divider" aria-hidden="true" />
       <div className="catalog-footer__brand">
-        <img className="catalog-footer__logo" src="/brand/logo.svg" alt="Biblioteca de Letrita" />
+        <img className="catalog-footer__logo" width="140" height="111" src="/brand/logo.svg" alt="Biblioteca de Letrita" />
         <p className="catalog-footer__tagline">Alquiler de libros por 15 o 30 días</p>
       </div>
     </footer>

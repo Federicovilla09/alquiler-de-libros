@@ -17,7 +17,7 @@ function FeaturedCard({ book }) {
         </span>
       </div>
       <div className="featured-card__cover" style={{ backgroundColor: book.coverColor }}>
-        {book.coverUrl && <img src={book.coverUrl} alt="" />}
+        {book.coverUrl && <img src={book.coverUrl} alt="" width="104" height="152" />}
       </div>
     </Link>
   )
@@ -33,11 +33,6 @@ function FeaturedCarousel({ books }) {
     setActive(Math.round(track.scrollLeft / track.clientWidth))
   }
 
-  function goTo(index) {
-    const track = trackRef.current
-    track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' })
-  }
-
   return (
     <div className="featured-carousel">
       <div className="featured-carousel__track" ref={trackRef} onScroll={handleScroll}>
@@ -46,16 +41,13 @@ function FeaturedCarousel({ books }) {
         ))}
       </div>
 
+      {/* El Pager es un indicador: muestra cuál se ve, pero no se toca */}
       {books.length > 1 && (
-        <div className="pager" role="group" aria-label="Recomendados">
+        <div className="pager" aria-hidden="true">
           {books.map((book, index) => (
-            <button
+            <span
               key={book.id}
-              type="button"
               className={index === active ? 'pager__dot pager__dot--active' : 'pager__dot'}
-              aria-label={`Ver recomendado ${index + 1} de ${books.length}`}
-              aria-current={index === active ? 'true' : undefined}
-              onClick={() => goTo(index)}
             />
           ))}
         </div>

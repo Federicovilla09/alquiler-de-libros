@@ -57,7 +57,7 @@
 .book-row__author {
   padding-top: var(--gap-2);
   font-size: 12px;
-  color: var(--gray-9);
+  color: var(--gray-11);
 }
 
 .book-row__availability {
@@ -69,5 +69,5 @@
 
 .book-row__copies {
   font-size: 10px;
-  color: var(--gray-9);
+  color: var(--gray-11);
 }
