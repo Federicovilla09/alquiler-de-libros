@@ -166,6 +166,13 @@ export async function returnCopy(bookId, number, lateDays) {
 
 async function uploadCover(bookId, file) {
   try {
+    // La portada que tenía antes, si tenía
+    const { data: current } = await supabase
+      .from('books')
+      .select('cover_url')
+      .eq('id', bookId)
+      .single()
+
     const image = await resizeImage(file)
     const path = `${bookId}/${Date.now()}.jpg`
 
@@ -180,9 +187,14 @@ async function uploadCover(bookId, file) {
       .from('books')
       .update({ cover_url: data.publicUrl })
       .eq('id', bookId)
-    return updateError
+    if (updateError) return updateError
+
+    // Recién cuando la nueva quedó guardada, borrar la anterior
+    const oldPath = current?.cover_url?.split('/covers/')[1]
+    if (oldPath) await supabase.storage.from('covers').remove([oldPath])
+
+    return null
   } catch (problem) {
-    // Errores que no vienen de Supabase, como no poder leer la foto
     return problem
   }
 }
