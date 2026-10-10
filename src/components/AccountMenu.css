@@ -106,3 +106,18 @@
     animation: none;
   }
 }
+
+/* El fondo oscuro detrás del menú (Backdrop en Home 11) */
+.account-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  background-color: color-mix(in srgb, var(--bg-app-11) 10%, transparent);
+  animation: account-menu-fade 150ms ease-out;
+}
+
+@keyframes account-menu-fade {
+  from {
+    opacity: 0;
+  }
+}

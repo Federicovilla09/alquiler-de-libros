@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import './AccountMenu.css'
 import Avatar from './Avatar'
@@ -11,26 +11,17 @@ function AccountMenu() {
   const { session, signOut } = useAuth()
   const { notify } = useNotice()
   const [open, setOpen] = useState(false)
-  const rootRef = useRef(null)
 
-  // Cerrar al tocar afuera o al apretar Escape
+  // Cerrar con la tecla Escape (los toques afuera los atrapa el fondo oscuro)
   useEffect(() => {
     if (!open) return
-
-    function handlePointerDown(event) {
-      if (!rootRef.current.contains(event.target)) setOpen(false)
-    }
 
     function handleKeyDown(event) {
       if (event.key === 'Escape') setOpen(false)
     }
 
-    document.addEventListener('pointerdown', handlePointerDown)
     document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('pointerdown', handlePointerDown)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
+    return () => document.removeEventListener('keydown', handleKeyDown)
   }, [open])
 
   async function copyCatalogLink() {
@@ -46,7 +37,7 @@ function AccountMenu() {
   }
 
   return (
-    <div className="account-menu" ref={rootRef}>
+    <div className="account-menu">
       <button
         type="button"
         className="account-menu__trigger"
@@ -56,6 +47,10 @@ function AccountMenu() {
       >
         <Avatar src="/avatar-mica.png" />
       </button>
+
+      {open && (
+        <div className="account-menu__backdrop" aria-hidden="true" onClick={() => setOpen(false)} />
+      )}
 
       {open && (
         <div className="account-menu__popover">
