@@ -6,22 +6,28 @@ const NoticeContext = createContext(null)
 export function NoticeProvider({ children }) {
   const [notice, setNotice] = useState(null)
 
-  // Cada aviso desaparece solo a los 3 segundos
+  // Cada aviso empieza a salir a los 2,7 segundos y desaparece a los 3
   useEffect(() => {
     if (!notice) return
-    const timer = setTimeout(() => setNotice(null), 3000)
-    return () => clearTimeout(timer)
-  }, [notice])
+    const leaveTimer = setTimeout(() => {
+      setNotice((current) => (current ? { ...current, leaving: true } : current))
+    }, 2700)
+    const removeTimer = setTimeout(() => setNotice(null), 3000)
+    return () => {
+      clearTimeout(leaveTimer)
+      clearTimeout(removeTimer)
+    }
+  }, [notice?.id])
 
   function notify(text, type = 'success') {
-    setNotice({ id: Date.now(), text, type })
+    setNotice({ id: Date.now(), text, type, leaving: false })
   }
 
   return (
     <NoticeContext.Provider value={{ notify }}>
       {children}
       {notice && (
-        <div className="toast" key={notice.id}>
+        <div className={notice.leaving ? 'toast toast--leaving' : 'toast'} key={notice.id}>
           <Notification type={notice.type}>{notice.text}</Notification>
         </div>
       )}

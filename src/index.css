@@ -11,3 +11,63 @@ body {
   background-color: var(--blush-1);
   color: var(--gray-13);
 }
+
+/* ─── Microinteracciones ─── */
+
+/* Tarjetas: se achican apenas al tocarlas, como si se hundieran */
+.catalog-card,
+.featured-card,
+.saga-item,
+.tracking__link {
+  transition: transform 120ms ease;
+}
+
+.catalog-card:active,
+.featured-card:active,
+.saga-item:active,
+.tracking__link:active {
+  transform: scale(0.98);
+}
+
+/* Filas de una lista: se sombrean al tocarlas */
+.book-row,
+.today-summary,
+button.today-alert {
+  transition: background-color 120ms ease;
+}
+
+.book-row:active,
+.today-summary:active {
+  background-color: var(--blush-1);
+}
+
+button.today-alert:active {
+  filter: brightness(0.97);
+}
+
+/* Enlaces de texto: se atenúan al tocarlos */
+.section-header__link,
+.catalog-no-results__link {
+  transition: opacity 120ms ease;
+}
+
+.section-header__link:active,
+.catalog-no-results__link:active {
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-card,
+  .featured-card,
+  .saga-item,
+  .tracking__link {
+    transition: none;
+  }
+
+  .catalog-card:active,
+  .featured-card:active,
+  .saga-item:active,
+  .tracking__link:active {
+    transform: none;
+  }
+}

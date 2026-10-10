@@ -68,3 +68,20 @@
   font-weight: 600;
   color: var(--gray-13);
 }
+
+/* Al cambiar de paso, el contenido nuevo aparece con un fundido */
+.copy-card__content {
+  animation: copy-card-in 180ms ease-out;
+}
+
+@keyframes copy-card-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-card__content {
+    animation: none;
+  }
+}

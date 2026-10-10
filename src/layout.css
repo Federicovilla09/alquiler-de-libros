@@ -71,9 +71,21 @@
   animation: toast-in 200ms ease-out;
 }
 
+.toast--leaving {
+  animation: toast-out 300ms ease-in forwards;
+}
+
 .toast .notification {
   box-shadow: var(--shadow-large);
 }
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
 
 @keyframes toast-in {
   from {
@@ -98,4 +110,27 @@
 .screen-error {
   padding: var(--gap-10) var(--gap-8);
   text-align: center;
+}
+
+/* Cada pantalla aparece con un fundido breve */
+.app,
+.catalog-page,
+.login,
+.welcome {
+  animation: screen-in 180ms ease-out;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app,
+  .catalog-page,
+  .login,
+  .welcome {
+    animation: none;
+  }
 }
