@@ -14,10 +14,11 @@ import Button from './Button'
 import { genres } from '../data/genres'
 import { tropes } from '../data/tropes'
 import InlineNotice from './InlineNotice'
+import { useLibrary } from '../store/LibraryContext'
+import { normalize } from '../utils/text'
 
 const BOOK_GENRES = genres.filter((g) => g !== 'Todos')
 const AUDIENCES = ['Todo público', '+15', '+18', '+21']
-const SERIES = ['Cincuenta sombras', 'Alas de sangre', 'Una corte de rosas y espinas']
 
 // "$2.000" → 2000
 function parsePrice(text) {
@@ -26,6 +27,12 @@ function parsePrice(text) {
 
 function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, onIdentityChange }) {
   const [genre, setGenre] = useState(book?.genre ?? 'Romance')
+  const { books } = useLibrary()
+
+  // Las series que ya usa algún libro de la biblioteca, sin repetir y en orden alfabético
+  const seriesOptions = [...new Set(books.map((b) => b.series).filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b, 'es'),
+  )
   const [selectedTropes, setSelectedTropes] = useState(book?.tropes ?? [])
   const [coverFile, setCoverFile] = useState(null)
   const [errors, setErrors] = useState({})
@@ -50,6 +57,14 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
     }
   }
 
+  // La serie elegida, o la nueva. Si la nueva ya existe escrita de otra forma, usa la existente.
+  function resolveSeries(choice, typed) {
+    if (choice !== NEW_SERIES) return choice || null
+    const name = (typed ?? '').trim()
+    if (!name) return null
+    return seriesOptions.find((s) => normalize(s) === normalize(name)) ?? name
+  }
+
   function handleSubmit(event) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
@@ -64,12 +79,7 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
       quote: data.get('quote').trim() || null,
       rating: Number(data.get('rating')),
       recommended: data.get('recommended') === 'on',
-      series:
-        data.get('inSeries') === 'on'
-          ? seriesChoice === NEW_SERIES
-            ? (data.get('newSeries') ?? '').trim()
-            : seriesChoice
-          : null,
+      series: data.get('inSeries') === 'on' ? resolveSeries(seriesChoice, data.get('newSeries')) : null,
       volume: Number(data.get('volume')) || 1,
       audience: data.get('audience'),
       price15: parsePrice(data.get('price15')),
@@ -193,7 +203,7 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
         defaultChecked={book?.recommended ?? false}
       />
       <SeriesField
-        series={SERIES}
+        series={seriesOptions}
         defaultChecked={Boolean(book?.series)}
         defaultSeries={book?.series}
         defaultVolume={book?.volume}
