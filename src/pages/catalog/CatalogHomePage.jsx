@@ -11,14 +11,13 @@ import CatalogBookCard from '../../components/CatalogBookCard'
 import CatalogNoResults from '../../components/CatalogNoResults'
 import CatalogFooter from '../../components/CatalogFooter'
 import Button from '../../components/Button'
+import Icon from '../../components/Icon'
 import { genres } from '../../data/genres'
 import { normalize } from '../../utils/text'
 
 const FEATURED_SIZE = 3
 const ROW_SIZE = 8
 const PAGE_SIZE = 6
-
-// ← 1. La clave y la función van acá, junto a las constantes
 const WELCOME_KEY = 'letrita:welcome-seen'
 
 // ¿Ya vio la bienvenida en este navegador?
@@ -36,13 +35,29 @@ function CatalogHomePage() {
   const [genre, setGenre] = useState('Todos')
   const [trope, setTrope] = useState(null)
   const [showAll, setShowAll] = useState(false)
-  // ← 2. El estado de la bienvenida, junto a los otros useState
   const [showWelcome, setShowWelcome] = useState(() => !hasSeenWelcome())
 
   // Al cambiar de género, el tropo elegido deja de tener sentido
   function changeGenre(nextGenre) {
     setGenre(nextGenre)
     setTrope(null)
+  }
+
+  // Volver al catálogo completo
+  function clearFilters() {
+    setQuery('')
+    setGenre('Todos')
+    setTrope(null)
+    setShowAll(false)
+  }
+
+  function closeWelcome() {
+    try {
+      localStorage.setItem(WELCOME_KEY, 'yes')
+    } catch {
+      // Si el navegador no deja guardar, la bienvenida se cierra igual
+    }
+    setShowWelcome(false)
   }
 
   // Los recomendados por Mica, hasta tres
@@ -71,6 +86,7 @@ function CatalogHomePage() {
     return matchesGenre && matchesTrope && matchesSearch
   })
 
+  // Con un filtro o una búsqueda activa, la Home muestra solo los resultados
   const isFiltering = search !== '' || genre !== 'Todos'
   const visible = showAll ? filtered : filtered.slice(0, PAGE_SIZE)
   const hiddenCount = filtered.length - visible.length
@@ -83,35 +99,9 @@ function CatalogHomePage() {
     .filter(Boolean)
     .join(' · ')
 
-  // ← 3. La primera visita muestra la bienvenida en lugar del catálogo
+  // La primera visita muestra la bienvenida en lugar del catálogo
   if (showWelcome) {
-    return (
-      <CatalogWelcome
-        onStart={() => {
-          try {
-            localStorage.setItem(WELCOME_KEY, 'yes')
-          } catch {
-            // Si el navegador no deja guardar, la bienvenida se cierra igual
-          }
-          setShowWelcome(false)
-        }}
-      />
-    )
-  }
-
-  if (showWelcome) {
-    return (
-      <CatalogWelcome
-        onStart={() => {
-          try {
-            localStorage.setItem(WELCOME_KEY, 'yes')
-          } catch {
-            // Si el navegador no deja guardar, la bienvenida se cierra igual
-          }
-          setShowWelcome(false)
-        }}
-      />
-    )
+    return <CatalogWelcome onStart={closeWelcome} />
   }
 
   // El catálogo todavía no tiene libros
@@ -138,7 +128,7 @@ function CatalogHomePage() {
     return (
       <main className="catalog-page">
         <CatalogHeader query={query} onQueryChange={setQuery} />
-        <CatalogNoResults query={query.trim()} onShowAll={() => setQuery('')} />
+        <CatalogNoResults query={query.trim()} onShowAll={clearFilters} />
         <CatalogFooter />
       </main>
     )
@@ -148,7 +138,7 @@ function CatalogHomePage() {
     <main className="catalog-page">
       <CatalogHeader query={query} onQueryChange={setQuery} />
 
-      {featured.length > 0 && (
+      {!isFiltering && featured.length > 0 && (
         <section className="catalog-featured">
           <h2 className="catalog-featured__title">Recomendados por Mica</h2>
           <FeaturedCarousel books={featured} />
@@ -172,35 +162,39 @@ function CatalogHomePage() {
         )}
       </div>
 
-      <section className="catalog-section">
-        <div className="catalog-section__header">
-          <SectionHeader
-            title="Recién llegados"
-            subtitle="Lo último que sumó Mica"
-            to="/catalogo/recien-llegados"
-          />
-        </div>
-        <div className="catalog-row">
-          {newest.map((book) => (
-            <CatalogBookCard key={book.id} book={book} />
-          ))}
-        </div>
-      </section>
+      {!isFiltering && (
+        <>
+          <section className="catalog-section">
+            <div className="catalog-section__header">
+              <SectionHeader
+                title="Recién llegados"
+                subtitle="Lo último que sumó Mica"
+                to="/catalogo/recien-llegados"
+              />
+            </div>
+            <div className="catalog-row">
+              {newest.map((book) => (
+                <CatalogBookCard key={book.id} book={book} />
+              ))}
+            </div>
+          </section>
 
-      <section className="catalog-section">
-        <div className="catalog-section__header">
-          <SectionHeader
-            title="Mejor valorados"
-            subtitle="Los que más le gustaron"
-            to="/catalogo/mejor-valorados"
-          />
-        </div>
-        <div className="catalog-row">
-          {topRated.map((book) => (
-            <CatalogBookCard key={book.id} book={book} />
-          ))}
-        </div>
-      </section>
+          <section className="catalog-section">
+            <div className="catalog-section__header">
+              <SectionHeader
+                title="Mejor valorados"
+                subtitle="Los que más le gustaron"
+                to="/catalogo/mejor-valorados"
+              />
+            </div>
+            <div className="catalog-row">
+              {topRated.map((book) => (
+                <CatalogBookCard key={book.id} book={book} />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
 
       <section className="catalog-grid-section">
         <div className="catalog-grid-section__title">
@@ -217,6 +211,12 @@ function CatalogHomePage() {
         {hiddenCount > 0 && (
           <Button variant="ghost" icon="arrows-button-down" onClick={() => setShowAll(true)}>
             Ver más ({hiddenCount})
+          </Button>
+        )}
+
+        {isFiltering && (
+          <Button variant="ghost" onClick={clearFilters}>
+            Limpiar filtros
           </Button>
         )}
       </section>

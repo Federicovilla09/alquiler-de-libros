@@ -175,13 +175,16 @@
   color: var(--gray-11);
 }
 
-/* Cita */
+/* Cita: el mismo estilo que en la ficha de Micaela */
 .catalog-book__quote {
   margin: 0;
-  padding-left: calc(var(--gap-7) - 3px);
-  border-left: 3px solid var(--bg-app-6);
+  padding-left: calc(var(--gap-8) - 2px);
+  border-left: 2px solid var(--gray-9);
+  font-family: 'Fraunces', Georgia, serif;
   font-size: 14px;
-  color: var(--gray-12);
+  font-style: italic;
+  line-height: 20px;
+  color: var(--gray-11);
 }
 
 /* Tropos y sinopsis */
