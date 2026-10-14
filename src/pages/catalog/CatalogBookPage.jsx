@@ -5,6 +5,7 @@ import Icon from '../../components/Icon'
 import TagChoice from '../../components/TagChoice'
 import { formatPrice } from '../../data/books'
 import { askMessage, waitlistMessage, whatsappLink } from '../../utils/whatsapp'
+import { stripQuotes } from '../../utils/text'
 
 const STARS = [1, 2, 3, 4, 5]
 
@@ -100,7 +101,8 @@ function CatalogBookPage() {
           </p>
         </div>
 
-        {book.quote && <blockquote className="catalog-book__quote">{book.quote}</blockquote>}
+        {book.quote && <blockquote className="catalog-book__quote">{stripQuotes(book.quote)}</blockquote>}
+    
 
         {book.tropes.length > 0 && (
           <section className="catalog-book__block">

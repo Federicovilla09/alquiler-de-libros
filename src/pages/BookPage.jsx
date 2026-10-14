@@ -17,6 +17,7 @@ import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
 import { useNotice } from '../store/NoticeContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
+import { stripQuotes } from '../../utils/text'
 
 const STARS = [1, 2, 3, 4, 5]
 const SAVE_ERROR = 'No pudimos guardar el cambio. Revisá tu conexión y probá de nuevo.'
@@ -141,7 +142,7 @@ function BookPage() {
           </div>
         </section>
 
-        {book.quote && <blockquote className="book-quote">“{book.quote}”</blockquote>}
+        {book.quote && <blockquote className="catalog-book__quote">“{stripQuotes(book.quote)}”</blockquote>}
 
         <section className="book-synopsis">
           <h3 className="book-synopsis__title">Sinopsis</h3>

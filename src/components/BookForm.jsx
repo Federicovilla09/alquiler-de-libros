@@ -15,7 +15,7 @@ import { genres } from '../data/genres'
 import { tropes } from '../data/tropes'
 import InlineNotice from './InlineNotice'
 import { useLibrary } from '../store/LibraryContext'
-import { normalize } from '../utils/text'
+import { normalize, stripQuotes } from '../utils/text'
 
 const BOOK_GENRES = genres.filter((g) => g !== 'Todos')
 const AUDIENCES = ['Todo público', '+15', '+18', '+21']
@@ -76,7 +76,7 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
       genre,
       tropes: selectedTropes,
       synopsis: data.get('synopsis').trim(),
-      quote: data.get('quote').trim() || null,
+      quote: stripQuotes(data.get('quote')) || null,
       rating: Number(data.get('rating')),
       recommended: data.get('recommended') === 'on',
       series: data.get('inSeries') === 'on' ? resolveSeries(seriesChoice, data.get('newSeries')) : null,
@@ -192,7 +192,7 @@ function BookForm({ book, submitLabel, onSubmit, duplicate, onDuplicateAction, o
       <TextField
         label="Frase destacada (Opcional)"
         name="quote"
-        placeholder="“Una cita memorable del libro...”"
+        placeholder="Una cita memorable del libro..."
         defaultValue={book?.quote ?? undefined}
       />
       <StarRating label="Tu puntaje" name="rating" defaultValue={book?.rating ?? 0} />

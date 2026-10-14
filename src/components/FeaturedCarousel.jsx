@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router'
 import './FeaturedCarousel.css'
 import Icon from './Icon'
+import { stripQuotes } from '../utils/text'
 
 function FeaturedCard({ book, priority = false }) {
   return (
@@ -10,7 +11,7 @@ function FeaturedCard({ book, priority = false }) {
         <span className="featured-card__chip">Recomendado por Mica</span>
         <p className="featured-card__title">{book.title}</p>
         <p className="featured-card__author">{book.author}</p>
-        {book.quote && <p className="featured-card__quote">“{book.quote}”</p>}
+        {book.quote && <p className="featured-card__quote">“{stripQuotes(book.quote)}”</p>}
         <span className="featured-card__cta">
           Ver libro
           <Icon name="arrows-button-right" />

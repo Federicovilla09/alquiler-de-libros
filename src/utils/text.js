@@ -7,3 +7,12 @@ export function normalize(text) {
 export function compactKey(text) {
   return normalize(text).replace(/[^a-z0-9]/g, '')
 }
+
+// Saca las comillas que haya al principio o al final de un texto,
+// de cualquier tipo: " “ ” « » ' ‘ ’
+export function stripQuotes(text) {
+  return (text ?? '')
+    .trim()
+    .replace(/^["'“”«»‘’]+|["'“”«»‘’]+$/g, '')
+    .trim()
+}
