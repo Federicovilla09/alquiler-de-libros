@@ -7,4 +7,7 @@ export const tropes = [
   'Triángulo amoroso',
   'Dark Romance',
   'Segunda oportunidad',
+  'Rivals to Lovers',
+  'Found Family',
+  'Proximidad forzada',
 ]
