@@ -136,3 +136,30 @@
     animation: none;
   }
 }
+
+/* ─── Catálogo: base de todas sus pantallas ─── */
+.catalog-page {
+  --page-pad: var(--gap-8);
+  min-height: 100dvh;
+  background-color: var(--blush-1);
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+  .catalog-page {
+    --page-pad: var(--gap-10);
+  }
+}
+
+/* Escritorio: el contenido mide 1200 px, centrado */
+@media (min-width: 1024px) {
+  .catalog-page {
+    --page-pad: max(var(--gap-12), calc((100% - 1200px) / 2));
+  }
+}
+
+/* El encabezado de navegación del catálogo usa el mismo margen */
+.catalog-page .navigation-header {
+  padding-right: var(--page-pad);
+  padding-left: var(--page-pad);
+}

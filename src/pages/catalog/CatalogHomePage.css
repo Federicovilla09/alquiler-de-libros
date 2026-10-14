@@ -1,12 +1,6 @@
-.catalog-page {
-  max-width: var(--app-max-width);
-  min-height: 100dvh;
-  margin: 0 auto;
-  background-color: var(--blush-1);
-}
-
+/* Filtros */
 .catalog-filters {
-  padding: var(--gap-9) var(--gap-8) 0;
+  padding: var(--gap-9) var(--page-pad) 0;
 }
 
 /* Filas que se deslizan */
@@ -18,15 +12,15 @@
 }
 
 .catalog-section__header {
-  padding: 0 var(--gap-8);
+  padding: 0 var(--page-pad);
 }
 
 .catalog-row {
   display: flex;
   gap: var(--gap-7);
-  padding: 0 var(--gap-8) var(--gap-8);
+  padding: 0 var(--page-pad) var(--gap-8);
   overflow-x: auto;
-  scroll-padding: 0 var(--gap-8);
+  scroll-padding: 0 var(--page-pad);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
@@ -44,7 +38,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-8);
-  padding: var(--gap-10) var(--gap-8) var(--gap-9);
+  padding: var(--gap-10) var(--page-pad) var(--gap-9);
 }
 
 .catalog-grid-section__title {
@@ -75,7 +69,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-7);
-  padding: var(--gap-8) var(--gap-8) 0;
+  padding: var(--gap-8) var(--page-pad) 0;
 }
 
 .catalog-featured__title {
@@ -102,4 +96,60 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-5);
+}
+
+/* ─── Tablet ─── */
+@media (min-width: 600px) {
+  .catalog-section {
+    padding-top: var(--gap-10);
+  }
+
+  .catalog-row {
+    gap: var(--gap-8);
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-9) var(--gap-8);
+  }
+
+  /* Los botones de la grilla miden lo que su texto */
+  .catalog-grid-section .button {
+    align-self: center;
+    width: auto;
+    min-width: 280px;
+  }
+}
+
+/* ─── Escritorio ─── */
+@media (min-width: 1024px) {
+  .catalog-section {
+    padding-top: var(--gap-12);
+  }
+
+  /* Las filas muestran seis libros, sin deslizar */
+  .catalog-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--gap-9);
+    overflow: visible;
+  }
+
+  .catalog-row > :nth-child(n + 7) {
+    display: none;
+  }
+
+  .catalog-row .catalog-card--row {
+    width: auto;
+  }
+
+  .catalog-grid-section {
+    padding-top: var(--gap-12);
+    padding-bottom: var(--gap-12);
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--gap-10) var(--gap-9);
+  }
 }

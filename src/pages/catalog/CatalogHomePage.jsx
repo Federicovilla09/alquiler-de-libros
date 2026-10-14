@@ -14,10 +14,10 @@ import Button from '../../components/Button'
 import Icon from '../../components/Icon'
 import { genres } from '../../data/genres'
 import { normalize } from '../../utils/text'
+import { useMediaQuery } from '../../utils/useMediaQuery'
 
 const FEATURED_SIZE = 3
 const ROW_SIZE = 8
-const PAGE_SIZE = 6
 const WELCOME_KEY = 'letrita:welcome-seen'
 
 // ¿Ya vio la bienvenida en este navegador?
@@ -36,6 +36,10 @@ function CatalogHomePage() {
   const [trope, setTrope] = useState(null)
   const [showAll, setShowAll] = useState(false)
   const [showWelcome, setShowWelcome] = useState(() => !hasSeenWelcome())
+  const isTablet = useMediaQuery('(min-width: 600px)')
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
+  // Cuántos libros antes de "Ver más": dos filas completas en cada medida
+  const pageSize = isDesktop ? 12 : isTablet ? 8 : 6
 
   // Al cambiar de género, el tropo elegido deja de tener sentido
   function changeGenre(nextGenre) {
@@ -88,7 +92,7 @@ function CatalogHomePage() {
 
   // Con un filtro o una búsqueda activa, la Home muestra solo los resultados
   const isFiltering = search !== '' || genre !== 'Todos'
-  const visible = showAll ? filtered : filtered.slice(0, PAGE_SIZE)
+  const visible = showAll ? filtered : filtered.slice(0, pageSize)
   const hiddenCount = filtered.length - visible.length
 
   const countText = [

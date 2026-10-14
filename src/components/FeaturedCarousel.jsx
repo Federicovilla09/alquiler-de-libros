@@ -36,10 +36,13 @@ function FeaturedCarousel({ books }) {
   const [active, setActive] = useState(0)
   const trackRef = useRef(null)
 
-  // Cuál tarjeta se ve: cuántos anchos se desplazó el carrusel
+  // Cuál tarjeta se ve: cuántas tarjetas se desplazó el carrusel
   function handleScroll() {
     const track = trackRef.current
-    setActive(Math.round(track.scrollLeft / track.clientWidth))
+    const first = track.firstElementChild
+    if (!first) return
+    const step = first.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0)
+    setActive(Math.round(track.scrollLeft / step))
   }
 
   return (

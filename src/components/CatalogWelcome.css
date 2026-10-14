@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: var(--app-max-width);
+  max-width: none;
   min-height: 100dvh;
   margin: 0 auto;
   padding: var(--gap-12) var(--gap-10);
@@ -62,6 +62,7 @@
   align-items: center;
   gap: var(--gap-9);
   width: 100%;
+  max-width: 420px;
 }
 
 .welcome__logo {
@@ -108,4 +109,66 @@
   font-size: 13px;
   font-weight: 700;
   color: var(--bg-app-10);
+}
+
+/* ─── Tablet: los círculos crecen y acompañan las esquinas ─── */
+@media (min-width: 600px) {
+  .welcome__deco--top {
+    top: -238px;
+    right: -211px;
+    width: 528px;
+    height: 528px;
+  }
+
+  .welcome__deco--top::after {
+    top: 53px;
+    left: 53px;
+    width: 422px;
+    height: 422px;
+  }
+
+  .welcome__deco--bottom {
+    bottom: -252px;
+    left: -183px;
+    width: 458px;
+    height: 458px;
+  }
+
+  .welcome__deco--bottom::after {
+    top: 53px;
+    left: 53px;
+    width: 352px;
+    height: 352px;
+  }
+}
+
+/* ─── Escritorio ─── */
+@media (min-width: 1024px) {
+  .welcome__deco--top {
+    top: -267px;
+    right: -238px;
+    width: 594px;
+    height: 594px;
+  }
+
+  .welcome__deco--top::after {
+    top: 60px;
+    left: 60px;
+    width: 475px;
+    height: 475px;
+  }
+
+  .welcome__deco--bottom {
+    bottom: -283px;
+    left: -206px;
+    width: 515px;
+    height: 515px;
+  }
+
+  .welcome__deco--bottom::after {
+    top: 60px;
+    left: 60px;
+    width: 396px;
+    height: 396px;
+  }
 }

@@ -181,3 +181,32 @@
     transition: none;
   }
 }
+
+/* ─── Tablet: dos recomendaciones por vez ─── */
+@media (min-width: 600px) {
+  .featured-carousel__track {
+    gap: var(--gap-8);
+  }
+
+  .featured-card {
+    width: calc((100% - var(--gap-8)) / 2);
+  }
+}
+
+/* ─── Escritorio: las tres juntas, sin carrusel ─── */
+@media (min-width: 1024px) {
+  .featured-carousel__track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-9);
+    overflow: visible;
+  }
+
+  .featured-card {
+    width: auto;
+  }
+
+  .pager {
+    display: none;
+  }
+}

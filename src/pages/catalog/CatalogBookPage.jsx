@@ -35,11 +35,42 @@ function CatalogBookPage() {
       <NavigationHeader title="Catálogo" backTo="/catalogo" />
 
       <div className="catalog-book">
-        <section className="catalog-book__hero">
+        {/* Columna izquierda en escritorio: lo que decide el alquiler */}
+        <aside className="catalog-book__aside">
           <div className="catalog-book__cover" style={{ backgroundColor: book.coverColor }}>
-            {book.coverUrl && <img src={book.coverUrl} width="124" height="182" alt="" />}
+            {book.coverUrl && <img src={book.coverUrl} alt="" width="124" height="182" />}
           </div>
 
+          <section className="catalog-book__prices" aria-label="Precios de alquiler">
+            <div className="catalog-book__price catalog-book__price--main">
+              <p className="catalog-book__price-label">15 días</p>
+              <p className="catalog-book__price-value">{formatPrice(book.price15)}</p>
+            </div>
+            <div className="catalog-book__price">
+              <p className="catalog-book__price-label">30 días</p>
+              <p className="catalog-book__price-value">{formatPrice(book.price30)}</p>
+            </div>
+          </section>
+
+          <div className="catalog-book__cta">
+            <a
+              className="button button--primary"
+              href={whatsappLink(message)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {book.available ? 'Consultar por WhatsApp' : 'Avisame cuando vuelva'}
+            </a>
+            <p className="catalog-book__helper">
+              {book.available
+                ? 'Se abre WhatsApp con un mensaje listo para enviarle a Mica.'
+                : 'Le escribís a Mica por WhatsApp y te avisa apenas vuelva.'}
+            </p>
+          </div>
+        </aside>
+
+        {/* Columna derecha en escritorio: lo que cuenta el libro */}
+        <div className="catalog-book__main">
           <div className="catalog-book__info">
             <div className="catalog-book__badges">
               {book.genre && <span className="catalog-book__genre">{book.genre}</span>}
@@ -72,103 +103,75 @@ function CatalogBookPage() {
             </p>
             {book.condition && <p className="catalog-book__condition">Estado: {book.condition}</p>}
           </div>
-        </section>
 
-        <section className="catalog-book__prices" aria-label="Precios de alquiler">
-          <div className="catalog-book__price catalog-book__price--main">
-            <p className="catalog-book__price-label">15 días</p>
-            <p className="catalog-book__price-value">{formatPrice(book.price15)}</p>
-          </div>
-          <div className="catalog-book__price">
-            <p className="catalog-book__price-label">30 días</p>
-            <p className="catalog-book__price-value">{formatPrice(book.price30)}</p>
-          </div>
-        </section>
+          {book.quote && <blockquote className="catalog-book__quote">“{stripQuotes(book.quote)}”</blockquote>}
 
-        <div className="catalog-book__cta">
-          <a
-            className="button button--primary"
-            href={whatsappLink(message)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {book.available ? 'Consultar por WhatsApp' : 'Avisame cuando vuelva'}
-          </a>
-          <p className="catalog-book__helper">
-            {book.available
-              ? 'Se abre WhatsApp con un mensaje listo para enviarle a Mica.'
-              : 'Le escribís a Mica por WhatsApp y te avisa apenas vuelva.'}
-          </p>
-        </div>
+          {book.tropes.length > 0 && (
+            <section className="catalog-book__block catalog-book__block--tropes">
+              <h2>Tropes</h2>
+              <div className="catalog-book__tropes">
+                {book.tropes.map((t) => (
+                  <TagChoice key={t} variant="trope" readOnly>
+                    {t}
+                  </TagChoice>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {book.quote && <blockquote className="catalog-book__quote">{stripQuotes(book.quote)}</blockquote>}
-    
+          {book.synopsis && (
+            <section className="catalog-book__block catalog-book__block--synopsis">
+              <h2>Sinopsis</h2>
+              <p className="catalog-book__synopsis">{book.synopsis}</p>
+            </section>
+          )}
 
-        {book.tropes.length > 0 && (
-          <section className="catalog-book__block">
-            <h2>Tropes</h2>
-            <div className="catalog-book__tropes">
-              {book.tropes.map((t) => (
-                <TagChoice key={t} variant="trope" readOnly>
-                  {t}
-                </TagChoice>
-              ))}
-            </div>
-          </section>
-        )}
+          {saga.length > 1 && (
+            <section className="catalog-saga">
+              <div>
+                <h2 className="catalog-saga__title">Parte de la saga {book.series}</h2>
+                <p className="catalog-saga__subtitle">{saga.length} tomos · se alquilan por separado</p>
+              </div>
+              <div className="catalog-saga__list">
+                {saga.map((tomo) => {
+                  const isCurrent = tomo.id === book.id
+                  const content = (
+                    <>
+                      <div className="saga-item__cover" style={{ backgroundColor: tomo.coverColor }}>
+                        {tomo.coverUrl && <img src={tomo.coverUrl} alt="" width="80" height="116" />}
+                      </div>
+                      <p className="saga-item__volume">Vol. {tomo.volume ?? '–'}</p>
+                      {isCurrent ? (
+                        <p className="saga-item__status saga-item__status--current">Estás acá</p>
+                      ) : (
+                        <p
+                          className={
+                            tomo.available
+                              ? 'saga-item__status saga-item__status--available'
+                              : 'saga-item__status'
+                          }
+                        >
+                          <span className="saga-item__dot" aria-hidden="true" />
+                          {tomo.available ? 'Disponible' : 'No disponible'}
+                        </p>
+                      )}
+                    </>
+                  )
 
-        {book.synopsis && (
-          <section className="catalog-book__block">
-            <h2>Sinopsis</h2>
-            <p className="catalog-book__synopsis">{book.synopsis}</p>
-          </section>
-        )}
-
-        {saga.length > 1 && (
-          <section className="catalog-saga">
-            <div>
-              <h2 className="catalog-saga__title">Parte de la saga {book.series}</h2>
-              <p className="catalog-saga__subtitle">{saga.length} tomos · se alquilan por separado</p>
-            </div>
-            <div className="catalog-saga__list">
-              {saga.map((tomo) => {
-                const isCurrent = tomo.id === book.id
-                const content = (
-                  <>
-                    <div className="saga-item__cover" style={{ backgroundColor: tomo.coverColor }}>
-                      {tomo.coverUrl && <img src={tomo.coverUrl} width="80" height="116" alt="" />}
+                  return isCurrent ? (
+                    <div key={tomo.id} className="saga-item saga-item--current" aria-current="page">
+                      {content}
                     </div>
-                    <p className="saga-item__volume">Vol. {tomo.volume ?? '–'}</p>
-                    {isCurrent ? (
-                      <p className="saga-item__status saga-item__status--current">Estás acá</p>
-                    ) : (
-                      <p
-                        className={
-                          tomo.available
-                            ? 'saga-item__status saga-item__status--available'
-                            : 'saga-item__status'
-                        }
-                      >
-                        <span className="saga-item__dot" aria-hidden="true" />
-                        {tomo.available ? 'Disponible' : 'No disponible'}
-                      </p>
-                    )}
-                  </>
-                )
-
-                return isCurrent ? (
-                  <div key={tomo.id} className="saga-item saga-item--current" aria-current="page">
-                    {content}
-                  </div>
-                ) : (
-                  <Link key={tomo.id} to={`/catalogo/libro/${tomo.id}`} className="saga-item">
-                    {content}
-                  </Link>
-                )
-              })}
-            </div>
-          </section>
-        )}
+                  ) : (
+                    <Link key={tomo.id} to={`/catalogo/libro/${tomo.id}`} className="saga-item">
+                      {content}
+                    </Link>
+                  )
+                })}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
     </main>
   )
