@@ -17,7 +17,7 @@ import { formatPrice } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
 import { useNotice } from '../store/NoticeContext'
 import { addDays, daysBetween, formatDate, parseDate, today } from '../utils/dates'
-import { stripQuotes } from '../../utils/text'
+import { stripQuotes } from '../utils/text'
 
 const STARS = [1, 2, 3, 4, 5]
 const SAVE_ERROR = 'No pudimos guardar el cambio. Revisá tu conexión y probá de nuevo.'

@@ -1,0 +1,113 @@
+/* El panel: pegado a la derecha, de toda la altura */
+.side-panel {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(520px, calc(100% - 120px));
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: var(--white);
+  box-shadow: -12px 0 40px color-mix(in srgb, var(--bg-app-11) 18%, transparent);
+  animation: side-panel-in 220ms ease-out;
+}
+
+/* Size=Wide: la ficha del libro, por las tarjetas de ejemplar */
+.side-panel--wide {
+  width: min(640px, calc(100% - 120px));
+}
+
+.side-panel::backdrop {
+  background-color: color-mix(in srgb, var(--bg-app-11) 40%, transparent);
+  animation: side-panel-fade 220ms ease-out;
+}
+
+.side-panel__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.side-panel__header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--gap-5);
+  padding: 20px 20px 20px 28px;
+  border-bottom: 1px solid var(--blush-3);
+}
+
+/* Con flecha, el encabezado arranca un poco más a la izquierda */
+.side-panel__header:has(.side-panel__button:first-child) {
+  padding-left: 16px;
+}
+
+.side-panel__title {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-13);
+}
+
+.side-panel__button {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--gray-13);
+  cursor: pointer;
+}
+
+.side-panel__button:hover {
+  background-color: var(--blush-1);
+}
+
+.side-panel__button:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+/* El contenido scrollea dentro del panel */
+.side-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.side-panel .nav-header {
+  display: none;
+}
+
+.side-panel .app {
+  min-height: 0;
+  padding-bottom: var(--gap-10);
+  background: none;
+  animation: none;
+}
+
+@keyframes side-panel-in {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+}
+
+@keyframes side-panel-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-panel,
+  .side-panel::backdrop {
+    animation: none;
+  }
+}

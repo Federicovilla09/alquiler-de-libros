@@ -160,8 +160,7 @@
 
 /* El encabezado de navegación del catálogo usa el mismo margen */
 .catalog-page .navigation-header {
-  padding-right: var(--page-pad);
-  padding-left: var(--page-pad);
+  display: none;
 }
 
 /* ─── Gestión: margen que se adapta, como en el catálogo ─── */
