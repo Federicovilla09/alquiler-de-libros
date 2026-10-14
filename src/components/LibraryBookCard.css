@@ -23,12 +23,15 @@
   overflow: hidden;
   border-radius: var(--radius-large);
   box-shadow: var(--shadow-medium);
-  transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease, transform 200ms ease;
 }
 
-/* En la computadora, la portada se levanta al pasar el mouse */
-.library-card:hover .library-card__cover {
-  box-shadow: var(--shadow-large);
+/* En la computadora, la portada crece apenas y se levanta al pasar el mouse */
+@media (hover: hover) and (pointer: fine) {
+  .library-card:hover .library-card__cover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-large);
+  }
 }
 
 .library-card__cover img {
@@ -87,7 +90,8 @@
     transition: none;
   }
 
-  .library-card:active {
+  .library-card:active,
+  .library-card:hover .library-card__cover {
     transform: none;
   }
 }

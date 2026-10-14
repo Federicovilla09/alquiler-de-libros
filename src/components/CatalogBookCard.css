@@ -29,6 +29,7 @@
   overflow: hidden;
   border-radius: var(--radius-medium);
   box-shadow: var(--shadow-medium);
+  transition: box-shadow 150ms ease, transform 200ms ease;
 }
 
 .catalog-card__cover img {
@@ -93,4 +94,22 @@
 
 .catalog-card__availability--available .catalog-card__dot {
   background-color: var(--success-9);
+}
+
+/* En la computadora, la portada crece apenas y se levanta al pasar el mouse */
+@media (hover: hover) and (pointer: fine) {
+  .catalog-card:hover .catalog-card__cover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-large);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-card__cover {
+    transition: none;
+  }
+
+  .catalog-card:hover .catalog-card__cover {
+    transform: none;
+  }
 }
