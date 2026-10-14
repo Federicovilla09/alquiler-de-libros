@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop'
 import ScreenLoader from './components/ScreenLoader'
 
 // Cada pantalla se descarga recién cuando se abre
+const AdminLayout = lazy(() => import('./components/AdminLayout'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const HomePage = lazy(() => import('./pages/HomePage'))
 const BookPage = lazy(() => import('./pages/BookPage'))
@@ -35,12 +36,15 @@ function App() {
 
           {/* Todo lo de adentro exige haber iniciado sesión */}
           <Route element={<RequireAuth />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/libros/nuevo" element={<NewBookPage />} />
-            <Route path="/libros/:id" element={<BookPage />} />
-            <Route path="/libros/:id/editar" element={<EditBookPage />} />
-            <Route path="/seguimiento" element={<TrackingPage />} />
-            <Route path="*" element={<PlaceholderPage title="Página no encontrada" />} />
+            {/* Lo que comparten las pantallas de la gestión: el menú lateral y la barra de navegación */}
+            <Route element={<AdminLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/libros/nuevo" element={<NewBookPage />} />
+              <Route path="/libros/:id" element={<BookPage />} />
+              <Route path="/libros/:id/editar" element={<EditBookPage />} />
+              <Route path="/seguimiento" element={<TrackingPage />} />
+              <Route path="*" element={<PlaceholderPage title="Página no encontrada" />} />
+            </Route>
           </Route>
         </Routes>
       </Suspense>

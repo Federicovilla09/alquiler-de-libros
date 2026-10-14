@@ -121,3 +121,43 @@
     opacity: 0;
   }
 }
+
+/* ─── Variante del menú lateral: la foto, el nombre y el email ─── */
+.account-menu--sidebar .account-menu__trigger {
+  align-items: center;
+  gap: var(--gap-7);
+  width: 100%;
+  padding: var(--gap-7);
+  border-radius: var(--radius-large);
+  background-color: var(--white);
+  text-align: left;
+}
+
+.account-menu__who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.account-menu__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-13);
+}
+
+.account-menu__mail {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--gray-11);
+}
+
+/* El globo se abre hacia arriba, porque el menú está al pie */
+.account-menu--sidebar .account-menu__popover {
+  top: auto;
+  right: auto;
+  bottom: calc(100% + var(--gap-5));
+  left: 0;
+  width: 100%;
+}

@@ -1,0 +1,17 @@
+.admin {
+  min-height: 100dvh;
+}
+
+/* Escritorio: el menú a la izquierda, la pantalla a la derecha */
+@media (min-width: 1024px) {
+  .admin {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  /* En escritorio, la navegación es el menú lateral */
+  .admin .bottom-nav {
+    display: none;
+  }
+}

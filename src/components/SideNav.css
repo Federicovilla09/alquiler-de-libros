@@ -1,0 +1,67 @@
+/* El menú lateral solo existe en escritorio */
+.side-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .side-nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3);
+    height: 100dvh;
+    padding: 28px var(--gap-8) var(--gap-9);
+    background-color: var(--blush-2);
+    border-right: 1px solid var(--blush-3);
+  }
+
+  .side-nav__logo {
+    width: 132px;
+    height: auto;
+    margin: 0 var(--gap-7) 28px;
+  }
+
+  .side-nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .side-nav__item {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-7);
+    padding: var(--gap-7) var(--gap-8);
+    border-radius: var(--radius-large);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-11);
+    text-decoration: none;
+    transition: background-color 120ms ease;
+  }
+
+  .side-nav__item:hover {
+    background-color: var(--blush-1);
+  }
+
+  .side-nav__item--active,
+  .side-nav__item--active:hover {
+    background-color: var(--bg-app-2);
+    font-weight: 600;
+    color: var(--bg-app-11);
+  }
+
+  .side-nav__item:focus-visible {
+    outline: 2px solid var(--bg-app-11);
+    outline-offset: 2px;
+  }
+
+  /* La cuenta, al pie */
+  .side-nav__account {
+    margin-top: auto;
+  }
+}

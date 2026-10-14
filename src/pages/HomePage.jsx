@@ -4,7 +4,6 @@ import SearchBar from '../components/SearchBar'
 import GenreFilters from '../components/GenreFilters'
 import BookRow from '../components/BookRow'
 import Button from '../components/Button'
-import BottomNav from '../components/BottomNav'
 import ScreenLoader from '../components/ScreenLoader'
 import { getBookStatus } from '../data/books'
 import { useLibrary } from '../store/LibraryContext'
@@ -33,7 +32,6 @@ function HomePage() {
         <div className="content">
           <EmptyLibrary />
         </div>
-        <BottomNav />
       </main>
     )
   }
@@ -96,7 +94,6 @@ function HomePage() {
           )}
         </section>
       </div>
-      <BottomNav />
     </main>
   )
 }

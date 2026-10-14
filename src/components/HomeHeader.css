@@ -144,3 +144,133 @@
   outline: 2px solid var(--bg-app-11);
   outline-offset: 0;
 }
+
+/* ─── Los chips de "Para hoy": ocultos en el celular ─── */
+.home-header__chips {
+  display: none;
+}
+
+.summary-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-5);
+  padding: calc(var(--gap-5) - 1px) var(--gap-6) calc(var(--gap-5) - 1px) calc(var(--gap-7) - 1px);
+  border: 1px solid;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: filter 120ms ease;
+}
+
+.summary-chip strong {
+  font-weight: 700;
+  color: var(--gray-13);
+}
+
+.summary-chip:active {
+  filter: brightness(0.97);
+}
+
+.summary-chip:focus-visible {
+  outline: 2px solid var(--bg-app-11);
+  outline-offset: 2px;
+}
+
+.summary-chip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+}
+
+/* Type=Overdue */
+.summary-chip--overdue {
+  background-color: var(--error-2);
+  border-color: var(--error-6);
+  color: var(--error-11);
+}
+
+/* Type=Due today */
+.summary-chip--return {
+  background-color: var(--warning-2);
+  border-color: var(--warning-6);
+  color: var(--warning-12);
+}
+
+.summary-chip--return .summary-chip__dot {
+  background-color: var(--warning-7);
+}
+
+/* Type=Reservation */
+.summary-chip--reservation {
+  background-color: var(--info-2);
+  border-color: var(--info-6);
+  color: var(--info-12);
+}
+
+.summary-chip--reservation .summary-chip__dot {
+  background-color: var(--info-9);
+}
+
+/* Todo al día */
+.summary-chip--clear {
+  background-color: var(--success-2);
+  border-color: var(--success-6);
+  color: var(--success-12);
+  cursor: default;
+}
+
+.summary-chip--clear .summary-chip__dot {
+  background-color: var(--success-9);
+}
+
+/* ─── Tablet: sin fondo ni esquinas, saludo y foto arriba, chips debajo ─── */
+@media (min-width: 600px) {
+  .home-header-wrap {
+    position: static;
+    background: none;
+  }
+
+  .home-header,
+  .home-header--scrolled {
+    gap: var(--gap-8);
+    padding: var(--gap-9) var(--page-pad) 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .home-header__hello {
+    font-size: 22px;
+  }
+
+  .home-header__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-5);
+  }
+
+  .home-header__today {
+    display: none;
+  }
+}
+
+/* ─── Escritorio: saludo y chips en una fila, la cuenta en el menú ─── */
+@media (min-width: 1024px) {
+  .home-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 28px;
+  }
+
+  .home-header__hello {
+    font-size: 24px;
+  }
+
+  .home-header__account {
+    display: none;
+  }
+}

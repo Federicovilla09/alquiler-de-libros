@@ -4,7 +4,6 @@ import './TrackingPage.css'
 import NavigationHeader from '../components/NavigationHeader'
 import TagFilter from '../components/TagFilter'
 import LoanCard from '../components/LoanCard'
-import BottomNav from '../components/BottomNav'
 import { getLoans } from '../utils/loans'
 import { useLibrary } from '../store/LibraryContext'
 import ScreenLoader from '../components/ScreenLoader'
@@ -83,8 +82,6 @@ function TrackingPage() {
           )
         })}
       </div>
-
-      <BottomNav />
     </main>
   )
 }

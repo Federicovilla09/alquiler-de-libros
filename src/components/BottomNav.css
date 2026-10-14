@@ -42,3 +42,9 @@
   font-size: 12px;
   font-weight: 700;
 }
+
+@media (min-width: 600px) {
+  .bottom-nav {
+    max-width: none;
+  }
+}

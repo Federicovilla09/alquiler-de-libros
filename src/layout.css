@@ -163,3 +163,46 @@
   padding-right: var(--page-pad);
   padding-left: var(--page-pad);
 }
+
+/* ─── Gestión: margen que se adapta, como en el catálogo ─── */
+.app {
+  --page-pad: var(--gap-8);
+}
+
+@media (min-width: 600px) {
+  .app {
+    --page-pad: var(--gap-10);
+    max-width: none;
+  }
+
+  .app .content {
+    padding-right: var(--page-pad);
+    padding-left: var(--page-pad);
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    --page-pad: 40px;
+    padding-bottom: 0;
+  }
+}
+
+/* ─── Notificaciones: abajo a la derecha, desde la tablet ─── */
+@media (min-width: 600px) {
+  .toast {
+    right: var(--gap-9);
+    bottom: calc(73px + var(--gap-9) + env(safe-area-inset-bottom, 0px));
+    left: auto;
+    width: 360px;
+    max-width: calc(100% - var(--gap-9) * 2);
+    margin: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .toast {
+    right: var(--gap-10);
+    bottom: var(--gap-10);
+  }
+}

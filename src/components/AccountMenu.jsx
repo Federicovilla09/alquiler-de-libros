@@ -6,7 +6,9 @@ import Icon from './Icon'
 import { useAuth } from '../store/AuthContext'
 import { useNotice } from '../store/NoticeContext'
 
-function AccountMenu() {
+// variant="avatar": la foto sola (encabezado del celular y la tablet)
+// variant="sidebar": la foto con el nombre y el email (pie del menú lateral)
+function AccountMenu({ variant = 'avatar' }) {
   const navigate = useNavigate()
   const { session, signOut } = useAuth()
   const { notify } = useNotice()
@@ -37,7 +39,7 @@ function AccountMenu() {
   }
 
   return (
-    <div className="account-menu">
+    <div className={`account-menu account-menu--${variant}`}>
       <button
         type="button"
         className="account-menu__trigger"
@@ -46,6 +48,12 @@ function AccountMenu() {
         onClick={() => setOpen(!open)}
       >
         <Avatar src="/avatar-mica.png" />
+        {variant === 'sidebar' && (
+          <span className="account-menu__who">
+            <span className="account-menu__name">Mica</span>
+            <span className="account-menu__mail">{session?.user.email}</span>
+          </span>
+        )}
       </button>
 
       {open && (

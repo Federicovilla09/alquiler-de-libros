@@ -15,6 +15,13 @@ function formatToday() {
   return clean.charAt(0).toUpperCase() + clean.slice(1)
 }
 
+// Los chips de "Para hoy", desde la tablet
+const CHIPS = [
+  { type: 'overdue', label: 'Atrasados' },
+  { type: 'return', label: 'Vencen hoy' },
+  { type: 'reservation', label: 'Reservas' },
+]
+
 function HomeHeader({ alerts = [], welcome = false }) {
   const [expanded, setExpanded] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -33,9 +40,9 @@ function HomeHeader({ alerts = [], welcome = false }) {
   }, [])
 
   const total = alerts.reduce((sum, alert) => sum + alert.count, 0)
-  const overdue = alerts
-    .filter((alert) => alert.type === 'overdue')
-    .reduce((sum, alert) => sum + alert.count, 0)
+  const countOf = (type) =>
+    alerts.filter((alert) => alert.type === type).reduce((sum, alert) => sum + alert.count, 0)
+  const overdue = countOf('overdue')
 
   return (
     <div className="home-header-wrap">
@@ -45,9 +52,38 @@ function HomeHeader({ alerts = [], welcome = false }) {
             <h1 className="home-header__hello">Hola, Mica</h1>
             <p className="home-header__date">{formatToday()}</p>
           </div>
-          <AccountMenu />
+          <div className="home-header__account">
+            <AccountMenu />
+          </div>
         </div>
 
+        {/* Desde la tablet: los pendientes como chips */}
+        {!welcome && (
+          <div className="home-header__chips" aria-label="Para hoy">
+            {total === 0 ? (
+              <span className="summary-chip summary-chip--clear">
+                <span className="summary-chip__dot" aria-hidden="true" />
+                Todo al día
+              </span>
+            ) : (
+              CHIPS.filter((chip) => countOf(chip.type) > 0).map((chip) => (
+                <button
+                  key={chip.type}
+                  type="button"
+                  className={`summary-chip summary-chip--${chip.type}`}
+                  onClick={() => navigate('/seguimiento')}
+                >
+                  <span className="summary-chip__dot" aria-hidden="true" />
+                  {chip.label}
+                  <strong>{countOf(chip.type)}</strong>
+                  <Icon name="arrows-button-right" size={12} />
+                </button>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* En el celular: el resumen desplegable */}
         {!welcome && (
           <div className="home-header__today">
             <p className="home-header__label">Para hoy</p>
