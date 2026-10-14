@@ -44,6 +44,17 @@ function HomeHeader({ alerts = [], welcome = false }) {
     alerts.filter((alert) => alert.type === type).reduce((sum, alert) => sum + alert.count, 0)
   const overdue = countOf('overdue')
 
+   // "Todo al día": el mismo chip en el celular y desde la tablet.
+  // En el celular, con el texto completo.
+  const clearChip = (
+    <span className="summary-chip summary-chip--clear">
+      <Icon name="check-circle" size={14} />
+      <span>
+        Todo al día<span className="summary-chip__more">. No hay vencimientos ni reservas pendientes.</span>
+      </span>
+    </span>
+  )
+
   return (
     <div className="home-header-wrap">
       <header className={scrolled ? 'home-header home-header--scrolled' : 'home-header'}>
@@ -60,38 +71,31 @@ function HomeHeader({ alerts = [], welcome = false }) {
         {/* Desde la tablet: los pendientes como chips */}
         {!welcome && (
           <div className="home-header__chips" aria-label="Para hoy">
-            {total === 0 ? (
-              <span className="summary-chip summary-chip--clear">
-                <span className="summary-chip__dot" aria-hidden="true" />
-                Todo al día
-              </span>
-            ) : (
-              CHIPS.filter((chip) => countOf(chip.type) > 0).map((chip) => (
-                <button
-                  key={chip.type}
-                  type="button"
-                  className={`summary-chip summary-chip--${chip.type}`}
-                  onClick={() => navigate('/seguimiento')}
-                >
-                  <span className="summary-chip__dot" aria-hidden="true" />
-                  {chip.label}
-                  <strong>{countOf(chip.type)}</strong>
-                  <Icon name="arrows-button-right" size={12} />
-                </button>
-              ))
-            )}
+            {total === 0
+              ? clearChip
+              : CHIPS.filter((chip) => countOf(chip.type) > 0).map((chip) => (
+                  <button
+                    key={chip.type}
+                    type="button"
+                    className={`summary-chip summary-chip--${chip.type}`}
+                    onClick={() => navigate('/seguimiento')}
+                  >
+                    <span className="summary-chip__dot" aria-hidden="true" />
+                    {chip.label}
+                    <strong>{countOf(chip.type)}</strong>
+                    <Icon name="arrows-button-right" size={12} />
+                  </button>
+                ))}
           </div>
         )}
 
-        {/* En el celular: el resumen desplegable */}
+        {/* En el celular: "Para hoy" con el resumen desplegable */}
         {!welcome && (
           <div className="home-header__today">
             <p className="home-header__label">Para hoy</p>
 
             {/* State=Clear */}
-            {alerts.length === 0 && (
-              <TodayAlert type="clear">Todo al día. No hay vencimientos ni reservas pendientes.</TodayAlert>
-            )}
+            {alerts.length === 0 && clearChip}
 
             {/* State=Collapsed */}
             {alerts.length > 0 && !expanded && (
@@ -146,4 +150,4 @@ function HomeHeader({ alerts = [], welcome = false }) {
   )
 }
 
-export default HomeHeader
+export default HomeHeader 

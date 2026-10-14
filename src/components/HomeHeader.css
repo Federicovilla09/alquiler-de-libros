@@ -214,7 +214,7 @@
   background-color: var(--info-9);
 }
 
-/* Todo al día */
+/* Todo al día: con el check en lugar del punto */
 .summary-chip--clear {
   background-color: var(--success-2);
   border-color: var(--success-6);
@@ -222,8 +222,9 @@
   cursor: default;
 }
 
-.summary-chip--clear .summary-chip__dot {
-  background-color: var(--success-9);
+.summary-chip--clear svg {
+  flex-shrink: 0;
+  color: var(--success-9);
 }
 
 /* ─── Tablet: sin fondo ni esquinas, saludo y foto arriba, chips debajo ─── */

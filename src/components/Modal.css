@@ -72,3 +72,29 @@
     animation: none;
   }
 }
+
+/* ─── Desde la tablet: ventana centrada (Layout=Dialog) ─── */
+@media (min-width: 600px) {
+  .modal {
+    width: min(440px, calc(100% - var(--gap-11)));
+    max-height: 85dvh;
+    margin: auto;
+    border-radius: var(--radius-x-large);
+    box-shadow: 0 24px 64px color-mix(in srgb, var(--bg-app-11) 20%, transparent);
+  }
+
+  .modal[open] {
+    animation: modal-pop 180ms ease-out;
+  }
+
+  .modal__content {
+    padding-bottom: var(--gap-9);
+  }
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}

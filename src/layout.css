@@ -1,7 +1,13 @@
+/* ═══════════════════════════════════════════
+   GESTIÓN
+   ═══════════════════════════════════════════ */
+
+/* ─── La pantalla ─── */
 .app {
+  --page-pad: var(--gap-8);
   max-width: var(--app-max-width);
   margin: 0 auto;
-  padding-bottom: 81px;
+  padding-bottom: 81px; /* el alto de la barra de navegación */
 }
 
 .content {
@@ -11,14 +17,22 @@
   padding: var(--gap-7);
 }
 
+/* ─── Búsqueda y géneros ─── */
+.home-tools {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+}
+
+/* ─── La biblioteca ─── */
 .catalog {
   display: flex;
   flex-direction: column;
   gap: var(--gap-7);
+  margin-top: var(--gap-5);
   padding: var(--gap-7);
   background-color: var(--blush-2);
   border-radius: var(--radius-x-large);
-  margin-top: 8px;
 }
 
 .catalog__title {
@@ -27,20 +41,24 @@
   color: var(--gray-13);
 }
 
+/* Celular: la lista */
 .catalog__list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-5);
+  overflow: hidden;
   background-color: var(--white);
   border-radius: var(--radius-x-large);
-  overflow: hidden;
 }
 
-.placeholder {
-  font-size: 14px;
-  color: var(--gray-11);
+/* Tablet y escritorio: la grilla de portadas */
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-9) var(--gap-8);
 }
 
+/* Sin resultados */
 .catalog__empty {
   display: flex;
   flex-direction: column;
@@ -59,7 +77,119 @@
   height: 160px;
 }
 
-/* ─── Notificación flotante ─── */
+/* ─── Tablet ─── */
+@media (min-width: 600px) {
+  .app {
+    --page-pad: var(--gap-10);
+    max-width: none;
+  }
+
+  .app .content {
+    padding-right: var(--page-pad);
+    padding-left: var(--page-pad);
+  }
+
+  /* Sin la tarjeta de fondo: las portadas van directo sobre la página */
+  .app .catalog {
+    padding: 0;
+    background: none;
+  }
+
+  .app .catalog .button {
+    align-self: center;
+    width: auto;
+    min-width: 280px;
+  }
+}
+
+/* ─── Escritorio ─── */
+@media (min-width: 1024px) {
+  .app {
+    --page-pad: 40px;
+    padding-bottom: 0; /* sin barra de navegación: está el menú lateral */
+  }
+
+  /* La búsqueda y los géneros en una fila */
+  .home-tools {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-9);
+  }
+
+  .home-tools .search-bar {
+    flex: 0 0 400px;
+  }
+
+  .home-tools > :last-child {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .library-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--gap-10) var(--gap-9);
+  }
+}
+
+
+/* ═══════════════════════════════════════════
+   CATÁLOGO
+   ═══════════════════════════════════════════ */
+
+.catalog-page {
+  --page-pad: var(--gap-8);
+  min-height: 100dvh;
+  background-color: var(--blush-1);
+}
+
+/* El encabezado de navegación usa el mismo margen que el resto */
+.catalog-page .navigation-header {
+  padding-right: var(--page-pad);
+  padding-left: var(--page-pad);
+}
+
+/* ─── Tablet ─── */
+@media (min-width: 600px) {
+  .catalog-page {
+    --page-pad: var(--gap-10);
+  }
+}
+
+/* ─── Escritorio: el contenido mide 1200 px, centrado ─── */
+@media (min-width: 1024px) {
+  .catalog-page {
+    --page-pad: max(var(--gap-12), calc((100% - 1200px) / 2));
+  }
+}
+
+
+/* ═══════════════════════════════════════════
+   ESTADOS DE CARGA Y ERROR
+   ═══════════════════════════════════════════ */
+
+.placeholder {
+  font-size: 14px;
+  color: var(--gray-11);
+}
+
+.screen-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+}
+
+.screen-error {
+  padding: var(--gap-10) var(--gap-8);
+  text-align: center;
+}
+
+
+/* ═══════════════════════════════════════════
+   NOTIFICACIÓN FLOTANTE
+   ═══════════════════════════════════════════ */
+
+/* Celular: abajo, a todo el ancho */
 .toast {
   position: fixed;
   right: var(--gap-8);
@@ -81,6 +211,26 @@
   animation: toast-out 300ms ease-in forwards;
 }
 
+/* ─── Tablet: abajo a la derecha, por encima de la barra de navegación ─── */
+@media (min-width: 600px) {
+  .toast {
+    right: var(--gap-9);
+    bottom: calc(73px + var(--gap-9) + env(safe-area-inset-bottom, 0px));
+    left: auto;
+    width: 360px;
+    max-width: calc(100% - var(--gap-9) * 2);
+    margin: 0;
+  }
+}
+
+/* ─── Escritorio: sin barra de navegación ─── */
+@media (min-width: 1024px) {
+  .toast {
+    right: var(--gap-10);
+    bottom: var(--gap-10);
+  }
+}
+
 @keyframes toast-in {
   from {
     opacity: 0;
@@ -95,26 +245,11 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .toast,
-  .toast--leaving {
-    animation: none;
-  }
-}
 
-.screen-loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100dvh;
-}
+/* ═══════════════════════════════════════════
+   TRANSICIÓN ENTRE PANTALLAS
+   ═══════════════════════════════════════════ */
 
-.screen-error {
-  padding: var(--gap-10) var(--gap-8);
-  text-align: center;
-}
-
-/* Cada pantalla aparece con un fundido breve */
 .app,
 .catalog-page,
 .login,
@@ -128,80 +263,18 @@
   }
 }
 
+
+/* ═══════════════════════════════════════════
+   MOVIMIENTO REDUCIDO
+   ═══════════════════════════════════════════ */
+
 @media (prefers-reduced-motion: reduce) {
   .app,
   .catalog-page,
   .login,
-  .welcome {
+  .welcome,
+  .toast,
+  .toast--leaving {
     animation: none;
-  }
-}
-
-/* ─── Catálogo: base de todas sus pantallas ─── */
-.catalog-page {
-  --page-pad: var(--gap-8);
-  min-height: 100dvh;
-  background-color: var(--blush-1);
-}
-
-/* Tablet */
-@media (min-width: 600px) {
-  .catalog-page {
-    --page-pad: var(--gap-10);
-  }
-}
-
-/* Escritorio: el contenido mide 1200 px, centrado */
-@media (min-width: 1024px) {
-  .catalog-page {
-    --page-pad: max(var(--gap-12), calc((100% - 1200px) / 2));
-  }
-}
-
-/* El encabezado de navegación del catálogo usa el mismo margen */
-.catalog-page .navigation-header {
-  display: none;
-}
-
-/* ─── Gestión: margen que se adapta, como en el catálogo ─── */
-.app {
-  --page-pad: var(--gap-8);
-}
-
-@media (min-width: 600px) {
-  .app {
-    --page-pad: var(--gap-10);
-    max-width: none;
-  }
-
-  .app .content {
-    padding-right: var(--page-pad);
-    padding-left: var(--page-pad);
-  }
-}
-
-@media (min-width: 1024px) {
-  .app {
-    --page-pad: 40px;
-    padding-bottom: 0;
-  }
-}
-
-/* ─── Notificaciones: abajo a la derecha, desde la tablet ─── */
-@media (min-width: 600px) {
-  .toast {
-    right: var(--gap-9);
-    bottom: calc(73px + var(--gap-9) + env(safe-area-inset-bottom, 0px));
-    left: auto;
-    width: 360px;
-    max-width: calc(100% - var(--gap-9) * 2);
-    margin: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .toast {
-    right: var(--gap-10);
-    bottom: var(--gap-10);
   }
 }
