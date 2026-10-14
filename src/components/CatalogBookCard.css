@@ -44,19 +44,27 @@
   gap: var(--gap-2);
 }
 
+/* El título reserva siempre el lugar de dos líneas,
+   así la autora y la disponibilidad quedan a la misma altura en cada fila */
 .catalog-card__title {
   display: -webkit-box;
   overflow: hidden;
+  min-height: 36px;
   font-size: 13px;
   font-weight: 600;
+  line-height: 18px;
   color: var(--gray-13);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
 }
 
+/* La autora, en una sola línea */
 .catalog-card__author {
+  overflow: hidden;
   font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--gray-11);
 }
 
