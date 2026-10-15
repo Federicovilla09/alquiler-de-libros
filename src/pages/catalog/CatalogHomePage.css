@@ -1,9 +1,46 @@
-/* Filtros */
+/* ═══════════════════════════════════════════
+   CELULAR
+   ═══════════════════════════════════════════ */
+
+/* ─── Recomendados por Mica ─── */
+.catalog-featured {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+  padding: var(--gap-8) var(--page-pad) 0;
+}
+
+.catalog-featured__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bg-app-11);
+}
+
+/* ─── Filtros: géneros y tropos ─── */
 .catalog-filters {
   padding: var(--gap-9) var(--page-pad) 0;
 }
 
-/* Filas que se deslizan */
+.catalog-filters__tropes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-5);
+  margin-top: var(--gap-7);
+}
+
+.catalog-filters__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-11);
+}
+
+.catalog-filters__trope-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-5);
+}
+
+/* ─── Filas que se deslizan: Recién llegados y Mejor valorados ─── */
 .catalog-section {
   display: flex;
   flex-direction: column;
@@ -33,7 +70,7 @@
   scroll-snap-align: start;
 }
 
-/* La grilla */
+/* ─── La grilla: Todos los libros ─── */
 .catalog-grid-section {
   display: flex;
   flex-direction: column;
@@ -58,47 +95,18 @@
   color: var(--gray-11);
 }
 
+/* minmax(0, 1fr): columnas siempre iguales, aunque un texto sea largo */
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gap-9) var(--gap-8);
 }
 
-/* Recomendados por Mica */
-.catalog-featured {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-7);
-  padding: var(--gap-8) var(--page-pad) 0;
-}
 
-.catalog-featured__title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--bg-app-11);
-}
+/* ═══════════════════════════════════════════
+   TABLET
+   ═══════════════════════════════════════════ */
 
-/* Los tropos del género elegido */
-.catalog-filters__tropes {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-5);
-  margin-top: var(--gap-7);
-}
-
-.catalog-filters__label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gray-11);
-}
-
-.catalog-filters__trope-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap-5);
-}
-
-/* ─── Tablet ─── */
 @media (min-width: 600px) {
   .catalog-section {
     padding-top: var(--gap-10);
@@ -109,8 +117,7 @@
   }
 
   .catalog-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--gap-9) var(--gap-8);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   /* Los botones de la grilla miden lo que su texto */
@@ -121,7 +128,11 @@
   }
 }
 
-/* ─── Escritorio ─── */
+
+/* ═══════════════════════════════════════════
+   ESCRITORIO
+   ═══════════════════════════════════════════ */
+
 @media (min-width: 1024px) {
   .catalog-section {
     padding-top: var(--gap-12);
@@ -130,7 +141,7 @@
   /* Las filas muestran seis libros, sin deslizar */
   .catalog-row {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--gap-9);
     overflow: visible;
   }
@@ -149,7 +160,7 @@
   }
 
   .catalog-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--gap-10) var(--gap-9);
   }
 }
