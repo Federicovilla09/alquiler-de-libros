@@ -122,3 +122,10 @@
 .book-copies__add .button {
   width: auto;
 }
+
+/* Editar y eliminar, uno debajo del otro, a todo el ancho */
+.book-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+}

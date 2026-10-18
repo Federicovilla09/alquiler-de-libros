@@ -113,6 +113,11 @@ export function LibraryProvider({ children }) {
     return save(db.editBook(bookId, values))
   }
 
+  // Elimina el libro, sus ejemplares, su historial y sus portadas
+  function deleteBook(bookId) {
+    return save(db.deleteBook(bookId))
+  }
+
   const value = {
     books,
     loading,
@@ -127,6 +132,7 @@ export function LibraryProvider({ children }) {
     addCopy,
     addBook,
     editBook,
+    deleteBook,
   }
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>

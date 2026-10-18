@@ -61,6 +61,13 @@
   color: var(--gray-11);
 }
 
+/* Dos botones en un modal: uno debajo del otro */
+.modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-7);
+}
+
 @keyframes modal-in {
   from {
     transform: translateY(100%);

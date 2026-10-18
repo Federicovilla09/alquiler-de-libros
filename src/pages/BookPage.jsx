@@ -31,6 +31,7 @@ function BookPage() {
   const [pendingReturn, setPendingReturn] = useState(null)
   const [addingCopy, setAddingCopy] = useState(location.state?.addCopy === true)
   const [newCondition, setNewCondition] = useState('Nuevo')
+  const [deleting, setDeleting] = useState(false)
   const {
     loading,
     getBook,
@@ -40,6 +41,7 @@ function BookPage() {
     renewCopy,
     returnCopy,
     addCopy,
+    deleteBook,
   } = useLibrary()
   const { notify } = useNotice()
   const book = getBook(id)
@@ -86,6 +88,15 @@ function BookPage() {
     ? Math.max(0, daysBetween(parseDate(pendingReturn.returnDate), start))
     : 0
 
+  // Eliminar: los ejemplares prestados o reservados lo impiden
+  const lentCopies = book.copies.filter((copy) => copy.state !== 'available')
+  const canDelete = lentCopies.length === 0
+  const historyCount = (book.history ?? []).length
+  const deleteSummary = [
+    `${book.copies.length} ${book.copies.length === 1 ? 'ejemplar' : 'ejemplares'}`,
+    `${historyCount} ${historyCount === 1 ? 'alquiler' : 'alquileres'} del historial`,
+  ].join(' y ')
+
   function confirmRental() {
     const { copy, plan } = pendingRental
     setPendingRental(null)
@@ -101,6 +112,16 @@ function BookPage() {
   function confirmAddCopy() {
     setAddingCopy(false)
     run(addCopy(book.id, newCondition), '¡Ejemplar agregado con éxito!')
+  }
+
+  // Primero volver a la biblioteca, después borrar:
+  // así la ficha nunca muestra un libro que ya no existe
+  async function confirmDelete() {
+    const bookId = book.id
+    setDeleting(false)
+    navigate('/', { replace: true })
+    const error = await deleteBook(bookId)
+    notify(error ? 'No pudimos eliminar el libro. Revisá tu conexión y probá de nuevo.' : 'Libro eliminado', error ? 'error' : undefined)
   }
 
   return (
@@ -201,9 +222,14 @@ function BookPage() {
           {tab === 1 && <BookHistory history={book.history ?? []} />}
         </div>
 
-        <Button variant="ghost" icon="edit-pencil" onClick={() => navigate(`/libros/${book.id}/editar`)}>
-          Editar datos del libro
-        </Button>
+        <div className="book-actions">
+          <Button variant="secondary" icon="edit-pencil" onClick={() => navigate(`/libros/${book.id}/editar`)}>
+            Editar datos del libro
+          </Button>
+          <Button variant="danger-secondary" icon="trash" onClick={() => setDeleting(true)}>
+            Eliminar libro
+          </Button>
+        </div>
       </div>
 
       <Modal open={pendingRental !== null} onClose={() => setPendingRental(null)} label="Resumen del alquiler">
@@ -261,6 +287,54 @@ function BookPage() {
               onChange={setNewCondition}
             />
             <Button onClick={confirmAddCopy}>Agregar ejemplar</Button>
+          </>
+        )}
+      </Modal>
+
+      <Modal
+        open={deleting}
+        onClose={() => setDeleting(false)}
+        label={canDelete ? 'Eliminar libro' : 'Este libro está prestado'}
+      >
+        {deleting && canDelete && (
+          <>
+            <section className="modal-section">
+              <h2 className="modal-section__title">¿Eliminar este libro?</h2>
+              <SummaryCard>
+                <SummaryItem label="Libro" value={book.title} />
+                <SummaryItem label="Se va a borrar" value={deleteSummary} />
+              </SummaryCard>
+            </section>
+            <p className="modal__note">
+              También se borra su portada y deja de aparecer en el catálogo. Esta acción no se puede deshacer.
+            </p>
+            <div className="modal__actions">
+              <Button variant="danger" icon="trash" onClick={confirmDelete}>
+                Sí, eliminar libro
+              </Button>
+              <Button variant="secondary" onClick={() => setDeleting(false)}>
+                Cancelar
+              </Button>
+            </div>
+          </>
+        )}
+
+        {deleting && !canDelete && (
+          <>
+            <section className="modal-section">
+              <h2 className="modal-section__title">Este libro está prestado</h2>
+              <SummaryCard>
+                <SummaryItem label="Libro" value={book.title} />
+                <SummaryItem
+                  label={lentCopies.length === 1 ? 'Lo tiene' : 'Lo tienen'}
+                  value={lentCopies.map((copy) => `Ejemplar ${copy.number} · ${copy.borrower}`).join(', ')}
+                />
+              </SummaryCard>
+            </section>
+            <p className="modal__note">
+              Para eliminarlo, primero registrá la devolución o cancelá la reserva de cada ejemplar.
+            </p>
+            <Button onClick={() => setDeleting(false)}>Entendido</Button>
           </>
         )}
       </Modal>

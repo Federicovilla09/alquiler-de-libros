@@ -263,3 +263,15 @@ export async function editBook(bookId, values) {
 
   return null
 }
+
+// Eliminar un libro: sus portadas en Storage, y el libro.
+// Los ejemplares y el historial se borran solos, en cascada.
+export async function deleteBook(bookId) {
+  const { data: files } = await supabase.storage.from('covers').list(String(bookId))
+  if (files && files.length > 0) {
+    await supabase.storage.from('covers').remove(files.map((f) => `${bookId}/${f.name}`))
+  }
+
+  const { error } = await supabase.from('books').delete().eq('id', bookId)
+  return error
+} 
